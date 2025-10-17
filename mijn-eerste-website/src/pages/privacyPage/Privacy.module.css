@@ -1,0 +1,71 @@
+/* Achtergrond van de hele pagina */
+.pageWrapper {
+    background-color: #f7f7f7; /* lichtgrijs, zoals MijnGezondheid.net */
+    display: flex;
+    justify-content: center;
+    padding-top: calc(var(--header-height) + 1rem);
+    padding-bottom: 3rem;
+    min-height: 100vh;
+}
+
+/* Witte contentcontainer */
+.contentWrapper {
+    background: #fff;
+    max-width: 1200px;
+    width: 100%;
+    padding: 3rem 3rem 4rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    line-height: 1.7;
+}
+
+/* Koppen */
+.contentWrapper h1 {
+    font-size: 2rem;
+    color: #014421;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contentWrapper h2 {
+    font-size: 1.3rem;
+    color: #014421;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Tekst en lijsten */
+.contentWrapper p {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.contentWrapper ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contentWrapper li {
+    margin-bottom: 0.6rem;
+}
+
+/* Links */
+.contentWrapper a {
+    color: #014421;
+    text-decoration: underline;
+}
+
+.contentWrapper a:hover {
+    text-decoration: none;
+}
+
+/* Responsiviteit */
+@media (max-width: 768px) {
+    .contentWrapper {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+    .contentWrapper h1 {
+        font-size: 1.6rem;
+    }
+}

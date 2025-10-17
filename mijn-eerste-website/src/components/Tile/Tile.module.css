@@ -1,0 +1,76 @@
+:root {
+    --color-primary: #014421;
+    --color-accent: #28a745;
+    --color-surface: darkgrey;
+    --color-text: #333;
+    --radius-md: 10px;
+    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --transition-fast: all 0.3s ease;
+}
+
+/* -------- TILE BASE -------- */
+.tile {
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    transition: var(--transition-fast);
+    flex: 1 1 300px
+}
+
+
+.tile {
+    width: 400px;
+    min-height: 200px;
+    flex-shrink: 0; /* <-- altijd aan */
+}
+
+
+/* -------- VARIANTS -------- */
+.tile--primary {
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    color: var(--color-text);
+}
+
+.tile--secondary {
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    color: var(--color-text);
+}
+
+/* -------- CONTENT -------- */
+.tile__icon {
+    width: 80px;
+    margin-bottom: 12px;
+}
+
+.tile__title {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.tile__text {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+    .tile {
+        padding: 1rem;
+    }
+
+    .tile {
+        margin: 0 auto; /* centreren */
+    }
+
+    .tile__title {
+        font-size: 1.25rem;
+    }
+
+    .tile__icon {
+        width: 60px;
+    }
+}

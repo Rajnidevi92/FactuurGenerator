@@ -1,0 +1,53 @@
+:root {
+    --color-primary: #014421;
+    --color-accent: #28a745;
+    --color-text: #333;
+    --transition-fast: all 0.3s ease;
+}
+
+.btn {
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--transition-fast);
+    border: none;
+}
+
+/* Primary button */
+.btn--primary {
+    background: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+}
+
+.btn--primary:hover {
+    background: white;
+    color: var(--color-primary);
+}
+
+/* Secondary button */
+.btn--secondary {
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn--secondary:hover {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Outline button */
+.btn--outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn--outline:hover {
+    background: var(--color-primary);
+    color: white;
+}

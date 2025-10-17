@@ -1,0 +1,146 @@
+/* Main */
+.main {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: var(--header-height);
+    background-color: whitesmoke;
+}
+
+/* Login Section */
+.loginSection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 0 40px 0;
+    width: 100%;
+}
+
+.loginContainer {
+    display: flex;
+    flex-wrap: nowrap; /* desktop naast elkaar */
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Kaarten */
+.loginLeft,
+.loginRight {
+    flex: 1 1 0;
+    min-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kaarten content */
+.loginLeft h2,
+.loginRight h2 {
+    margin-bottom: 1rem;
+    color: #014421;
+}
+
+.loginLeft ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.loginLeft li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Login form */
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.loginForm input[type="email"],
+.loginForm input[type="password"] {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.noAccount {
+    margin: 15px 0;
+    font-size: 0.9rem;
+}
+
+.noAccount a {
+    color: #014421;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.noAccount a:hover {
+    text-decoration: underline;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.checkboxContainer input {
+    margin-right: 10px;
+}
+
+.loginBtn {
+    background: #014421;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.loginBtn:hover {
+    background: #28a745;
+}
+
+/* Responsive */
+@media screen and (max-width: 992px) {
+    .loginContainer {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 2rem;
+    }
+
+    .loginLeft,
+    .loginRight {
+        flex: 1 1 100%;
+        min-width: 0;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .loginForm label {
+        font-size: 14px;
+    }
+
+    .loginForm input {
+        font-size: 14px;
+    }
+}

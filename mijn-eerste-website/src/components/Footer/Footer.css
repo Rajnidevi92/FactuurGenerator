@@ -45,3 +45,23 @@
 .footer-links a:hover::after {
     width: 100%;
 }
+
+.footer {
+    margin-top: auto; /* duwt footer naar onder */
+}
+
+.default-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.default-link:hover {
+    color: #28a745;
+}
+
+.active-link {
+    color: #28a745;
+    text-decoration: underline;
+    margin-left: 15px;
+}

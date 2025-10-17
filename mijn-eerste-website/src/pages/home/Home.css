@@ -1,25 +1,10 @@
-/* ---------- jouw originele CSS (ongwijzigd behalve hieronder) ---------- */
-/* Reset + Base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fff;
-}
-
+/* ---------- Globale containers ---------- */
 .outer-content-container {
     max-width: 100%;
     margin: 0 auto;
     padding: 40px;
     display: flex;
     justify-content: center;
-    border: red solid 2px;
 }
 
 .inner-content-container {
@@ -28,106 +13,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: pink solid 2px;
 }
 
-/* ---------- Header & Footer (Aangepast zodat ze smaller worden) ---------- */
+/* ---------- Padding voor fixed header ---------- */
 
-/* Fixed header — we verwijderen verticale padding van de outer container
-   en geven de header een vaste minimale hoogte zodat het voorspelbaar is. */
-.header {
-    background: #014421;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
 
-    /* reset oude padding - we regelen padding in de nested .outer-content-container */
-    padding: 0;
-    min-height: 56px; /* pas dit getal aan indien je het nog dunner/witter wilt */
-}
-
-/* Zorg dat de outer-content-container binnen de header géén 40px vertical padding meer heeft.
-   Houd links/rechts padding (40px) voor align met de rest van de layout. */
-.header .outer-content-container {
-    padding: 20px 40px; /* 6px boven/onder, 40px links/rechts */
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-/* Zorg dat de inner container de volledige hoogte gebruikt en items centreert */
-.header .inner-content-container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    height: 100%;
-}
-
-/* Kleinere logo zodat de header visueel slanker is */
-.logo {
-    font-size: 30px; /* optioneel: zet terug als je logo groter wilt */
-    font-weight: bold;
-    line-height: 1;
-}
-
-/* De navigatie zelf ongewijzigd, behalve dat hij nu netjes binnen de kleine header past */
-.header-content__navigation ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-}
-
-.header-content__navigation a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-}
-
-.header-content__navigation a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 0;
-    height: 2px;
-    background-color: #28a745;
-    transition: width 0.3s ease;
-}
-
-.header-content__navigation a:hover {
-    color: black;
-}
-
-.header-content__navigation a:hover::after {
-    width: 100%;
-}
-
-/* ---------- Hero Section (ongewijzigd behalve: we gebruiken main padding voor fixed header) ---------- */
-/* Let op: in je originele CSS staat .hero { padding-top:150px } maar in je HTML gebruik je geen .hero class.
-   Daarom voegen we hier veilige top-padding toe op main, zodat inhoud niet onder de fixed header verschijnt. */
-main {
-    /* Zet deze waarde ongeveer gelijk aan min-height van .header (plus kleine marge).
-       Pas 56px aan als je min-height verandert. */
-    padding-top: 64px;
-}
-
-/* Hero styles blijven hetzelfde (niet verwijderen) */
-.hero {
-    padding-top: 150px; /* (blijf staan maar niet gebruikt tenzij je .hero class toevoegt) */
-    background-color: #fff;
-}
-
+/* ---------- Hero Section ---------- */
 .hero-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: 2rem;
+    flex-wrap: wrap; /* laat herflowen als ruimte krap wordt */
 }
 
 .hero-text {
@@ -157,53 +55,19 @@ main {
     display: block;
 }
 
-/* Hero tiles */
+/* ---------- Hero Tiles ---------- */
 .hero-tiles {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* desktop: 3 naast elkaar */
     gap: 8rem;
-    justify-content: center;
-    margin-top: -140px; /* overlap hero */
+    justify-items: center;
+    margin-top: -140px;
     position: relative;
     z-index: 2;
 }
 
-.green-tile {
-    background: darkgrey;
-    border: 2px solid #014421;
-    border-radius: 10px;
-    padding: 1.5rem;
-    flex: 1 1 300px;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
 
-.green-tile h2 {
-    margin-bottom: 0.5rem;
-}
-
-.green-tile p {
-    margin-bottom: 1.5rem;
-}
-
-.green-tile .tile-btn {
-    background: #014421;
-    color: white;
-    font-weight: bold;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.green-tile .tile-btn:hover {
-    background: white;
-    color: #014421;
-    border: 2px solid #014421;
-}
-
-/* Work Section */
+/* ---------- Work Section ---------- */
 #work {
     background-color: #f8f8f8;
     padding: 60px 0;
@@ -215,8 +79,6 @@ main {
     justify-content: space-between;
     margin: 60px 0;
     gap: 3rem;
-    max-width: 100%;
-    overflow-x: hidden;
 }
 
 .work-article:nth-of-type(odd) {
@@ -264,7 +126,7 @@ main {
     font-weight: bold;
 }
 
-/* FAQ */
+/* ---------- FAQ Section ---------- */
 #faq {
     text-align: center;
     padding: 60px 20px;
@@ -272,7 +134,7 @@ main {
 
 .faq-details {
     margin-block: 24px;
-    text-align: left;
+    text-align: center;
 }
 
 .faq-summary {
@@ -290,59 +152,12 @@ main {
 }
 
 #faq-work-video {
-    scroll-margin-top: 100px; /* fixed header ruimte */
+    scroll-margin-top: 100px; /* ruimte voor fixed header */
 }
 
-/* ---------- Footer (aanpassing: verwijder outer padding en maak smaller) ---------- */
-.footer {
-    background: #014421;
-    color: white;
-
-    /* footer eigen padding resetten - outer container regelt padding */
-    padding: 0;
-    min-height: 48px; /* zet lager als je wil */
-}
-
-.footer .outer-content-container {
-    padding: 20px 40px; /* 8px boven/onder en behoud horizontale padding */
-}
-
-.footer-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
-.footer-links a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-    position: relative;
-}
-
-.footer-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background-color: #28a745;
-    transition: width 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: black;
-}
-
-.footer-links a:hover::after {
-    width: 100%;
-}
-
-/* Responsive */
+/* ---------- Responsive: Tablet / mobiel ---------- */
 @media (max-width: 1000px) {
+    /* Hero section stapelt */
     .hero-inner {
         flex-direction: column;
         text-align: center;
@@ -356,18 +171,25 @@ main {
         padding: 0;
     }
 
+    /* Hero Tiles: 1 per rij, maar behoud breedte en padding */
     .hero-tiles {
-        flex-direction: column;
-        gap: 1.5rem;
+        grid-template-columns: 1fr; /* stapel */
+        gap: 2rem; /* kleinere gap */
         margin-top: 20px;
     }
 
+    /* Work Section stapelt */
     .work-article {
-        flex-direction: column !important;
+        flex-direction: column;
         text-align: center;
+    }
+
+    .work-article__info-container {
+        order: -1;
     }
 
     .work-article__image-wrapper {
         margin-bottom: 20px;
+        order: 0;
     }
 }

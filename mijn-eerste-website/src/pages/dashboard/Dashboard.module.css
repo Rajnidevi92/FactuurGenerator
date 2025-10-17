@@ -1,0 +1,131 @@
+:root {
+    --primary: #014421;
+    --accent: #28a745;
+    --text: #333;
+}
+
+/* MAIN LAYOUT */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; /* ruimte voor fixed header */
+}
+
+/* USER-BAR */
+.userBarSection {
+    width: 100%;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.userBar {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    background: url("src/assets/foto-huisarts.png") center/cover no-repeat;
+    position: relative;
+}
+
+.profileBlock {
+    min-width: 1400px;
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+
+}
+
+
+
+.loginBadge {
+    font-weight: bold;
+    color: var(--primary);
+
+}
+
+.userName {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.userAvatarSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.userAvatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+}
+
+.uploadBtn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.uploadBtn:hover {
+    background-color: #1e7b33;
+}
+
+/* TILES SECTIE */
+.tileSection {
+    width: 100%;
+    padding-top: 120px;
+}
+
+.outerContentContainer {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.innerContentContainer {
+    width: 100%;
+    max-width: 1400px;
+}
+
+.tilesWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    justify-items: center;
+}
+
+@media screen and (max-width: 992px) {
+    .tilesWrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .tilesWrapper {
+        grid-template-columns: 1fr;
+    }
+}

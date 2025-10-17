@@ -1,0 +1,93 @@
+.header {
+    background: #014421;
+    color: white;
+    position: fixed;
+    height: 80px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    /* reset oude padding - we regelen padding in de nested .outer-content-container */
+    padding: 0;
+    min-height: 56px; /* pas dit getal aan indien je het nog dunner/witter wilt */
+}
+
+/* Zorg dat de outer-content-container binnen de header géén 40px vertical padding meer heeft.
+   Houd links/rechts padding (40px) voor align met de rest van de layout. */
+.header .outer-content-container {
+    padding: 20px 40px; /* 6px boven/onder, 40px links/rechts */
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Zorg dat de inner container de volledige hoogte gebruikt en items centreert */
+.header .inner-content-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    height: 100%;
+    gap: 2rem; /* ruimte tussen logo en navigatie */
+}
+
+/* Kleinere logo zodat de header visueel slanker is */
+.logo {
+    font-size: 30px; /* optioneel: zet terug als je logo groter wilt */
+    font-weight: bold;
+    line-height: 1;
+    color: white;
+}
+
+.logo-link {
+    text-decoration: none; /* verwijder underline */
+    color: inherit;        /* behoud de kleur van de originele div */
+    font-weight: inherit;  /* behoud font-weight */
+    cursor: pointer;       /* pointer bij hover */
+}
+
+.logo-link:hover {
+    color: inherit;        /* blijft dezelfde kleur bij hover */
+}
+
+/* De navigatie zelf ongewijzigd, behalve dat hij nu netjes binnen de kleine header past */
+.header-content__navigation ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.header-content__navigation a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
+
+.header-content__navigation a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+.header-content__navigation a:hover {
+    color: black;
+}
+
+.header-content__navigation a:hover::after {
+    width: 100%;
+
+
+}
+
+@media (max-width: 1000px) {
+    .header .outer-content-container {
+        padding: 50px 50px; /* smaller voor mobiel */
+    }
+}

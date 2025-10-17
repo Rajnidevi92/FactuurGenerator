@@ -1,0 +1,164 @@
+/* Reset binnen module */
+:global(*) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:global(html, body) {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Variabelen */
+:root {
+    --primary: #014421;
+    --accent: #28a745;
+    --text: #333;
+    --text-faded: rgba(0, 0, 0, 0.08);
+}
+
+/* Main layout */
+.main {
+    display: flex;
+    justify-content: center;
+    padding-top: 120px; /* ruimte voor fixed header */
+    flex: 1;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto 93px auto;
+}
+
+/* Alphabet navigation */
+.alphabetNav {
+    flex: 0 0 200px;
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.alphabetNav ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    list-style: none;
+}
+
+.alphabetNav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.alphabetNav a:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Topics */
+.topics {
+    flex: 1 1 0;
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 14px;
+    margin-bottom: 24px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.topicGroup {
+    margin-bottom: 24px;
+}
+
+.topicGroup h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+    color: var(--primary);
+}
+
+.topicGroup ul {
+    list-style: none;
+    margin-left: 8px;
+}
+
+.topicGroup li {
+    margin: 4px 0;
+    font-size: 15px;
+}
+
+
+.letterButton {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.letterButton:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.activeLetter {
+    background: var(--primary);
+    color: white;
+}
+
+.description {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+
+
+/* Responsive */
+@media screen and (max-width: 992px) {
+    .contentWrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .alphabetNav ul {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .alphabetNav {
+        width: 100%;
+    }
+    .alphabetNav ul {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}

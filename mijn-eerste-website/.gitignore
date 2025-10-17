@@ -22,3 +22,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
+//////////////
+- moet er index.js map komen van componenten. Is dat best practicea?
+- camelcase pages --> begint met kleine letter. De jsx en css erin camelcase beginnend met hoofdletter
+- mapje voor aparte pages. Hoofd wel benoemen Homepage. de jsx en css kan dan home worden genoemd.
+- in index: styling voor hele applicatie
+- in app.jsx styling voor hele applicatie (zoals nav balk)
+- <Route path="/posts/:id" element={<PostDetail />} />
+                      <Route path="*" element={<NotFound/>}/>
+                      toevoegen
+
+
+
+- op zelfde pagina link en geen hef a? en #
+- meteen naar boven scrollen? met component?
+- root kleur waar te zetten; en hoe toe te passen
+- Semantiek van het logo
+
+  <h1> is prima op homepage, maar in andere pagina’s moet je meestal <div> of <span> gebruiken om te voorkomen dat elke pagina een <h1> heeft (SEO).
+
+  Optie: <div className="logo"> of <h1> alleen op Home.
+

@@ -1,0 +1,108 @@
+.authWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px; /* header */
+    padding-bottom: 50px; /* footer */
+    min-height: calc(100vh - 140px);
+}
+
+.authCard {
+    width: 100%;
+    max-width: 720px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    padding: 28px;
+}
+
+.authCard h1 {
+    font-size: 24px;
+    line-height: 1.2;
+    color: #014421;
+    margin-bottom: 6px;
+}
+
+.authSubtitle {
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.authForm { display: grid; gap: 16px; }
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.formField { display: flex; flex-direction: column; gap: 8px; }
+.formField label { font-size: 14px; color: #222; }
+.formField input {
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    background: #fff;
+}
+
+.formField input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 4px rgba(40,167,69,0.12);
+}
+
+.helpText { font-size: 12px; color: #666; }
+
+.formCheck {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+}
+.formCheck input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: #28a745;
+}
+.formCheck a { color: #014421; text-decoration: none; }
+.formCheck a:hover { text-decoration: underline; }
+
+.btnPrimary {
+    appearance: none;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    background: #014421;
+    color: #fff;
+    transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow: 0 6px 14px rgba(40,167,69,.25);
+}
+.btnPrimary:hover { background: #1e7b33; }
+.btnPrimary:active { transform: translateY(1px); }
+
+.authAlt {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #555;
+}
+.authAlt a { color: #014421; text-decoration: none; }
+.authAlt a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .formRow { grid-template-columns: 1fr; }
+    .authCard { padding: 22px; }
+}
+
+@media (max-width: 576px) {
+    .authWrapper { padding-top: 60px; padding-bottom: 60px; }
+}
