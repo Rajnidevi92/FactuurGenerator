@@ -1,12 +1,8 @@
 import React from "react";
-import Header from "../../components/Header/Header.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
 import styles from "./Privacy.module.css";
 
 export default function Privacy() {
     return (
-        <>
-            <Header />
             <div className={styles.pageWrapper}>
                 <main className={styles.contentWrapper}>
                     <h1>Privacyverklaring QuickHuisartsCheck</h1>
@@ -74,7 +70,6 @@ export default function Privacy() {
                     </p>
                 </main>
             </div>
-            <Footer />
-        </>
+
     );
 }

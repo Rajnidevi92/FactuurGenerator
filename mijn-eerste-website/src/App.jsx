@@ -4,6 +4,8 @@ import Login from './pages/inlogPage/Inlog.jsx';
 import Registration from './pages/registrationPage/Registration.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
 import AllComplaints from './pages/allComplaints/AllComplaints.jsx';
+import ComplaintFinder from './pages/complaintFinder/ComplaintFinder.jsx';
+import ComplaintQuestions from "./pages/complaintQuestions/ComplaintQuestions.jsx";
 import Privacy from './pages/privacyPage/Privacy.jsx';
 import Disclaimer from './pages/disclaimerPage/Disclaimer.jsx';
 import Header from './components/Header/Header.jsx';
@@ -23,6 +25,8 @@ function App() {
                         <Route path="/registration" element={<Registration />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/allcomplaints" element={<AllComplaints />} />
+                        <Route path="/complaintfinder" element={<ComplaintFinder />} />
+                        <Route path="/complaintquestions" element={<ComplaintQuestions />} />
                         <Route path="/privacy" element={<Privacy />} />
                         <Route path="/disclaimer" element={<Disclaimer />} />
                     </Routes>

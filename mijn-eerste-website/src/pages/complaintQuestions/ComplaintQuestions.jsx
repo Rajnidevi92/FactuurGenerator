@@ -1,55 +1,155 @@
-import React from "react";
-import Header from "../../components/Header/Header.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./ComplaintQuestions.module.css";
 
 export default function ComplaintQuestions() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const symptom = location.state?.symptom;
+
+    const [gpQuestions, setGpQuestions] = useState([]);
+    const [urgentQuestions, setUrgentQuestions] = useState([]);
+    const [checked, setChecked] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [advice, setAdvice] = useState("");
+
+    useEffect(() => {
+        if (!symptom) return;
+        setLoading(true);
+
+        async function fetchQuestions() {
+            try {
+                const token =
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdGllbnQxQGV4YW1wbGUuY29tIiwicHJvamVjdElkIjoiNGZhYTMxYmEtODY5MS00YWU2LTlmNWUtOTE5NmMyYjMyNmY5IiwidXNlcklkIjowLCJyb2xlIjoicGF0aWVudCIsImV4cCI6MTc2MjI3MDM2NywiaXNzIjoiTm92aUR5bmFtaWNBcGkiLCJhdWQiOiJOb3ZpRnJvbnRlbmQifQ.lkswjkBBuh9Zi2PngVjnUrWtwY5_OH_B40rzZXjdXBY";
+
+                const gpRes = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/questionGP",
+                    {
+                        headers: {
+                            accept: "*/*",
+                            "novi-education-project-id": "4faa31ba-8691-4ae6-9f5e-9196c2b326f9",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                const gpData = await gpRes.json();
+                const gpFiltered =
+                    (Array.isArray(gpData) ? gpData : gpData.items || []).filter(
+                        (q) => q.symptomId === symptom.id
+                    );
+
+                const urgentRes = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/questionUrgent",
+                    {
+                        headers: {
+                            accept: "*/*",
+                            "novi-education-project-id": "4faa31ba-8691-4ae6-9f5e-9196c2b326f9",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                const urgentData = await urgentRes.json();
+                const urgentFiltered =
+                    (Array.isArray(urgentData) ? urgentData : urgentData.items || []).filter(
+                        (q) => q.symptomId === symptom.id
+                    );
+
+                setGpQuestions(gpFiltered);
+                setUrgentQuestions(urgentFiltered);
+            } catch (err) {
+                console.error("Fout bij ophalen vragen:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchQuestions();
+    }, [symptom]);
+
+    const handleChange = (type, id) => {
+        const key = `${type}_${id}`;
+        setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const gpChecked = gpQuestions.some((q) => checked[`gp_${q.id}`]);
+        const urgentChecked = urgentQuestions.some((q) => checked[`urgent_${q.id}`]);
+
+        let resultAdvice = "";
+        if (urgentChecked) {
+            resultAdvice = "Advies: Bel 112 of de spoedlijn van uw huisarts.";
+        } else if (gpChecked) {
+            resultAdvice = "Advies: Plan afspraak bij uw huisarts.";
+        }
+
+        setAdvice(resultAdvice);
+    };
+
     return (
-        <>
-            <Header />
-            <main className={styles.mainWrapper}>
-                <section className={styles.complaintSection}>
-                    <div className={styles.complaintContainer}>
+        <main className={styles.mainWrapper}>
+            <section className={styles.complaintSection}>
+                <div className={styles.complaintContainer}>
+                    <div className={styles.complaintLeft}>
+                        {/* Terugknop */}
+                        <button
+                            type="button"
+                            onClick={() => navigate(-1)}
+                            className={styles.backButton}
+                        >
+                            &larr; Terug
+                        </button>
 
-                        {/* Linker helft */}
-                        <div className={styles.complaintLeft}>
-                            <h2>Klacht: Hoofdpijn</h2>
-                            <p>Beantwoord de vragen over deze klacht. Vink de van toepassing zijnde antwoorden aan.</p>
-                        </div>
+                        <h2>Klacht: {symptom?.symptom_name || "Onbekend"}</h2>
+                    </div>
 
-                        {/* Rechter helft */}
-                        <div className={styles.complaintRight}>
-                            <form className={styles.complaintForm} action="#" method="POST">
-                                <label>
-                                    <input type="checkbox" name="symptom1" />
-                                    Sinds wanneer ervaar je hoofdpijn?
-                                </label>
+                    <div className={styles.complaintRight}>
+                        {loading ? (
+                            <p>Laden...</p>
+                        ) : (
+                            <form className={styles.complaintForm} onSubmit={handleSubmit}>
+                                {gpQuestions.map((q) => (
+                                    <label key={`gp_${q.id}`} className={styles.questionLabel}>
+                                        <input
+                                            type="checkbox"
+                                            checked={!!checked[`gp_${q.id}`]}
+                                            onChange={() => handleChange("gp", q.id)}
+                                            disabled={!!advice}
+                                        />
+                                        {q.question_text}
+                                    </label>
+                                ))}
 
-                                <label>
-                                    <input type="checkbox" name="symptom2" />
-                                    Hoe ernstig is de pijn (schaal 1-10)?
-                                </label>
+                                {urgentQuestions.map((q) => (
+                                    <label key={`urgent_${q.id}`} className={styles.questionLabel}>
+                                        <input
+                                            type="checkbox"
+                                            checked={!!checked[`urgent_${q.id}`]}
+                                            onChange={() => handleChange("urgent", q.id)}
+                                            disabled={!!advice}
+                                        />
+                                        {q.question_text}
+                                    </label>
+                                ))}
 
-                                <label>
-                                    <input type="checkbox" name="symptom3" />
-                                    Heb je misselijkheid of andere klachten?
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="symptom4" />
-                                    Zijn er triggers bekend zoals stress of voeding?
-                                </label>
-
-                                <button type="submit" className={styles.continueBtn}>
+                                <button type="submit" className={styles.continueBtn} disabled={!!advice}>
                                     Doorgaan
                                 </button>
-                            </form>
-                        </div>
 
+                                {advice && (
+                                    <p
+                                        className={styles.advice}
+                                        style={{ color: "red", fontWeight: "bold", marginTop: "1rem" }}
+                                    >
+                                        {advice}
+                                    </p>
+                                )}
+                            </form>
+                        )}
                     </div>
-                </section>
-            </main>
-            <Footer />
-        </>
+                </div>
+            </section>
+        </main>
     );
 }

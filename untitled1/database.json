@@ -1,0 +1,1200 @@
+{
+  "collections": [
+    {
+      "name": "symptoms",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptom_name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "self_care_advice",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "anonymous",
+          "user",
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "patientInformationData",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "first_name",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        {
+          "name": "last_name",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        {
+          "name": "birth_date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "min": 5,
+          "max": 100,
+          "pattern": ".*@.*"
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "patientHistory",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "patientId",
+          "type": "reference:patients",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "questionGP",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "question_text",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor",
+          "patient"
+        ],
+        "POST": [
+          "admin"
+        ],
+        "PUT": [
+          "admin"
+        ],
+        "PATCH": [
+          "admin"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "questionUrgent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "question_text",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor",
+          "patient"
+        ],
+        "POST": [
+          "admin"
+        ],
+        "PUT": [
+          "admin"
+        ],
+        "PATCH": [
+          "admin"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "admin@quickhuisartscheck.nl",
+      "password": "admin123",
+      "roles": [
+        "admin"
+      ]
+    },
+    {
+      "email": "dokter@quickhuisartscheck.nl",
+      "password": "dokter123",
+      "roles": [
+        "doctor"
+      ]
+    },
+    {
+      "email": "patient1@example.com",
+      "password": "patient123",
+      "roles": [
+        "patient"
+      ]
+    },
+    {
+      "email": "patient2@example.com",
+      "password": "patient123",
+      "roles": [
+        "patient"
+      ]
+    }
+  ],
+  "data": {
+    "symptoms": [
+      {
+        "id": 1,
+        "symptom_name": "Anale pijn",
+        "description": "Pijn in of rond de anus kan verschillende oorzaken hebben, zoals aambeien, fissuren of infecties.",
+        "self_care_advice": "Was het gebied na ontlasting voorzichtig, vermijd krabben, gebruik eventueel zittend warm water of een mild zalfje tegen aambeien."
+      },
+      {
+        "id": 2,
+        "symptom_name": "Pijn in elleboog en arm",
+        "description": "Pijn in de arm of elleboog kan ontstaan door overbelasting, blessures, ontstekingen of andere aandoeningen.",
+        "self_care_advice": "Rust de arm uit, gebruik indien nodig een koud kompres, vermijd zware belasting, en probeer lichte oefeningen om de flexibiliteit te behouden."
+      },
+      {
+        "id": 3,
+        "symptom_name": "Elleboog pijn",
+        "description": "Pijn in de arm of elleboog kan ontstaan door overbelasting, blessures, ontstekingen of andere aandoeningen.",
+        "self_care_advice": "Rust de arm uit, gebruik indien nodig een koud kompres, vermijd zware belasting, en probeer lichte oefeningen om de flexibiliteit te behouden."
+      }
+    ],
+    "patientInformationData": [
+      {
+        "id": 1,
+        "first_name": "Jan",
+        "last_name": "Jansen",
+        "birth_date": "1985-03-14",
+        "email": "patient1@example.com"
+      },
+      {
+        "id": 2,
+        "first_name": "Maria",
+        "last_name": "de Vries",
+        "birth_date": "1992-07-22",
+        "email": "patient2@example.com"
+      }
+    ],
+    "patientHistory": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "patientId": 1
+      },
+      {
+        "id": 2,
+        "symptomId": 2,
+        "patientId": 2
+      },
+      {
+        "id": 3,
+        "symptomId": 10,
+        "patientId": 1
+      },
+      {
+        "id": 4,
+        "symptomId": 11,
+        "patientId": 2
+      },
+      {
+        "id": 5,
+        "symptomId": 12,
+        "patientId": 1
+      },
+      {
+        "id": 6,
+        "symptomId": 13,
+        "patientId": 2
+      },
+      {
+        "id": 7,
+        "symptomId": 14,
+        "patientId": 1
+      }
+    ],
+    "questionGP": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "question_text": "Is de pijn in de anus ernstig?"
+      },
+      {
+        "id": 2,
+        "symptomId": 1,
+        "question_text": "Verbeteren de klachten niet na een paar dagen?"
+      },
+      {
+        "id": 3,
+        "symptomId": 1,
+        "question_text": "Zit er bloed in de ontlasting of uit de anus gedurende meer dan 3 weken?"
+      },
+      {
+        "id": 4,
+        "symptomId": 2,
+        "question_text": "Is de pijn constant aanwezig?"
+      },
+      {
+        "id": 5,
+        "symptomId": 2,
+        "question_text": "Beperkt de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 6,
+        "symptomId": 2,
+        "question_text": "Is er zwelling of roodheid rond het gewricht?"
+      },
+      {
+        "id": 7,
+        "symptomId": 3,
+        "question_text": "Is de pijn constant aanwezig?"
+      },
+      {
+        "id": 8,
+        "symptomId": 3,
+        "question_text": "Beperkt de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 9,
+        "symptomId": 3,
+        "question_text": "Is er zwelling of roodheid rond het gewricht?"
+      },
+      {
+        "id": 10,
+        "symptom_name": "Verlies of verandering van reukzin",
+        "description": "Een verminderd of veranderd reukvermogen kan verschillende oorzaken hebben, zoals infecties, verkoudheid, neuspoliepen, allergieën of neurologische aandoeningen.",
+        "self_care_advice": "Houd neus en sinussen schoon, vermijd irriterende stoffen zoals rook, zorg voor goede luchtvochtigheid en controleer of medicatie invloed kan hebben op de reukzin."
+      },
+      {
+        "id": 11,
+        "symptom_name": "Anale Jeuk",
+        "description": "Jeuk rond de anus kan verschillende oorzaken hebben, zoals aambeien, huidirritatie, infecties of worminfecties.",
+        "self_care_advice": "Houd het gebied schoon en droog, vermijd krabben, gebruik mild wasmiddel en eventueel een zalf tegen jeuk of irritatie."
+      },
+      {
+        "id": 12,
+        "symptom_name": "Angst, angstgevoelens en paniekaanvallen",
+        "description": "Angst is een natuurlijke reactie op stressvolle situaties, maar wanneer deze gevoelens regelmatig optreden zonder duidelijke oorzaak, kunnen ze het dagelijks leven beïnvloeden. Paniekaanvallen zijn plotselinge episodes van intense angst die gepaard kunnen gaan met lichamelijke symptomen zoals een versnelde hartslag, zweten en duizeligheid.",
+        "self_care_advice": "Probeer ontspanningstechnieken zoals ademhalingsoefeningen, yoga of meditatie. Regelmatige lichaamsbeweging kan helpen om spanning te verminderen. Zorg voor een gezond slaapritme en eet regelmatig. Vermijd het gebruik van alcohol, tabak of drugs als copingmechanisme."
+      },
+      {
+        "id": 13,
+        "symptom_name": "Rugpijn",
+        "description": "Rugpijn is een veelvoorkomende klacht, vooral lage rugpijn. Het kan worden veroorzaakt door blessures, overbelasting, hernia, ischias of andere aandoeningen. Meestal verbetert het binnen enkele weken, maar soms kan het langer aanhouden of terugkeren.",
+        "self_care_advice": "Blijf actief en probeer dagelijkse activiteiten voort te zetten. Gebruik ontstekingsremmende pijnstillers zoals ibuprofen. Gebruik een koud kompres om pijn en zwelling te verminderen, of een warm kompres voor stijfheid of spierkrampen. Probeer oefeningen en rekken voor rugpijn."
+      },
+      {
+        "id": 14,
+        "symptom_name": "Slechte adem (halitose)",
+        "description": "Slechte adem is een veelvoorkomend probleem dat vaak wordt veroorzaakt door een ophoping van bacteriën in de mond, tandvleesproblemen, droge mond of bepaalde voedingsmiddelen.",
+        "self_care_advice": "Poets je tanden en tong minstens twee keer per dag met fluoride tandpasta, gebruik een tongschraper, reinig dagelijks tussen je tanden met floss of interdentale borstels, en gebruik suikervrije kauwgom of pepermuntjes na het eten van sterk ruikend voedsel."
+      },
+      {
+        "id": 15,
+        "symptom_name": "Bedplassen (enuresis nocturna)",
+        "description": "Bedplassen is het onvrijwillig urineren tijdens de slaap bij kinderen ouder dan 5 jaar die eerder langere tijd droog waren. Het komt vaak voor en kan verschillende oorzaken hebben, zoals onvoldoende productie van het hormoon vasopressine, een te kleine blaas, stress of constipatie.",
+        "self_care_advice": "Zorg voor een regelmatig toiletbezoek overdag, vermijd cafeïnehoudende dranken in de avond, bied voldoende drinken overdag aan, gebruik waterdichte hoeslakens en moedig positieve gedragingen aan met beloningen."
+      },
+      {
+        "id": 16,
+        "symptom_name": "Diarree en braken (gastro-enteritis)",
+        "description": "Diarree en braken worden vaak veroorzaakt door een virale infectie (buikgriep) en komen veel voor bij kinderen. Ze worden gemakkelijk verspreid in gezinnen, scholen en kinderdagverblijven. Diarree gaat meestal gepaard met frequente waterige ontlasting die een onaangename geur heeft.",
+        "self_care_advice": "Zorg ervoor dat je kind voldoende vocht binnenkrijgt, bij voorkeur via een orale rehydratatieoplossing (ORS) of verdunde appelsap. Kleine hoeveelheden vaak geven is het beste. Blijf borstvoeding geven of blijf flesvoeding aanbieden. Vermijd koolzuurhoudende dranken. Handhygiëne is belangrijk: was handen grondig na het verschonen van luiers en voor het eten. Houd het kind thuis totdat het 48 uur na de laatste episode van diarree of braken geen symptomen meer vertoont."
+      },
+      {
+        "id": 17,
+        "symptom_name": "Postmenopauzale bloeding",
+        "description": "Postmenopauzale bloeding is elke vaginale bloeding die optreedt na de menopauze, gedefinieerd als het niet hebben van een menstruatie gedurende 12 maanden of langer. Dit kan variëren van lichte spotting tot zwaardere bloedingen. Hoewel de meeste gevallen onschuldig zijn, is het belangrijk om dit te laten onderzoeken, aangezien het in sommige gevallen een teken kan zijn van baarmoederkanker.",
+        "self_care_advice": "Het is belangrijk om medische hulp te zoeken bij postmenopauzale bloeding. Vermijd zelfdiagnose of behandeling zonder professioneel advies. Ondersteunende maatregelen zoals het bijhouden van een menstruatiekalender kunnen nuttig zijn voor uw zorgverlener."
+      },
+      {
+        "id": 18,
+        "symptom_name": "Vaginale bloeding tussen menstruaties of na seks",
+        "description": "Vaginale bloeding tussen menstruaties of na seks kan verschillende oorzaken hebben, zoals hormonale anticonceptie, poliepen, infecties of veranderingen in de baarmoederhals. Hoewel het meestal onschuldig is, is het belangrijk om dit te laten onderzoeken door een arts.",
+        "self_care_advice": "Gebruik een waterige glijmiddel om vaginale droogte te verminderen, vooral tijdens de menopauze. Zorg voor een goede hygiëne en vermijd irriterende stoffen zoals geparfumeerde producten. Als je hormonale anticonceptie gebruikt, bespreek dan met je arts of dit de oorzaak kan zijn."
+      },
+      {
+        "id": 19,
+        "symptom_name": "Rectaal bloedverlies",
+        "description": "Rectale bloeding is het verlies van bloed via de anus. Dit kan variëren van kleine hoeveelheden bloed op het toiletpapier tot grotere hoeveelheden bloed in de ontlasting. De meeste gevallen zijn onschuldig, maar het is belangrijk om medische hulp te zoeken, vooral als het gaat om aanhoudende of hevige bloeding.",
+        "self_care_advice": "Zorg voor een vezelrijk dieet en drink voldoende water om constipatie te voorkomen. Vermijd langdurig zitten op het toilet en probeer niet te persen. Gebruik indien nodig een warm zitbad om ongemak te verlichten. Over-the-counter crèmes of zetpillen kunnen helpen bij symptomen van aambeien."
+      },
+      {
+        "id": 20,
+        "symptom_name": "Winderigheid (flatulentie)",
+        "description": "Winderigheid is het onvrijwillig laten ontsnappen van lucht uit de darmen via de anus. Het is normaal om dagelijks lucht te laten ontsnappen, maar overmatige of stinkende winden kunnen ongemakkelijk zijn. Dit kan veroorzaakt worden door bepaalde voedingsmiddelen, het inslikken van lucht of onderliggende gezondheidsproblemen.",
+        "self_care_advice": "Eet langzaam en kauw goed om het inslikken van lucht te verminderen. Vermijd voedingsmiddelen die bekend staan om het veroorzaken van winderigheid, zoals kool, bonen, uien en koolzuurhoudende dranken. Probeer kleinere, frequentere maaltijden in plaats van grote maaltijden. Regelmatige lichaamsbeweging kan ook helpen bij het verminderen van winderigheid."
+      },
+      {
+        "id": 21,
+        "symptom_name": "Bloed ophoesten (hemoptoë)",
+        "description": "Bloed ophoesten kan verschillende oorzaken hebben, variërend van relatief onschuldig tot ernstig. Mogelijke oorzaken zijn een langdurige of ernstige hoest, luchtweginfecties zoals bronchitis, longontsteking of tuberculose, of aandoeningen zoals bronchiectasieën. In sommige gevallen kan het wijzen op ernstigere problemen zoals een bloedstolsel in de longen (longembolie) of longkanker.",
+        "self_care_advice": "Als je slechts een paar kleine stipjes of vlekjes bloed hebt opgehoest, is het belangrijk om een afspraak te maken met je huisarts of contact op te nemen met NHS 111 voor advies. Vermijd roken en zorg voor voldoende rust en hydratatie. Als je symptomen zoals kortademigheid, pijn op de borst of een snelle hartslag ervaart, zoek dan onmiddellijk medische hulp."
+      },
+      {
+        "id": 22,
+        "symptom_name": "Bloed in sperma (hematospermie)",
+        "description": "Bloed in sperma is meestal onschuldig en verdwijnt vaak vanzelf binnen enkele dagen of weken. Mogelijke oorzaken zijn infecties (zoals een urineweginfectie of seksueel overdraagbare aandoening), recente medische ingrepen (zoals een prostaatbiopsie of vasectomie) of prostaatproblemen (zoals prostatitis of een vergrote prostaat). In zeldzame gevallen kan het wijzen op prostaatkanker.",
+        "self_care_advice": "Als je recent een medische ingreep hebt ondergaan, zoals een vasectomie of prostaatbiopsie, is het normaal om bloed in het sperma te hebben. Dit zou binnen enkele weken moeten verdwijnen. Vermijd onbeschermde seks totdat eventuele infecties zijn uitgesloten. Als je bezorgd bent of als de symptomen aanhouden, neem dan contact op met je huisarts."
+      },
+      {
+        "id": 23,
+        "symptom_name": "Bloed in urine (hematurie)",
+        "description": "Bloed in urine is meestal niet ernstig, maar moet altijd door een huisarts worden gecontroleerd. Het kan helder rood, donkerbruin of zelfs roze zijn. Mogelijke oorzaken zijn urineweginfecties, nierstenen, prostaatproblemen of tumoren in de blaas of nieren. In zeldzame gevallen kan het wijzen op kanker, vooral bij volwassenen boven de 45 jaar.",
+        "self_care_advice": "Als je bloed in je urine opmerkt, neem dan contact op met je huisarts, zelfs als je verder geen andere symptomen hebt. Vermijd zelfdiagnose. Drink voldoende water en vermijd het inhouden van urine. Als je recentelijk bieten hebt gegeten of medicijnen gebruikt die de urine kunnen kleuren, zoals rifampicine of nitrofurantoïne, kan dit de oorzaak zijn."
+      },
+      {
+        "id": 24,
+        "symptom_name": "Blauwe of grijze huid of lippen (cyanose)",
+        "description": "Cyanose is een blauwachtige of grijze verkleuring van de huid of lippen, wat duidt op onvoldoende zuurstof in het bloed of een slechte doorbloeding. Dit kan een teken zijn van een ernstige aandoening en vereist onmiddellijke medische aandacht.",
+        "self_care_advice": "Als je of je kind plotseling blauwe of grijze lippen, tong, gezicht of huid heeft, vooral in combinatie met ademhalingsmoeilijkheden, pijn op de borst, verwarring, slaperigheid of duizeligheid, bel dan onmiddellijk 999 voor een ambulance. Dit kan wijzen op een ernstig medisch probleem."
+      },
+      {
+        "id": 25,
+        "symptom_name": "Blozen",
+        "description": "Blozen is een veelvoorkomend verschijnsel waarbij de huid, vooral op het gezicht, plotseling rood wordt. Dit gebeurt vaak als reactie op emoties zoals schaamte, verlegenheid, angst of opwinding. Hoewel blozen meestal onschuldig is, kan het voor sommige mensen ongemakkelijk zijn en invloed hebben op hun dagelijks leven.",
+        "self_care_advice": "Om blozen te verminderen, kun je proberen jezelf te kalmeren door diep adem te halen en je te concentreren op iets anders. Het dragen van make-up die de roodheid camoufleert kan helpen in stressvolle situaties. Vermijd het eten van pittig voedsel of het drinken van alcohol en warme dranken als je merkt dat dit je blozen verergert."
+      },
+      {
+        "id": 26,
+        "symptom_name": "Lichaamsgeur",
+        "description": "Lichaamsgeur ontstaat wanneer bacteriën op de huid zweet afbreken. Dit komt vaak voor tijdens de puberteit, maar kan ook door factoren zoals voeding, medicatie of onderliggende aandoeningen worden beïnvloed. Hoewel het meestal geen reden tot bezorgdheid is, kan het voor sommige mensen ongemakkelijk zijn.",
+        "self_care_advice": "Was je oksels, liezen en voeten minstens twee keer per dag met zeep en droog ze grondig af. Gebruik antiperspirant en deodorant, en wissel je kleding regelmatig. Draag natuurlijke stoffen zoals katoen en vermijd synthetische materialen die zweet vasthouden. Let op je voeding en vermijd sterk ruikende of gekruide gerechten."
+      },
+      {
+        "id": 27,
+        "symptom_name": "Blaas- en darmincontinentie",
+        "description": "Blaas- en darmincontinentie verwijst naar het onvermogen om de controle over de blaas of darmen te behouden, wat leidt tot onvrijwillig urine- of ontlastingsverlies. Dit kan variëren van incidentele lekkage tot volledige incontinentie en kan veroorzaakt worden door verschillende factoren zoals verzwakte bekkenbodemspieren, neurologische aandoeningen of medische ingrepen.",
+        "self_care_advice": "Het is belangrijk om een gezonde levensstijl te behouden, inclusief regelmatige lichaamsbeweging en een vezelrijk dieet om de darmfunctie te ondersteunen. Het trainen van de bekkenbodemspieren kan helpen bij het verbeteren van de controle. Het gebruik van incontinentieproducten kan tijdelijk ongemak verminderen, maar raadpleeg een zorgverlener voor een behandelplan dat gericht is op de onderliggende oorzaak."
+      },
+      {
+        "id": 28,
+        "symptom_name": "Knobbel in de borst",
+        "description": "Een Knobbel in de borst is vaak onschuldig, maar moet altijd door een arts worden gecontroleerd. Mogelijke oorzaken zijn goedaardige tumoren of cysten, maar het kan ook wijzen op borstkanker.",
+        "self_care_advice": "Raak niet in paniek. Controleer regelmatig je borsten op veranderingen en raadpleeg een arts bij twijfel."
+      },
+      {
+        "id": 29,
+        "symptom_name": "Borstpijn",
+        "description": "Borstpijn komt vaak voor en heeft meestal geen ernstige oorzaak. Het kan verband houden met de menstruatiecyclus, zwangerschap of hormonale veranderingen.",
+        "self_care_advice": "Draag een goed passende beha, neem pijnstillers zoals paracetamol of ibuprofen en probeer stress te verminderen."
+      },
+      {
+        "id": 30,
+        "symptom_name": "Tandenknarsen (bruxisme)",
+        "description": "Tandenknarsen, of bruxisme, komt vaak voor tijdens de slaap en kan leiden tot tandbeschadiging en kaakpijn.",
+        "self_care_advice": "Probeer ontspanningstechnieken, zoals ademhalingsoefeningen, en vermijd cafeïne en alcohol voor het slapen."
+      },
+      {
+        "id": 31,
+        "symptom_name": "Uitpuilende ogen",
+        "description": "Uitpuilende ogen kunnen een teken zijn van een probleem met de schildklier, zoals de ziekte van Graves.",
+        "self_care_advice": "Bescherm je ogen tegen fel licht met een zonnebril en gebruik kunsttranen om droogheid te verminderen."
+      },
+      {
+        "id": 32,
+        "symptom_name": "Neusverkoudheid",
+        "description": "Neusverkoudheid is een ophoping van slijm in de neus en sinussen, en slijm in de keel. Het verdwijnt meestal vanzelf, maar raadpleeg een huisarts als het langer dan een paar weken aanhoudt.",
+        "self_care_advice": "Drink veel water, gebruik een luchtbevochtiger, probeer zoutwaterneusspoelingen en slaap met een extra kussen om rechtop te liggen."
+      },
+      {
+        "id": 33,
+        "symptom_name": "Pijn op de borst",
+        "description": "Pijn op de borst is meestal niet ernstig, maar het is belangrijk om medische hulp te zoeken om de oorzaak vast te stellen. Bel onmiddellijk 999 als u denkt dat u een hartaanval heeft.",
+        "self_care_advice": "Probeer te ontspannen, vermijd zware inspanning en neem pijnstillers zoals paracetamol indien nodig."
+      },
+      {
+        "id": 34,
+        "symptom_name": "Pijn stuit (coccygodynie)",
+        "description": "Coccygodynie is pijn aan het bot aan de basis van de wervelkolom, nabij de bovenkant van de billen. De pijn kan dof en zeurend zijn, met af en toe scherpe steken.",
+        "self_care_advice": "Zit rechtop, gebruik een speciaal kussen, leg ijs of warmte op het pijnlijke gebied en neem pijnstillers zoals ibuprofen."
+      },
+      {
+        "id": 35,
+        "symptom_name": "Verwardheid (delier)",
+        "description": "Verwardheid kan plotseling optreden en heeft veel verschillende oorzaken. Het is belangrijk om onmiddellijk medische hulp te zoeken als iemand plotseling verward raakt.",
+        "self_care_advice": "Blijf bij de persoon, geef geruststelling en noteer eventuele medicijnen die ze gebruiken."
+      },
+      {
+        "id": 36,
+        "symptom_name": "Obstipatie (verstopping)",
+        "description": "Obstipatie is wanneer u minder vaak dan normaal ontlasting heeft, of wanneer de ontlasting hard, droog of moeilijk door te geven is.",
+        "self_care_advice": "Eet vezelrijke voeding, drink veel water, beweeg regelmatig en negeer de aandrang niet."
+      },
+      {
+        "id": 37,
+        "symptom_name": "Hoesten",
+        "description": "Hoesten is een reflex die uw luchtwegen schoonmaakt van slijm, stof of irritatie. De meeste hoestbuien verdwijnen vanzelf binnen een paar weken.",
+        "self_care_advice": "Drink veel water, rust uit, en gebruik eventueel een hoestsiroop of stoominhalatie om de keel te verzachten."
+      },
+      {
+        "id": 38,
+        "symptom_name": "Bloed ophoesten",
+        "description": "Het ophoesten van bloed kan verschillende oorzaken hebben, zoals infecties, longproblemen of andere aandoeningen. Het vereist altijd medische beoordeling.",
+        "self_care_advice": "Rust goed uit, vermijd zware inspanning, en volg het advies van uw huisarts of specialist."
+      },
+      {
+        "id": 39,
+        "symptom_name": "Gehoorverlies",
+        "description": "Gehoorverlies kan plotseling of geleidelijk optreden en kan worden veroorzaakt door ouderdom, infecties, oorsmeerophoping of andere medische problemen.",
+        "self_care_advice": "Vermijd harde geluiden, bescherm uw oren en maak indien nodig een afspraak met een KNO-arts."
+      },
+      {
+        "id": 40,
+        "symptom_name": "Uitdroging",
+        "description": "Uitdroging ontstaat wanneer het lichaam meer vocht verliest dan het binnenkrijgt. Het kan leiden tot dorst, vermoeidheid, duizeligheid en minder urineproductie.",
+        "self_care_advice": "Drink regelmatig water, eet vochtige voedingsmiddelen zoals fruit, en vermijd alcohol of cafeïne die uitdroging kan verergeren."
+      },
+      {
+        "id": 41,
+        "symptom_name": "Tandpijn",
+        "description": "Tandpijn kan worden veroorzaakt door cariës, tandvleesontsteking, gebroken tanden of andere tandheelkundige problemen.",
+        "self_care_advice": "Spoel met warm water, gebruik eventueel een pijnstiller, vermijd zeer warme of koude voedingsmiddelen en maak een afspraak bij de tandarts."
+      },
+      {
+        "id": 42,
+        "symptom_name": "Duizeligheid",
+        "description": "Duizeligheid kan verschillende oorzaken hebben zoals lage bloeddruk, uitdroging, medicatie of evenwichtsstoornissen.",
+        "self_care_advice": "Ga langzaam zitten of staan, drink voldoende water en rust uit wanneer nodig."
+      },
+      {
+        "id": 43,
+        "symptom_name": "Dubbelzien",
+        "description": "Dubbelzien kan een tijdelijk of aanhoudend probleem zijn en kan veroorzaakt worden door oogspierproblemen, neurologische aandoeningen of andere medische oorzaken.",
+        "self_care_advice": "Rust uw ogen uit, vermijd vermoeidheid, en raadpleeg een arts voor een grondige evaluatie."
+      },
+      {
+        "id": 44,
+        "symptom_name": "Droge ogen",
+        "description": "Droge ogen kunnen branderig, jeukend of rood aanvoelen en worden vaak veroorzaakt door verminderde traanproductie of omgevingsfactoren.",
+        "self_care_advice": "Gebruik kunsttranen, neem regelmatige pauzes van schermwerk en bescherm uw ogen tegen wind en stof."
+      },
+      {
+        "id": 45,
+        "symptom_name": "Droge of pijnlijke lippen",
+        "description": "Droge of pijnlijke lippen kunnen ontstaan door uitdroging, weersomstandigheden of infecties.",
+        "self_care_advice": "Gebruik een lippenbalsem, drink voldoende water en vermijd het likken van uw lippen."
+      },
+      {
+        "id": 46,
+        "symptom_name": "Droge mond",
+        "description": "Een droge mond kan veroorzaakt worden door uitdroging, medicatie, ziekte of verminderde speekselproductie.",
+        "self_care_advice": "Drink voldoende water, kauw suikervrije kauwgom en vermijd alcohol of cafeïne."
+      },
+      {
+        "id": 47,
+        "symptom_name": "Slikproblemen (dysfagie)",
+        "description": "Slikproblemen kunnen veroorzaakt worden door spierproblemen, neurologische aandoeningen of obstructies in de slokdarm.",
+        "self_care_advice": "Eet langzaam, neem kleine hapjes en drink voldoende vocht bij het slikken."
+      },
+      {
+        "id": 48,
+        "symptom_name": "Oorpijn",
+        "description": "Oorpijn kan worden veroorzaakt door een oorinfectie, oorsmeerophoping, drukveranderingen of problemen met de kaak of keel.",
+        "self_care_advice": "Gebruik pijnstillers zoals paracetamol, houd het oor droog en vermijd het inbrengen van voorwerpen in het oor."
+      },
+      {
+        "id": 49,
+        "symptom_name": "Hartkloppingen",
+        "description": "Hartkloppingen zijn het gevoel dat uw hart sneller of onregelmatig klopt. Ze kunnen worden veroorzaakt door stress, cafeïne, alcohol of een onderliggende hartziekte.",
+        "self_care_advice": "Vermijd cafeïne, alcohol en roken. Probeer stress te verminderen met ontspanningsoefeningen of ademhalingstechnieken."
+      },
+      {
+        "id": 50,
+        "symptom_name": "Ejaculatieproblemen",
+        "description": "Ejaculatieproblemen kunnen bestaan uit voortijdige, vertraagde of uitblijvende zaadlozing. Ze kunnen lichamelijke of psychologische oorzaken hebben.",
+        "self_care_advice": "Praat openlijk met uw partner, vermijd overmatig alcoholgebruik en raadpleeg uw arts als het aanhoudt."
+      },
+      {
+        "id": 51,
+        "symptom_name": "Erectieproblemen (erectiele disfunctie)",
+        "description": "Erectieproblemen kunnen veroorzaakt worden door stress, vermoeidheid, alcohol, hormonale veranderingen of een onderliggende aandoening.",
+        "self_care_advice": "Beperk alcohol, rook niet, beweeg regelmatig en probeer stress te verminderen. Praat met uw arts als het regelmatig voorkomt."
+      },
+      {
+        "id": 52,
+        "symptom_name": "Trillen of beven van de handen",
+        "description": "Beven of trillen van de handen kan veroorzaakt worden door stress, angst, cafeïne, medicatie of neurologische aandoeningen zoals de ziekte van Parkinson.",
+        "self_care_advice": "Vermijd cafeïne, rust voldoende en probeer ontspanningstechnieken om stress te verminderen."
+      },
+      {
+        "id": 53,
+        "symptom_name": "Overmatige slaperigheid overdag (hypersomnie)",
+        "description": "Overmatige slaperigheid overdag kan veroorzaakt worden door slaaptekort, slaapapneu, depressie of neurologische aandoeningen.",
+        "self_care_advice": "Zorg voor een regelmatig slaapschema, vermijd cafeïne of alcohol voor het slapen en zorg voor een rustige slaapomgeving."
+      },
+      {
+        "id": 54,
+        "symptom_name": "Overmatige haargroei (hirsutisme)",
+        "description": "Overmatige haargroei bij vrouwen kan veroorzaakt worden door hormonale disbalans, zoals het polycysteus-ovariumsyndroom (PCOS), of door erfelijke factoren.",
+        "self_care_advice": "Overweeg ontharingsmethoden zoals scheren, waxen of laserbehandelingen, en bespreek hormonale behandelingen met uw arts."
+      },
+      {
+        "id": 55,
+        "symptom_name": "Overmatig zweten (hyperhidrose)",
+        "description": "Overmatig zweten kan zonder duidelijke reden voorkomen of veroorzaakt worden door stress, hormonale veranderingen of medische aandoeningen.",
+        "self_care_advice": "Draag luchtige kleding, gebruik een sterke antitranspirant en vermijd pittig eten of alcohol."
+      },
+      {
+        "id": 56,
+        "symptom_name": "Overmatige dorst",
+        "description": "Overmatige dorst kan veroorzaakt worden door uitdroging, hoge bloedsuikerspiegel (diabetes) of bepaalde medicijnen.",
+        "self_care_advice": "Drink voldoende water en beperk suikerhoudende dranken. Laat uw bloedsuiker controleren bij aanhoudende dorst."
+      },
+      {
+        "id": 57,
+        "symptom_name": "Vliegjes of lichtflitsen in het oog",
+        "description": "Vliegjes (floaters) en lichtflitsen kunnen normaal zijn, maar kunnen ook wijzen op een probleem met het netvlies, vooral als het plotseling optreedt.",
+        "self_care_advice": "Laat uw ogen onderzoeken bij nieuwe of verergerende klachten, vooral als u plotseling veel meer floaters ziet."
+      },
+      {
+        "id": 58,
+        "symptom_name": "Problemen met oogleden",
+        "description": "Ooglidproblemen zoals zwelling, jeuk, roodheid of trillingen kunnen veroorzaakt worden door allergieën, infecties of vermoeidheid.",
+        "self_care_advice": "Houd het gebied schoon, gebruik warme kompressen en vermijd het wrijven in de ogen."
+      },
+      {
+        "id": 59,
+        "symptom_name": "Flauwvallen (syncope)",
+        "description": "Flauwvallen betekent dat u plotseling het bewustzijn verliest doordat de bloedtoevoer naar de hersenen tijdelijk onvoldoende is.",
+        "self_care_advice": "Ga direct zitten of liggen zodra u zich licht in het hoofd voelt. Leg uw benen omhoog om de bloedtoevoer naar de hersenen te verbeteren. Vermijd langdurig stilstaan in warme omgevingen."
+      },
+      {
+        "id": 60,
+        "symptom_name": "Misselijkheid (gevoel van ziek zijn)",
+        "description": "Misselijkheid is het gevoel dat u moet braken of zich onwel voelt in de maagstreek. Het kan worden veroorzaakt door infecties, medicatie, zwangerschap of spijsverteringsproblemen.",
+        "self_care_advice": "Rust goed uit, eet kleine porties, vermijd vet of sterk gekruid eten en drink regelmatig kleine hoeveelheden water."
+      },
+      {
+        "id": 61,
+        "symptom_name": "Koorts bij volwassenen",
+        "description": "Koorts bij volwassenen is een lichaamstemperatuur boven 38 °C, meestal door een infectie veroorzaakt.",
+        "self_care_advice": "Drink voldoende, rust goed uit, draag luchtige kleding en neem paracetamol als u zich niet lekker voelt."
+      },
+      {
+        "id": 62,
+        "symptom_name": "Koorts bij kinderen",
+        "description": "Een hoge lichaamstemperatuur (38 °C of hoger) bij kinderen is meestal onschuldig en gaat vanzelf over binnen enkele dagen.",
+        "self_care_advice": "Geef het kind voldoende te drinken, trek lichte kleding aan en houd de temperatuur in de gaten. Geef paracetamol alleen als het kind zich ziek voelt."
+      },
+      {
+        "id": 63,
+        "symptom_name": "Pijn in hand of vingers",
+        "description": "Pijn in hand of vingers kan ontstaan door overbelasting, blessures, artritis of zenuwproblemen.",
+        "self_care_advice": "Rust de hand, vermijd overbelasting, gebruik ijs bij zwelling en voer lichte rekoefeningen uit als de pijn vermindert."
+      },
+      {
+        "id": 64,
+        "symptom_name": "Voetpijn",
+        "description": "Voetpijn kan komen door overbelasting, blessures of aandoeningen zoals ontsteking of platvoeten.",
+        "self_care_advice": "Rust de voet, draag stevige schoenen, gebruik ijs bij zwelling en vermijd langdurig staan."
+      },
+      {
+        "id": 65,
+        "symptom_name": "Aanval of stuiptrekking",
+        "description": "Een aanval is een plotselinge verstoring in de hersenactiviteit die leidt tot bewustzijnsverlies of spierschokken.",
+        "self_care_advice": "Blijf rustig, leg de persoon in een veilige houding en bel 112 als de aanval langer dan 5 minuten duurt."
+      },
+      {
+        "id": 66,
+        "symptom_name": "Hielpijn",
+        "description": "Pijn in de hiel kan worden veroorzaakt door overbelasting, peesontsteking (fasciitis plantaris) of een verkeerde loophouding.",
+        "self_care_advice": "Rust de voet, draag goed ondersteunende schoenen, gebruik eventueel een hielkussen en rek regelmatig de kuitspieren."
+      },
+      {
+        "id": 67,
+        "symptom_name": "Teenpijn",
+        "description": "Pijn in de tenen kan worden veroorzaakt door ingegroeide teennagels, eelt, artritis of infecties.",
+        "self_care_advice": "Draag comfortabele schoenen, houd de voeten schoon en droog, en week de teen in warm water bij irritatie."
+      },
+      {
+        "id": 68,
+        "symptom_name": "Pijn boven op de voet",
+        "description": "Pijn aan de bovenkant van de voet kan ontstaan door overbelasting, kneuzing of zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag geen strakke schoenen, gebruik ijs bij zwelling en ondersteun de voet bij het lopen."
+      },
+      {
+        "id": 69,
+        "symptom_name": "Pijn onder de voet",
+        "description": "Pijn aan de onderkant van de voet kan worden veroorzaakt door overbelasting, een peesplaatontsteking of een verkeerde houding.",
+        "self_care_advice": "Draag stevige schoenen, vermijd langdurig staan, rek de voetzool en gebruik eventueel een zooltje voor ondersteuning."
+      },
+      {
+        "id": 70,
+        "symptom_name": "Pijn in de bal van de voet",
+        "description": "Pijn in de bal van de voet (metatarsalgie) wordt vaak veroorzaakt door overbelasting, slecht schoeisel of een zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag schoenen met demping, vermijd hoge hakken en gebruik eventueel een inlegzool."
+      },
+      {
+        "id": 71,
+        "symptom_name": "Haaruitval",
+        "description": "Haaruitval kan tijdelijk zijn door stress, hormonale veranderingen of erfelijkheid.",
+        "self_care_advice": "Gebruik milde haarverzorging, vermijd strakke kapsels en eet gevarieerd voor voldoende voedingsstoffen."
+      },
+      {
+        "id": 72,
+        "symptom_name": "Hallucinaties of stemmen horen",
+        "description": "Hallucinaties zijn waarnemingen die er niet echt zijn, zoals stemmen horen of dingen zien die anderen niet waarnemen.",
+        "self_care_advice": "Praat met iemand die u vertrouwt, zorg voor voldoende slaap en vermijd alcohol of drugs."
+      },
+      {
+        "id": 73,
+        "symptom_name": "Handpijn",
+        "description": "Pijn in de hand kan veroorzaakt worden door overbelasting, artrose, peesontsteking of een blessure.",
+        "self_care_advice": "Rust de hand, gebruik ijs bij zwelling en vermijd herhaald gebruik van de pijnlijke beweging."
+      },
+      {
+        "id": 74,
+        "symptom_name": "Hoofdpijn",
+        "description": "Hoofdpijn kan vele oorzaken hebben, zoals spanning, migraine, vermoeidheid of uitdroging.",
+        "self_care_advice": "Rust goed uit, drink voldoende water, en vermijd fel licht of lawaai. Gebruik paracetamol indien nodig."
+      },
+      {
+        "id": 75,
+        "symptom_name": "Hevige menstruatie (menorragie)",
+        "description": "Hevige menstruatie betekent dat u meer bloed verliest dan normaal of langer dan 7 dagen ongesteld bent.",
+        "self_care_advice": "Houd uw menstruatiepatroon bij, gebruik ijzerrijke voeding en bespreek langdurige klachten met een arts."
+      },
+      {
+        "id": 76,
+        "symptom_name": "Hik (hikken)",
+        "description": "Hikken ontstaat door onwillekeurige samentrekkingen van het middenrif en gaat meestal vanzelf over.",
+        "self_care_advice": "Drink rustig water, houd even de adem in of slik een theelepel suiker. Vermijd alcohol en grote maaltijden."
+      },
+      {
+        "id": 77,
+        "symptom_name": "Heuppijn",
+        "description": "Pijn in de heup kan ontstaan door overbelasting, slijtage, ontsteking of een blessure.",
+        "self_care_advice": "Rust goed uit, gebruik ijs of warmte, en rek voorzichtig de heupspieren om stijfheid te verminderen."
+      },
+      {
+        "id": 78,
+        "symptom_name": "Heuppijn bij kinderen (irritable hip)",
+        "description": "Bij kinderen kan plotselinge heuppijn wijzen op een tijdelijke ontsteking, vaak na een infectie.",
+        "self_care_advice": "Laat het kind rusten, geef eventueel paracetamol en vermijd activiteiten die pijn doen."
+      },
+      {
+        "id": 79,
+        "symptom_name": "Netelroos (galbulten)",
+        "description": "Netelroos veroorzaakt plotselinge jeukende bulten op de huid die binnen uren tot dagen verdwijnen.",
+        "self_care_advice": "Vermijd krabben, gebruik koelzalf of antihistaminica en draag losse kleding."
+      },
+      {
+        "id": 80,
+        "symptom_name": "Wormen bij mensen",
+        "description": "Wormen zijn parasieten in de darmen die jeuk, buikpijn of gewichtsverlies kunnen veroorzaken.",
+        "self_care_advice": "Was handen goed, knip nagels kort, verschoon beddengoed regelmatig en gebruik ontwormingsmiddel indien nodig."
+      },
+      {
+        "id": 81,
+        "symptom_name": "Urineverlies (urine-incontinentie)",
+        "description": "Onbedoeld urineverlies komt vaak voor en kan verschillende vormen aannemen, zoals lekkage bij hoesten, niezen of plots dringende aandrang.",
+        "self_care_advice": "Ga regelmatig naar het toilet, vermijd overmatig drinken vlak voor het slapen, doe bekkenbodem-oefeningen en draag eventueel absorberend incontinentiemateriaal."
+      },
+      {
+        "id": 82,
+        "symptom_name": "Maag- of slokdarmirritatie (indigestie)",
+        "description": "Een gevoel van pijn of ongemak in de bovenbuik of branderig gevoel achter het borstbeen, vaak na het eten of drinken.",
+        "self_care_advice": "Eet kleinere maaltijden, vermijd vet en gekruid voedsel, blijf rechtop zitten na het eten en vermijd cafeïne of alcohol."
+      },
+      {
+        "id": 83,
+        "symptom_name": "Slaapprobleem (insomnia)",
+        "description": "Moeite met in slaap vallen, doorslapen of te vroeg wakker worden, ondanks voldoende gelegenheid om te slapen.",
+        "self_care_advice": "Stel een vast slaapschema in, vermijd schermen vlak voor het slapen, zorg voor een rustige slaapomgeving en beperk cafeïne of alcohol ’s avonds."
+      },
+      {
+        "id": 84,
+        "symptom_name": "Onregelmatige menstruatie",
+        "description": "De cyclus komt minder dan 21 dagen of meer dan 35 dagen vaak voor en kan door veel factoren beïnvloed worden.",
+        "self_care_advice": "Houd uw menstruatiepatroon bij in een kalender of app, let op stress, gewicht en veranderde levensstijl, en bespreek afwijkingen met uw arts."
+      },
+      {
+        "id": 85,
+        "symptom_name": "Jeukende huid",
+        "description": "Jeukende huid kan vele oorzaken hebben, zoals droge huid, allergieën, huidaandoeningen of interne ziekten.",
+        "self_care_advice": "Gebruik milde, ongeparfumeerde verzorgingsproducten, vermijd heet water bij het douchen, hydrateer de huid goed en draag losse kleding."
+      },
+      {
+        "id": 86,
+        "symptom_name": "Gewrichtspijn",
+        "description": "Pijn in één of meerdere gewrichten kan door veel oorzaken ontstaan, zoals overbelasting, ontsteking of slijtage.",
+        "self_care_advice": "Rust het gewricht, vermijd herhaalde belasting, gebruik ijs bij zwelling, en probeer lichte oefening als de pijn iets afneemt."
+      },
+      {
+        "id": 87,
+        "symptom_name": "Kniepijn",
+        "description": "Pijn in de knie kan komen door blessures, overbelasting, artrose of ontsteking in of rond de knie.",
+        "self_care_advice": "Draag een knie­ondersteuning, vermijd traplopen of zwaar tillen, gebruik ijs bij zwelling en probeer lichte kracht- en flexibiliteitsoefeningen."
+      },
+      {
+        "id": 88,
+        "symptom_name": "Beenkram­pen",
+        "description": "Beenkram­pen zijn plotselinge, pijnlijke samentrekkingen van de spieren in het been, vaak ’s nachts of na inspanning.",
+        "self_care_advice": "Rek de kuitspieren voor het slapen, blijf goed gehydrateerd, en vermijd langdurig staan of zitten in dezelfde houding."
+      },
+      {
+        "id": 89,
+        "symptom_name": "Man­ken bij kinderen (irritable hip)",
+        "description": "Een kind dat plots mankt kan een tijdelijke heupontsteking of andere heup­aandoening hebben.",
+        "self_care_advice": "Laat het kind rusten, vermijd zware belasting van het been, en overleg met een arts als de mankheid langer dan een paar dagen duurt."
+      },
+      {
+        "id": 90,
+        "symptom_name": "Neerslachtigheid / depressieve stemming",
+        "description": "Langdurig somber of neerslachtig voelen kan wijzen op een depressie of andere mentale gezondheids­klacht.",
+        "self_care_advice": "Probeer een vast dagritme aan te houden, blijf bewegen, praat met iemand die u vertrouwt en stel kleine haalbare doelen."
+      },
+      {
+        "id": 91,
+        "symptom_name": "Verlies van lib­ido",
+        "description": "Een aanzienlijke afname van seksueel verlangen kan door stress, hormonale veranderingen of relatie­problemen worden veroorzaakt.",
+        "self_care_advice": "Praat open met uw partner of arts, let op stress­factoren, voldoende slaap en een gezonde levensstijl."
+      },
+      {
+        "id": 92,
+        "symptom_name": "Knobbels of bulten onder de huid (lumps)",
+        "description": "Het opmerken van een nieuwe knobbel of bult kan onschuldig zijn, maar ook een teken van een ernstiger aandoening.",
+        "self_care_advice": "Houd de bult in de gaten, let op groei of verandering en plan een controle bij uw arts."
+      },
+      {
+        "id": 93,
+        "symptom_name": "Menstruatiepijn",
+        "description": "Pijn tijdens de menstruatie komt veel voor, maar kan ook wijzen op een onderliggende aandoening.",
+        "self_care_advice": "Gebruik een warme kruik, probeer rust tijdens de menstruatie­dagen en overweeg een mild pijnstiller als nodig."
+      },
+      {
+        "id": 94,
+        "symptom_name": "Gemiste of late menstruatie",
+        "description": "Een gemiste of sterk vertraagde menstruatie kan door zwangerschap, hormonale afwijkingen of andere oorzaken ontstaan.",
+        "self_care_advice": "Gebruik een ovulatie- of zwangerschapstest, houd uw cyclus bij en raadpleeg uw arts bij onregelmatigheden."
+      },
+      {
+        "id": 95,
+        "symptom_name": "Metaalachtige smaak in de mond",
+        "description": "Een metaalkleurige of metalen smaak in de mond kan door tandvleesproblemen, bepaalde medicijnen of infecties veroorzaakt worden.",
+        "self_care_advice": "Houd uw mond goed schoon, drink voldoende, vermijd metalen bestek en bespreek medicatie­bijwerkingen met uw arts."
+      },
+      {
+        "id": 96,
+        "symptom_name": "Nagelproblemen",
+        "description": "Nagelproblemen zijn meestal niet ernstig. Veel voorkomende klachten zijn broze, loszittende nagels of nagels die van kleur of vorm veranderen.",
+        "self_care_advice": "Houd uw nagels schoon en gedroogd, vermijd agressieve chemicaliën, draag goed passend schoeisel voor teennagels, en knip nagels recht af."
+      },
+      {
+        "id": 97,
+        "symptom_name": "Nekpijn en stijve nek",
+        "description": "Pijn of stijfheid in de nek kan ontstaan door verkeerde houding, spierspanning, blessure of slijtage.",
+        "self_care_advice": "Zorg voor een goede houding, wissel regelmatig houding, gebruik warme of koude kompressen en probeer lichte rekoefeningen."
+      },
+      {
+        "id": 98,
+        "symptom_name": "Nachtzweten",
+        "description": "Nachtzweten betekent dat u zóveel zweet tijdens de slaap dat kleding of beddengoed nat wordt, zonder dat de kamer te warm is of er veel dekens zijn.",
+        "self_care_advice": "Draag luchtige kleding, houd de slaapkamer koel, vermijd alcohol en pittig eten voor het slapen gaan, en probeer stressfactoren te verminderen."
+      },
+      {
+        "id": 99,
+        "symptom_name": "Tepelafscheiding",
+        "description": "Afwijkende afscheiding uit de tepelstaander kan verschillende oorzaken hebben, soms onschuldig maar soms reden voor nader onderzoek.",
+        "self_care_advice": "Let op kleur, consistentie en of er bloed in zit; draag indien nodig een goed ondersteunende bh en bespreek nieuwe of veranderende afscheiding met uw arts."
+      },
+      {
+        "id": 100,
+        "symptom_name": "Eisprongpijn",
+        "description": "Pijn of krampgevoel rond de eisprong (meestal midden in de cyclus) komt bij veel vrouwen voor en is meestal onschuldig.",
+        "self_care_advice": "Houd lichte warmte tegen de plek, rust even uit, gebruik indien nodig een milde pijnstiller en houd uw cyclus bij."
+      },
+      {
+        "id": 101,
+        "symptom_name": "Testikelpijn",
+        "description": "Pijn in een of beide testikels kan verschillende oorzaken hebben, zoals ontsteking, torsie of letsel.",
+        "self_care_advice": "Draag ondersteunend ondergoed, vermijd zware inspanning, houd de testikel hoog als er zwelling is en raadpleeg uw arts bij aanhoudende pijn."
+      },
+      {
+        "id": 102,
+        "symptom_name": "Pijn aan de achterkant van de hand",
+        "description": "Pijn aan de achterkant van de hand kan worden veroorzaakt door overbelasting, zenuwbeknelling, of letsel.",
+        "self_care_advice": "Rust de hand, vermijd herhaalde bewegingen, draag indien nodig een spalk en doe lichte stretching."
+      },
+      {
+        "id": 103,
+        "symptom_name": "Pijn in de palm van de hand",
+        "description": "Pijn of branderig gevoel in de palm kan wijzen op peesontsteking, carpaal tunnelsyndroom of overbelasting.",
+        "self_care_advice": "Bewegen op geleide van pijn"
+      },
+      {
+        "id": 104,
+        "symptom_name": "Verlamming",
+        "description": "Plotselinge of toenemende verlamming of krachtsverlies in een lichaamsdeel kan een teken zijn van een ernstige aandoening zoals een beroerte.",
+        "self_care_advice": "Zoek direct medische hulp bij plotseling krachtsverlies of verlamming; leg het aangedane deel omhoog en vermijd inspanning."
+      },
+      {
+        "id": 105,
+        "symptom_name": "Bekkenpijn",
+        "description": "Pijn in de onderbuik of het bekkengebied kan door veel oorzaken komen zoals blaas-, baarmoeder- of darmproblemen.",
+        "self_care_advice": "Rust, gebruik een warme kruik indien goed verdraagbaar, let op uw toiletritme en raadpleeg uw arts bij aanhoudende pijn."
+      },
+      {
+        "id": 106,
+        "symptom_name": "Knobbels of plekjes op de penis",
+        "description": "Knobbels of plekjes op de penis kunnen door infecties, huidproblemen of zeldzamere aandoeningen ontstaan.",
+        "self_care_advice": "Houd de plek schoon en droog, vermijd irriterende stoffen, draag katoenondergoed en bespreek nieuwe of veranderende plekjes met uw arts."
+      },
+      {
+        "id": 107,
+        "symptom_name": "Tintelingen (pins & needles)",
+        "description": "Een tintelend of prikkelend gevoel (’pins & needles’) kan ontstaan door druk op zenuwen, verminderde bloedtoevoer of neurologische aandoeningen.",
+        "self_care_advice": "Verander regelmatig houding, rek zacht de arm of been, vermijd langdurige druk op hetzelfde gebied en probeer voldoende beweging."
+      },
+      {
+        "id": 108,
+        "symptom_name": "Priapisme (pijnlijke erectie)",
+        "description": "Een langdurige, vaak pijnlijke erectie die niet verdwijnt kan een noodgeval zijn en moet snel behandeld worden.",
+        "self_care_advice": "Ga direct naar een arts als de erectie langer dan 4 uur aanhoudt; vermijd alcohol of drugs die dit kunnen veroorzaken."
+      },
+      {
+        "id": 109,
+        "symptom_name": "Huiduitslag bij baby’s en kinderen",
+        "description": "Huiduitslag komt veel voor bij baby’s en kinderen. Meestal is het onschuldig, maar soms is er snel medische aandacht nodig.",
+        "self_care_advice": "Houd de huid schoon en droog, verander regelmatig de luier bij baby’s, vermijd prikkelende stoffen en let op of de uitslag verbetert binnen een paar dagen."
+      },
+      {
+        "id": 110,
+        "symptom_name": "Rode oog",
+        "description": "Een rood oog kan veroorzaakt zijn door een infectie, allergie, irritatie of een ernstiger oogprobleem.",
+        "self_care_advice": "Was uw handen regelmatig, vermijd wrijven in het oog, gebruik indien nodig een warm kompres en raadpleeg uw arts als het niet verbetert."
+      },
+      {
+        "id": 111,
+        "symptom_name": "Kortademigheid",
+        "description": "Kortademigheid betekent dat u sneller of zwaarder ademt dan normaal, of het gevoel heeft niet genoeg lucht te krijgen.",
+        "self_care_advice": "Rust, vermijd inspanning, zit rechtop en probeer ademhaling in te kalmeren. Bij chronische long- of hartaandoeningen overleg met uw arts."
+      },
+      {
+        "id": 112,
+        "symptom_name": "Schouderpijn",
+        "description": "Pijn in de schouder kan worden veroorzaakt door overbelasting, slijtage, ontsteking of een blessure.",
+        "self_care_advice": "Vermijd zware belasting, gebruik een koude of warme drukplek, oefen lichte beweging en draag geen zware tas meer aan die kant."
+      },
+      {
+        "id": 113,
+        "symptom_name": "Stinkende voeten",
+        "description": "Stinkende voeten ontstaan vaak door transpiratie, slechte ventilatie van schoenen of schimmelinfectie.",
+        "self_care_advice": "Draag ademende schoenen, verander dagelijks sokken, gebruik antischimmelpoeder en houd de voeten droog."
+      },
+      {
+        "id": 114,
+        "symptom_name": "Sterk ruikende urine",
+        "description": "Sterk ruikende urine kan verschillende oorzaken hebben zoals uitdroging, infectie of bepaalde voedingsmiddelen of medicijnen.",
+        "self_care_advice": "Drink voldoende, let op goede hygiëne bij toiletbezoek, en overleg met uw arts als de geur langer dan 24-48 uur aanhoudt."
+      },
+      {
+        "id": 115,
+        "symptom_name": "Snurken",
+        "description": "Snurken is geluid maken tijdens de slaap door luchtweerstand. Vaak onschuldig, maar kan wijzen op slaapapneu of andere slaapstoornis.",
+        "self_care_advice": "Slaap op de zij, vermijd alcohol en zwaar eten voor het slapengaan, let op overgewicht en houdt het slaapritme regelmatig."
+      },
+      {
+        "id": 116,
+        "symptom_name": "Incontinentie bij kinderen (poepen in broek)",
+        "description": "Ongewild poepen in de broek bij kinderen kan door constipatie, emotionele factoren of medische oorzaken komen.",
+        "self_care_advice": "Houd een toiletroutine aan, beloon droog zijn, kijk naar vezelrijke voeding en zorg voor voldoende vochtinname."
+      },
+      {
+        "id": 117,
+        "symptom_name": "Zere of witte tong",
+        "description": "Een tong die wit of pijnlijk is kan wijzen op een schimmelinfectie (spruw), irritatie of andere mondhuid‐problemen.",
+        "self_care_advice": "Spoel de mond met lauw water, eet zacht voedsel, vermijd pittig eten en houd goede mondhygiëne."
+      },
+      {
+        "id": 118,
+        "symptom_name": "Keelpijn",
+        "description": "Keelpijn is een veelvoorkomend symptoom, vaak door virale infectie, soms door een bacterie.",
+        "self_care_advice": "Drink voldoende, gebruik warme dranken, gorgel met zout water en rust voldoende."
+      },
+      {
+        "id": 119,
+        "symptom_name": "Buikpijn",
+        "description": "Buikpijn kan vele oorzaken hebben, zoals voedselintolerantie, infectie, obstipatie of andere medische aandoeningen.",
+        "self_care_advice": "Hak uw voeding in kleinere porties, vermijd vet en sterk gekruid voedsel, rust, en drink voldoende vocht."
+      },
+      {
+        "id": 120,
+        "symptom_name": "Striae (rekstrepen)",
+        "description": "Striae zijn lijntjes in de huid ontstaan door snelle groei, zwangerschap of sterke gewichtsschommelingen. Meestal onschuldig.",
+        "self_care_advice": "Gebruik hydraterende crème, draag zachte kleding, beperk snelle gewichtstoename en gebruik zonbescherming op de huidstrepen."
+      },
+      {
+        "id": 121,
+        "symptom_name": "Gezwollen armen en handen (oedeem)",
+        "description": "Oedeem is vochtophoping in weefsels, vaak zichtbaar als gezwollen armen of handen. Kan meerdere oorzaken hebben.",
+        "self_care_advice": "Houd uw armen omhoog, vermijd langdurig stilstaan, draag losse kleding en controleer zoutinname."
+      },
+      {
+        "id": 122,
+        "symptom_name": "Gezwollen lymfeklieren",
+        "description": "Opgezette lymfeklieren in de hals, oksel of lies kunnen een teken zijn van infectie, ontsteking of soms ernstiger aandoening.",
+        "self_care_advice": "Zorg voor rust, warme compressen, voldoende vochtinname en let op genezing binnen een paar weken."
+      },
+      {
+        "id": 123,
+        "symptom_name": "Knobbels of zwellingen in de testikel",
+        "description": "Een zwelling of knobbel in de testikel kan onschuldig zijn, maar ook op ernstige klachten wijzen zoals testikeltorsie of kanker.",
+        "self_care_advice": "Onderzoek uzelf een- à twee keer per maand, draag ondersteunend ondergoed, vermijd zwaar tillen en raadpleeg uw arts bij verandering."
+      },
+      {
+        "id": 124,
+        "symptom_name": "Duim- of pijn in de duim",
+        "description": "Pijn in de duim kan komen door artrose, overbelasting, peesontsteking of blessures.",
+        "self_care_advice": "Draag een duimspalk indien nodig, vermijd zware belasting, doe lichte rekoefeningen en wissel warm/koude kompressen."
+      },
+      {
+        "id": 125,
+        "symptom_name": "Tinnitus (oorsuizen)",
+        "description": "Tinnitus is het horen van geluiden zoals zoemen of fluiten zonder externe bron. Het komt veel voor en is meestal onschuldig.",
+        "self_care_advice": "Vermijd harde geluiden, gebruik geluidsmaskering (‘white noise’), beperk cafeïne en beheer stress. Raadpleeg uw arts bij blijvende of verergerende klachten."
+      },
+      {
+        "id": 126,
+        "symptom_name": "Moeheid en lusteloosheid",
+        "description": "Aanhoudende moeheid of vermoeidheid zonder duidelijke oorzaak kan wijzen op onderliggende gezondheidsproblemen.",
+        "self_care_advice": "Zorg voor regelmatig slaapritme, beweeg dagelijks licht, eet gezond en beperk stress. Raadpleeg arts bij aanhoudende klachten."
+      },
+      {
+        "id": 127,
+        "symptom_name": "Vaginale droogte",
+        "description": "Vaginale droogte komt vaak voor, vooral tijdens de menopauze en kan jeuk, pijn of ongemak veroorzaken.",
+        "self_care_advice": "Gebruik glijmiddelen op waterbasis tijdens seks, draag katoenen ondergoed en vermijd irriterende producten."
+      },
+      {
+        "id": 128,
+        "symptom_name": "Gezichtsverlies",
+        "description": "Plotseling of geleidelijk verlies van gezichtsvermogen in één of beide ogen kan verschillende oorzaken hebben.",
+        "self_care_advice": "Bescherm uw ogen tegen fel licht, rust goed uit en raadpleeg een oogarts bij verandering in zicht."
+      },
+      {
+        "id": 129,
+        "symptom_name": "Braken van bloed",
+        "description": "Braken van bloed kan duiden op een bloeding in de maag of slokdarm en vereist vaak medische hulp.",
+        "self_care_advice": "Vermijd voedsel en dranken die irritatie veroorzaken en noteer de hoeveelheid en kleur van het braaksel."
+      },
+      {
+        "id": 130,
+        "symptom_name": "Tranende ogen",
+        "description": "Overmatig tranen kan worden veroorzaakt door verstopte traanbuizen, infecties of irritatie.",
+        "self_care_advice": "Houd de ogen schoon, gebruik oogdruppels bij irritatie en vermijd wrijven."
+      },
+      {
+        "id": 131,
+        "symptom_name": "Polspijn",
+        "description": "Polspijn kan ontstaan door overbelasting, artrose, zenuwbeknelling of een cyste.",
+        "self_care_advice": "Rust de pols, draag ondersteunende braces indien nodig en vermijd herhaalde belasting."
+      },
+      {
+        "id": 132,
+        "symptom_name": "Hielpijn",
+        "description": "Pijn in de hiel kan worden veroorzaakt door overbelasting, peesontsteking (fasciitis plantaris) of een verkeerde loophouding.",
+        "self_care_advice": "Rust de voet, draag goed ondersteunende schoenen, gebruik eventueel een hielkussen en rek regelmatig de kuitspieren."
+      },
+      {
+        "id": 133,
+        "symptom_name": "Teenpijn",
+        "description": "Pijn in de tenen kan worden veroorzaakt door ingegroeide teennagels, eelt, artritis of infecties.",
+        "self_care_advice": "Draag comfortabele schoenen, houd de voeten schoon en droog, en week de teen in warm water bij irritatie."
+      },
+      {
+        "id": 134,
+        "symptom_name": "Pijn boven op de voet",
+        "description": "Pijn aan de bovenkant van de voet kan ontstaan door overbelasting, kneuzing of zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag geen strakke schoenen, gebruik ijs bij zwelling en ondersteun de voet bij het lopen."
+      },
+      {
+        "id": 135,
+        "symptom_name": "Pijn onder de voet",
+        "description": "Pijn aan de onderkant van de voet kan worden veroorzaakt door overbelasting, een peesplaatontsteking of een verkeerde houding.",
+        "self_care_advice": "Draag stevige schoenen, vermijd langdurig staan, rek de voetzool en gebruik eventueel een zooltje voor ondersteuning."
+      },
+      {
+        "id": 136,
+        "symptom_name": "Pijn in de bal van de voet",
+        "description": "Pijn in de bal van de voet (metatarsalgie) wordt vaak veroorzaakt door overbelasting, slecht schoeisel of een zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag schoenen met demping, vermijd hoge hakken en gebruik eventueel een inlegzool."
+      },
+      {
+        "id": 137,
+        "symptom_name": "Haaruitval",
+        "description": "Haaruitval kan tijdelijk zijn door stress, hormonale veranderingen of erfelijkheid.",
+        "self_care_advice": "Gebruik milde haarverzorging, vermijd strakke kapsels en eet gevarieerd voor voldoende voedingsstoffen."
+      },
+      {
+        "id": 138,
+        "symptom_name": "Hallucinaties of stemmen horen",
+        "description": "Hallucinaties zijn waarnemingen die er niet echt zijn, zoals stemmen horen of dingen zien die anderen niet waarnemen.",
+        "self_care_advice": "Praat met iemand die u vertrouwt, zorg voor voldoende slaap en vermijd alcohol of drugs."
+      }
+    ],
+    "questionUrgent": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "question_text": "Heeft u hevige anale pijn met hoge temperatuur of koude rillingen?"
+      },
+      {
+        "id": 2,
+        "symptomId": 1,
+        "question_text": "Is uw ontlasting zwart of donkerrood?"
+      },
+      {
+        "id": 3,
+        "symptomId": 2,
+        "question_text": "Heeft u plotselinge hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 4,
+        "symptomId": 2,
+        "question_text": "Is er een zichtbare misvorming van de arm of elleboog?"
+      },
+      {
+        "id": 5,
+        "symptomId": 2,
+        "question_text": "Heeft u gevoelloosheid of tintelingen in hand of vingers?"
+      },
+      {
+        "id": 6,
+        "symptomId": 3,
+        "question_text": "Heeft u plotselinge hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 7,
+        "symptomId": 3,
+        "question_text": "Is er een zichtbare misvorming van de arm of elleboog?"
+      },
+      {
+        "id": 8,
+        "symptomId": 3,
+        "question_text": "Heeft u gevoelloosheid of tintelingen in hand of vingers?"
+      }
+    ]
+  }
+}

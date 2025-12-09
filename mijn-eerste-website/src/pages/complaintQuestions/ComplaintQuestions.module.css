@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 100px; /* ruimte voor header */
+    padding-top: 100px;
     width: 100%;
     background-color: whitesmoke;
 }
@@ -27,24 +27,27 @@
 
 .complaintContainer {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
     max-width: 1200px;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 /* Linker & rechter helft */
 .complaintLeft,
 .complaintRight {
-    flex: 1 1 0;
-    min-width: 400px;
-    padding: 2rem;
+    flex: 1 1 45%;
+    min-width: 300px;
+    padding: 2rem; /* padding rondom */
     background: white;
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    justify-content: center; /* verticaal centreren */
+    position: relative; /* nodig voor absolute terugknop */
+    min-height: 300px; /* optioneel, geeft voldoende hoogte */
 }
 
 .complaintLeft h2,
@@ -53,16 +56,45 @@
     color: var(--primary);
 }
 
+/* Terug knop */
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: background .2s ease, box-shadow .2s ease;
+    z-index: 10;
+    background: white;
+    cursor: pointer;
+}
+.backButton:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
 /* Form */
 .complaintForm {
     display: flex;
     flex-direction: column;
 }
 
+.complaintForm h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
 .complaintForm label {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-weight: normal;
     cursor: pointer;
 }
@@ -74,6 +106,20 @@
     cursor: pointer;
 }
 
+/* Advies */
+.advice {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.adviceUrgent {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: red;
+}
+
+/* Doorgaan knop */
 .continueBtn {
     background: var(--primary);
     color: white;
@@ -84,16 +130,18 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
-    transition: background .2s ease;
+    transition: background 0.2s ease;
 }
-
-.continueBtn:hover { background: var(--accent); }
+.continueBtn:hover {
+    background: var(--accent);
+}
 
 /* Responsive */
 @media screen and (max-width: 992px) {
     .complaintContainer {
         flex-direction: column;
         gap: 2rem;
+        align-items: center;
     }
 
     .complaintLeft,
@@ -101,12 +149,19 @@
         flex: 1 1 100%;
         min-width: 0;
         width: 100%;
-        margin: 0 auto;
     }
 }
 
 @media screen and (max-width: 576px) {
-    .complaintLeft, .complaintRight {
+    .complaintLeft,
+    .complaintRight {
         padding: 1rem;
+    }
+
+    .backButton {
+        top: 12px;
+        left: 12px;
+        font-size: 12px;
+        padding: 4px 8px;
     }
 }

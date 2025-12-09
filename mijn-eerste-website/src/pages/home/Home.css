@@ -55,6 +55,9 @@
     display: block;
 }
 
+
+
+
 /* ---------- Hero Tiles ---------- */
 .hero-tiles {
     display: grid;
@@ -64,6 +67,13 @@
     margin-top: -140px;
     position: relative;
     z-index: 2;
+}
+
+
+.hero-tiles > * {
+    width: 100%;
+    max-width: 450px;  /* gewenste tile-breedte */
+    box-sizing: border-box;
 }
 
 

@@ -1,0 +1,5068 @@
+{
+  "collections": [
+    {
+      "name": "symptoms",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptom_name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "self_care_advice",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "anonymous",
+          "user",
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "patientInformationData",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "first_name",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        {
+          "name": "last_name",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        {
+          "name": "birth_date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "min": 5,
+          "max": 100,
+          "pattern": ".*@.*"
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "patientHistory",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "patientId",
+          "type": "reference:patients",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor"
+        ],
+        "POST": [
+          "admin",
+          "doctor"
+        ],
+        "PUT": [
+          "admin",
+          "doctor"
+        ],
+        "PATCH": [
+          "admin",
+          "doctor"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "questionGP",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "question_text",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor",
+          "patient"
+        ],
+        "POST": [
+          "admin"
+        ],
+        "PUT": [
+          "admin"
+        ],
+        "PATCH": [
+          "admin"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    },
+    {
+      "name": "questionUrgent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "symptomId",
+          "type": "reference:symptoms",
+          "required": true
+        },
+        {
+          "name": "question_text",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "doctor",
+          "patient"
+        ],
+        "POST": [
+          "admin"
+        ],
+        "PUT": [
+          "admin"
+        ],
+        "PATCH": [
+          "admin"
+        ],
+        "DELETE": [
+          "admin"
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "admin@quickhuisartscheck.nl",
+      "password": "admin123",
+      "roles": [
+        "admin"
+      ]
+    },
+    {
+      "email": "dokter@quickhuisartscheck.nl",
+      "password": "dokter123",
+      "roles": [
+        "doctor"
+      ]
+    },
+    {
+      "email": "patient1@example.com",
+      "password": "patient123",
+      "roles": [
+        "patient"
+      ]
+    },
+    {
+      "email": "patient2@example.com",
+      "password": "patient123",
+      "roles": [
+        "patient"
+      ]
+    }
+  ],
+  "data": {
+    "symptoms": [
+      {
+        "id": 1,
+        "symptom_name": "Anale pijn",
+        "description": "Pijn in of rond de anus kan verschillende oorzaken hebben, zoals aambeien, fissuren of infecties.",
+        "self_care_advice": "Was het gebied na ontlasting voorzichtig, vermijd krabben, gebruik eventueel zittend warm water of een mild zalfje tegen aambeien."
+      },
+      {
+        "id": 2,
+        "symptom_name": "Pijn in elleboog en arm",
+        "description": "Pijn in de arm of elleboog kan ontstaan door overbelasting, blessures, ontstekingen of andere aandoeningen.",
+        "self_care_advice": "Rust de arm uit, gebruik indien nodig een koud kompres, vermijd zware belasting, en probeer lichte oefeningen om de flexibiliteit te behouden."
+      },
+      {
+        "id": 3,
+        "symptom_name": "Elleboog pijn",
+        "description": "Pijn in de arm of elleboog kan ontstaan door overbelasting, blessures, ontstekingen of andere aandoeningen.",
+        "self_care_advice": "Rust de arm uit, gebruik indien nodig een koud kompres, vermijd zware belasting, en probeer lichte oefeningen om de flexibiliteit te behouden."
+      },
+      {
+        "id": 3,
+        "symptom_name": "Elleboog pijn",
+        "description": "Pijn in de arm of elleboog kan ontstaan door overbelasting, blessures, ontstekingen of andere aandoeningen.",
+        "self_care_advice": "Rust de arm uit, gebruik indien nodig een koud kompres, vermijd zware belasting, en probeer lichte oefeningen om de flexibiliteit te behouden."
+      },
+      {
+        "id": 10,
+        "symptom_name": "Verlies of verandering van reukzin",
+        "description": "Een verminderd of veranderd reukvermogen kan verschillende oorzaken hebben, zoals infecties, verkoudheid, neuspoliepen, allergieën of neurologische aandoeningen.",
+        "self_care_advice": "Houd neus en sinussen schoon, vermijd irriterende stoffen zoals rook, zorg voor goede luchtvochtigheid en controleer of medicatie invloed kan hebben op de reukzin."
+      },
+      {
+        "id": 11,
+        "symptom_name": "Anale Jeuk",
+        "description": "Jeuk rond de anus kan verschillende oorzaken hebben, zoals aambeien, huidirritatie, infecties of worminfecties.",
+        "self_care_advice": "Houd het gebied schoon en droog, vermijd krabben, gebruik mild wasmiddel en eventueel een zalf tegen jeuk of irritatie."
+      },
+      {
+        "id": 12,
+        "symptom_name": "Angst, angstgevoelens en paniekaanvallen",
+        "description": "Angst is een natuurlijke reactie op stressvolle situaties, maar wanneer deze gevoelens regelmatig optreden zonder duidelijke oorzaak, kunnen ze het dagelijks leven beïnvloeden. Paniekaanvallen zijn plotselinge episodes van intense angst die gepaard kunnen gaan met lichamelijke symptomen zoals een versnelde hartslag, zweten en duizeligheid.",
+        "self_care_advice": "Probeer ontspanningstechnieken zoals ademhalingsoefeningen, yoga of meditatie. Regelmatige lichaamsbeweging kan helpen om spanning te verminderen. Zorg voor een gezond slaapritme en eet regelmatig. Vermijd het gebruik van alcohol, tabak of drugs als copingmechanisme."
+      },
+      {
+        "id": 13,
+        "symptom_name": "Rugpijn",
+        "description": "Rugpijn is een veelvoorkomende klacht, vooral lage rugpijn. Het kan worden veroorzaakt door blessures, overbelasting, hernia, ischias of andere aandoeningen. Meestal verbetert het binnen enkele weken, maar soms kan het langer aanhouden of terugkeren.",
+        "self_care_advice": "Blijf actief en probeer dagelijkse activiteiten voort te zetten. Gebruik ontstekingsremmende pijnstillers zoals ibuprofen. Gebruik een koud kompres om pijn en zwelling te verminderen, of een warm kompres voor stijfheid of spierkrampen. Probeer oefeningen en rekken voor rugpijn."
+      },
+      {
+        "id": 14,
+        "symptom_name": "Slechte adem (halitose)",
+        "description": "Slechte adem is een veelvoorkomend probleem dat vaak wordt veroorzaakt door een ophoping van bacteriën in de mond, tandvleesproblemen, droge mond of bepaalde voedingsmiddelen.",
+        "self_care_advice": "Poets je tanden en tong minstens twee keer per dag met fluoride tandpasta, gebruik een tongschraper, reinig dagelijks tussen je tanden met floss of interdentale borstels, en gebruik suikervrije kauwgom of pepermuntjes na het eten van sterk ruikend voedsel."
+      },
+      {
+        "id": 15,
+        "symptom_name": "Bedplassen (enuresis nocturna)",
+        "description": "Bedplassen is het onvrijwillig urineren tijdens de slaap bij kinderen ouder dan 5 jaar die eerder langere tijd droog waren. Het komt vaak voor en kan verschillende oorzaken hebben, zoals onvoldoende productie van het hormoon vasopressine, een te kleine blaas, stress of constipatie.",
+        "self_care_advice": "Zorg voor een regelmatig toiletbezoek overdag, vermijd cafeïnehoudende dranken in de avond, bied voldoende drinken overdag aan, gebruik waterdichte hoeslakens en moedig positieve gedragingen aan met beloningen."
+      },
+      {
+        "id": 16,
+        "symptom_name": "Diarree en braken (gastro-enteritis)",
+        "description": "Diarree en braken worden vaak veroorzaakt door een virale infectie (buikgriep) en komen veel voor bij kinderen. Ze worden gemakkelijk verspreid in gezinnen, scholen en kinderdagverblijven. Diarree gaat meestal gepaard met frequente waterige ontlasting die een onaangename geur heeft.",
+        "self_care_advice": "Zorg ervoor dat je kind voldoende vocht binnenkrijgt, bij voorkeur via een orale rehydratatieoplossing (ORS) of verdunde appelsap. Kleine hoeveelheden vaak geven is het beste. Blijf borstvoeding geven of blijf flesvoeding aanbieden. Vermijd koolzuurhoudende dranken. Handhygiëne is belangrijk: was handen grondig na het verschonen van luiers en voor het eten. Houd het kind thuis totdat het 48 uur na de laatste episode van diarree of braken geen symptomen meer vertoont."
+      },
+      {
+        "id": 17,
+        "symptom_name": "Postmenopauzale bloeding",
+        "description": "Postmenopauzale bloeding is elke vaginale bloeding die optreedt na de menopauze, gedefinieerd als het niet hebben van een menstruatie gedurende 12 maanden of langer. Dit kan variëren van lichte spotting tot zwaardere bloedingen. Hoewel de meeste gevallen onschuldig zijn, is het belangrijk om dit te laten onderzoeken, aangezien het in sommige gevallen een teken kan zijn van baarmoederkanker.",
+        "self_care_advice": "Het is belangrijk om medische hulp te zoeken bij postmenopauzale bloeding. Vermijd zelfdiagnose of behandeling zonder professioneel advies. Ondersteunende maatregelen zoals het bijhouden van een menstruatiekalender kunnen nuttig zijn voor uw zorgverlener."
+      },
+      {
+        "id": 18,
+        "symptom_name": "Vaginale bloeding tussen menstruaties of na seks",
+        "description": "Vaginale bloeding tussen menstruaties of na seks kan verschillende oorzaken hebben, zoals hormonale anticonceptie, poliepen, infecties of veranderingen in de baarmoederhals. Hoewel het meestal onschuldig is, is het belangrijk om dit te laten onderzoeken door een arts.",
+        "self_care_advice": "Gebruik een waterige glijmiddel om vaginale droogte te verminderen, vooral tijdens de menopauze. Zorg voor een goede hygiëne en vermijd irriterende stoffen zoals geparfumeerde producten. Als je hormonale anticonceptie gebruikt, bespreek dan met je arts of dit de oorzaak kan zijn."
+      },
+      {
+        "id": 19,
+        "symptom_name": "Rectaal bloedverlies",
+        "description": "Rectale bloeding is het verlies van bloed via de anus. Dit kan variëren van kleine hoeveelheden bloed op het toiletpapier tot grotere hoeveelheden bloed in de ontlasting. De meeste gevallen zijn onschuldig, maar het is belangrijk om medische hulp te zoeken, vooral als het gaat om aanhoudende of hevige bloeding.",
+        "self_care_advice": "Zorg voor een vezelrijk dieet en drink voldoende water om constipatie te voorkomen. Vermijd langdurig zitten op het toilet en probeer niet te persen. Gebruik indien nodig een warm zitbad om ongemak te verlichten. Over-the-counter crèmes of zetpillen kunnen helpen bij symptomen van aambeien."
+      },
+      {
+        "id": 20,
+        "symptom_name": "Winderigheid (flatulentie)",
+        "description": "Winderigheid is het onvrijwillig laten ontsnappen van lucht uit de darmen via de anus. Het is normaal om dagelijks lucht te laten ontsnappen, maar overmatige of stinkende winden kunnen ongemakkelijk zijn. Dit kan veroorzaakt worden door bepaalde voedingsmiddelen, het inslikken van lucht of onderliggende gezondheidsproblemen.",
+        "self_care_advice": "Eet langzaam en kauw goed om het inslikken van lucht te verminderen. Vermijd voedingsmiddelen die bekend staan om het veroorzaken van winderigheid, zoals kool, bonen, uien en koolzuurhoudende dranken. Probeer kleinere, frequentere maaltijden in plaats van grote maaltijden. Regelmatige lichaamsbeweging kan ook helpen bij het verminderen van winderigheid."
+      },
+      {
+        "id": 21,
+        "symptom_name": "Bloed ophoesten (hemoptoë)",
+        "description": "Bloed ophoesten kan verschillende oorzaken hebben, variërend van relatief onschuldig tot ernstig. Mogelijke oorzaken zijn een langdurige of ernstige hoest, luchtweginfecties zoals bronchitis, longontsteking of tuberculose, of aandoeningen zoals bronchiectasieën. In sommige gevallen kan het wijzen op ernstigere problemen zoals een bloedstolsel in de longen (longembolie) of longkanker.",
+        "self_care_advice": "Als je slechts een paar kleine stipjes of vlekjes bloed hebt opgehoest, is het belangrijk om een afspraak te maken met je huisarts of contact op te nemen met NHS 111 voor advies. Vermijd roken en zorg voor voldoende rust en hydratatie. Als je symptomen zoals kortademigheid, pijn op de borst of een snelle hartslag ervaart, zoek dan onmiddellijk medische hulp."
+      },
+      {
+        "id": 22,
+        "symptom_name": "Bloed in sperma (hematospermie)",
+        "description": "Bloed in sperma is meestal onschuldig en verdwijnt vaak vanzelf binnen enkele dagen of weken. Mogelijke oorzaken zijn infecties (zoals een urineweginfectie of seksueel overdraagbare aandoening), recente medische ingrepen (zoals een prostaatbiopsie of vasectomie) of prostaatproblemen (zoals prostatitis of een vergrote prostaat). In zeldzame gevallen kan het wijzen op prostaatkanker.",
+        "self_care_advice": "Als je recent een medische ingreep hebt ondergaan, zoals een vasectomie of prostaatbiopsie, is het normaal om bloed in het sperma te hebben. Dit zou binnen enkele weken moeten verdwijnen. Vermijd onbeschermde seks totdat eventuele infecties zijn uitgesloten. Als je bezorgd bent of als de symptomen aanhouden, neem dan contact op met je huisarts."
+      },
+      {
+        "id": 23,
+        "symptom_name": "Bloed in urine (hematurie)",
+        "description": "Bloed in urine is meestal niet ernstig, maar moet altijd door een huisarts worden gecontroleerd. Het kan helder rood, donkerbruin of zelfs roze zijn. Mogelijke oorzaken zijn urineweginfecties, nierstenen, prostaatproblemen of tumoren in de blaas of nieren. In zeldzame gevallen kan het wijzen op kanker, vooral bij volwassenen boven de 45 jaar.",
+        "self_care_advice": "Als je bloed in je urine opmerkt, neem dan contact op met je huisarts, zelfs als je verder geen andere symptomen hebt. Vermijd zelfdiagnose. Drink voldoende water en vermijd het inhouden van urine. Als je recentelijk bieten hebt gegeten of medicijnen gebruikt die de urine kunnen kleuren, zoals rifampicine of nitrofurantoïne, kan dit de oorzaak zijn."
+      },
+      {
+        "id": 24,
+        "symptom_name": "Blauwe of grijze huid of lippen (cyanose)",
+        "description": "Cyanose is een blauwachtige of grijze verkleuring van de huid of lippen, wat duidt op onvoldoende zuurstof in het bloed of een slechte doorbloeding. Dit kan een teken zijn van een ernstige aandoening en vereist onmiddellijke medische aandacht.",
+        "self_care_advice": "Als je of je kind plotseling blauwe of grijze lippen, tong, gezicht of huid heeft, vooral in combinatie met ademhalingsmoeilijkheden, pijn op de borst, verwarring, slaperigheid of duizeligheid, bel dan onmiddellijk 999 voor een ambulance. Dit kan wijzen op een ernstig medisch probleem."
+      },
+      {
+        "id": 25,
+        "symptom_name": "Blozen",
+        "description": "Blozen is een veelvoorkomend verschijnsel waarbij de huid, vooral op het gezicht, plotseling rood wordt. Dit gebeurt vaak als reactie op emoties zoals schaamte, verlegenheid, angst of opwinding. Hoewel blozen meestal onschuldig is, kan het voor sommige mensen ongemakkelijk zijn en invloed hebben op hun dagelijks leven.",
+        "self_care_advice": "Om blozen te verminderen, kun je proberen jezelf te kalmeren door diep adem te halen en je te concentreren op iets anders. Het dragen van make-up die de roodheid camoufleert kan helpen in stressvolle situaties. Vermijd het eten van pittig voedsel of het drinken van alcohol en warme dranken als je merkt dat dit je blozen verergert."
+      },
+      {
+        "id": 26,
+        "symptom_name": "Lichaamsgeur",
+        "description": "Lichaamsgeur ontstaat wanneer bacteriën op de huid zweet afbreken. Dit komt vaak voor tijdens de puberteit, maar kan ook door factoren zoals voeding, medicatie of onderliggende aandoeningen worden beïnvloed. Hoewel het meestal geen reden tot bezorgdheid is, kan het voor sommige mensen ongemakkelijk zijn.",
+        "self_care_advice": "Was je oksels, liezen en voeten minstens twee keer per dag met zeep en droog ze grondig af. Gebruik antiperspirant en deodorant, en wissel je kleding regelmatig. Draag natuurlijke stoffen zoals katoen en vermijd synthetische materialen die zweet vasthouden. Let op je voeding en vermijd sterk ruikende of gekruide gerechten."
+      },
+      {
+        "id": 27,
+        "symptom_name": "Blaas- en darmincontinentie",
+        "description": "Blaas- en darmincontinentie verwijst naar het onvermogen om de controle over de blaas of darmen te behouden, wat leidt tot onvrijwillig urine- of ontlastingsverlies. Dit kan variëren van incidentele lekkage tot volledige incontinentie en kan veroorzaakt worden door verschillende factoren zoals verzwakte bekkenbodemspieren, neurologische aandoeningen of medische ingrepen.",
+        "self_care_advice": "Het is belangrijk om een gezonde levensstijl te behouden, inclusief regelmatige lichaamsbeweging en een vezelrijk dieet om de darmfunctie te ondersteunen. Het trainen van de bekkenbodemspieren kan helpen bij het verbeteren van de controle. Het gebruik van incontinentieproducten kan tijdelijk ongemak verminderen, maar raadpleeg een zorgverlener voor een behandelplan dat gericht is op de onderliggende oorzaak."
+      },
+      {
+        "id": 28,
+        "symptom_name": "Knobbel in de borst",
+        "description": "Een Knobbel in de borst is vaak onschuldig, maar moet altijd door een arts worden gecontroleerd. Mogelijke oorzaken zijn goedaardige tumoren of cysten, maar het kan ook wijzen op borstkanker.",
+        "self_care_advice": "Raak niet in paniek. Controleer regelmatig je borsten op veranderingen en raadpleeg een arts bij twijfel."
+      },
+      {
+        "id": 29,
+        "symptom_name": "Borstpijn",
+        "description": "Borstpijn komt vaak voor en heeft meestal geen ernstige oorzaak. Het kan verband houden met de menstruatiecyclus, zwangerschap of hormonale veranderingen.",
+        "self_care_advice": "Draag een goed passende beha, neem pijnstillers zoals paracetamol of ibuprofen en probeer stress te verminderen."
+      },
+      {
+        "id": 30,
+        "symptom_name": "Tandenknarsen (bruxisme)",
+        "description": "Tandenknarsen, of bruxisme, komt vaak voor tijdens de slaap en kan leiden tot tandbeschadiging en kaakpijn.",
+        "self_care_advice": "Probeer ontspanningstechnieken, zoals ademhalingsoefeningen, en vermijd cafeïne en alcohol voor het slapen."
+      },
+      {
+        "id": 31,
+        "symptom_name": "Uitpuilende ogen",
+        "description": "Uitpuilende ogen kunnen een teken zijn van een probleem met de schildklier, zoals de ziekte van Graves.",
+        "self_care_advice": "Bescherm je ogen tegen fel licht met een zonnebril en gebruik kunsttranen om droogheid te verminderen."
+      },
+      {
+        "id": 32,
+        "symptom_name": "Neusverkoudheid",
+        "description": "Neusverkoudheid is een ophoping van slijm in de neus en sinussen, en slijm in de keel. Het verdwijnt meestal vanzelf, maar raadpleeg een huisarts als het langer dan een paar weken aanhoudt.",
+        "self_care_advice": "Drink veel water, gebruik een luchtbevochtiger, probeer zoutwaterneusspoelingen en slaap met een extra kussen om rechtop te liggen."
+      },
+      {
+        "id": 33,
+        "symptom_name": "Pijn op de borst",
+        "description": "Pijn op de borst is meestal niet ernstig, maar het is belangrijk om medische hulp te zoeken om de oorzaak vast te stellen. Bel onmiddellijk 999 als u denkt dat u een hartaanval heeft.",
+        "self_care_advice": "Probeer te ontspannen, vermijd zware inspanning en neem pijnstillers zoals paracetamol indien nodig."
+      },
+      {
+        "id": 34,
+        "symptom_name": "Pijn stuit (coccygodynie)",
+        "description": "Coccygodynie is pijn aan het bot aan de basis van de wervelkolom, nabij de bovenkant van de billen. De pijn kan dof en zeurend zijn, met af en toe scherpe steken.",
+        "self_care_advice": "Zit rechtop, gebruik een speciaal kussen, leg ijs of warmte op het pijnlijke gebied en neem pijnstillers zoals ibuprofen."
+      },
+      {
+        "id": 35,
+        "symptom_name": "Verwardheid (delier)",
+        "description": "Verwardheid kan plotseling optreden en heeft veel verschillende oorzaken. Het is belangrijk om onmiddellijk medische hulp te zoeken als iemand plotseling verward raakt.",
+        "self_care_advice": "Blijf bij de persoon, geef geruststelling en noteer eventuele medicijnen die ze gebruiken."
+      },
+      {
+        "id": 36,
+        "symptom_name": "Obstipatie (verstopping)",
+        "description": "Obstipatie is wanneer u minder vaak dan normaal ontlasting heeft, of wanneer de ontlasting hard, droog of moeilijk door te geven is.",
+        "self_care_advice": "Eet vezelrijke voeding, drink veel water, beweeg regelmatig en negeer de aandrang niet."
+      },
+      {
+        "id": 37,
+        "symptom_name": "Hoesten",
+        "description": "Hoesten is een reflex die uw luchtwegen schoonmaakt van slijm, stof of irritatie. De meeste hoestbuien verdwijnen vanzelf binnen een paar weken.",
+        "self_care_advice": "Drink veel water, rust uit, en gebruik eventueel een hoestsiroop of stoominhalatie om de keel te verzachten."
+      },
+      {
+        "id": 38,
+        "symptom_name": "Bloed ophoesten",
+        "description": "Het ophoesten van bloed kan verschillende oorzaken hebben, zoals infecties, longproblemen of andere aandoeningen. Het vereist altijd medische beoordeling.",
+        "self_care_advice": "Rust goed uit, vermijd zware inspanning, en volg het advies van uw huisarts of specialist."
+      },
+      {
+        "id": 39,
+        "symptom_name": "Gehoorverlies",
+        "description": "Gehoorverlies kan plotseling of geleidelijk optreden en kan worden veroorzaakt door ouderdom, infecties, oorsmeerophoping of andere medische problemen.",
+        "self_care_advice": "Vermijd harde geluiden, bescherm uw oren en maak indien nodig een afspraak met een KNO-arts."
+      },
+      {
+        "id": 40,
+        "symptom_name": "Uitdroging",
+        "description": "Uitdroging ontstaat wanneer het lichaam meer vocht verliest dan het binnenkrijgt. Het kan leiden tot dorst, vermoeidheid, duizeligheid en minder urineproductie.",
+        "self_care_advice": "Drink regelmatig water, eet vochtige voedingsmiddelen zoals fruit, en vermijd alcohol of cafeïne die uitdroging kan verergeren."
+      },
+      {
+        "id": 41,
+        "symptom_name": "Tandpijn",
+        "description": "Tandpijn kan worden veroorzaakt door cariës, tandvleesontsteking, gebroken tanden of andere tandheelkundige problemen.",
+        "self_care_advice": "Spoel met warm water, gebruik eventueel een pijnstiller, vermijd zeer warme of koude voedingsmiddelen en maak een afspraak bij de tandarts."
+      },
+      {
+        "id": 42,
+        "symptom_name": "Duizeligheid",
+        "description": "Duizeligheid kan verschillende oorzaken hebben zoals lage bloeddruk, uitdroging, medicatie of evenwichtsstoornissen.",
+        "self_care_advice": "Ga langzaam zitten of staan, drink voldoende water en rust uit wanneer nodig."
+      },
+      {
+        "id": 43,
+        "symptom_name": "Dubbelzien",
+        "description": "Dubbelzien kan een tijdelijk of aanhoudend probleem zijn en kan veroorzaakt worden door oogspierproblemen, neurologische aandoeningen of andere medische oorzaken.",
+        "self_care_advice": "Rust uw ogen uit, vermijd vermoeidheid, en raadpleeg een arts voor een grondige evaluatie."
+      },
+      {
+        "id": 44,
+        "symptom_name": "Droge ogen",
+        "description": "Droge ogen kunnen branderig, jeukend of rood aanvoelen en worden vaak veroorzaakt door verminderde traanproductie of omgevingsfactoren.",
+        "self_care_advice": "Gebruik kunsttranen, neem regelmatige pauzes van schermwerk en bescherm uw ogen tegen wind en stof."
+      },
+      {
+        "id": 45,
+        "symptom_name": "Droge of pijnlijke lippen",
+        "description": "Droge of pijnlijke lippen kunnen ontstaan door uitdroging, weersomstandigheden of infecties.",
+        "self_care_advice": "Gebruik een lippenbalsem, drink voldoende water en vermijd het likken van uw lippen."
+      },
+      {
+        "id": 46,
+        "symptom_name": "Droge mond",
+        "description": "Een droge mond kan veroorzaakt worden door uitdroging, medicatie, ziekte of verminderde speekselproductie.",
+        "self_care_advice": "Drink voldoende water, kauw suikervrije kauwgom en vermijd alcohol of cafeïne."
+      },
+      {
+        "id": 47,
+        "symptom_name": "Slikproblemen (dysfagie)",
+        "description": "Slikproblemen kunnen veroorzaakt worden door spierproblemen, neurologische aandoeningen of obstructies in de slokdarm.",
+        "self_care_advice": "Eet langzaam, neem kleine hapjes en drink voldoende vocht bij het slikken."
+      },
+      {
+        "id": 48,
+        "symptom_name": "Oorpijn",
+        "description": "Oorpijn kan worden veroorzaakt door een oorinfectie, oorsmeerophoping, drukveranderingen of problemen met de kaak of keel.",
+        "self_care_advice": "Gebruik pijnstillers zoals paracetamol, houd het oor droog en vermijd het inbrengen van voorwerpen in het oor."
+      },
+      {
+        "id": 49,
+        "symptom_name": "Hartkloppingen",
+        "description": "Hartkloppingen zijn het gevoel dat uw hart sneller of onregelmatig klopt. Ze kunnen worden veroorzaakt door stress, cafeïne, alcohol of een onderliggende hartziekte.",
+        "self_care_advice": "Vermijd cafeïne, alcohol en roken. Probeer stress te verminderen met ontspanningsoefeningen of ademhalingstechnieken."
+      },
+      {
+        "id": 50,
+        "symptom_name": "Ejaculatieproblemen",
+        "description": "Ejaculatieproblemen kunnen bestaan uit voortijdige, vertraagde of uitblijvende zaadlozing. Ze kunnen lichamelijke of psychologische oorzaken hebben.",
+        "self_care_advice": "Praat openlijk met uw partner, vermijd overmatig alcoholgebruik en raadpleeg uw arts als het aanhoudt."
+      },
+      {
+        "id": 51,
+        "symptom_name": "Erectieproblemen (erectiele disfunctie)",
+        "description": "Erectieproblemen kunnen veroorzaakt worden door stress, vermoeidheid, alcohol, hormonale veranderingen of een onderliggende aandoening.",
+        "self_care_advice": "Beperk alcohol, rook niet, beweeg regelmatig en probeer stress te verminderen. Praat met uw arts als het regelmatig voorkomt."
+      },
+      {
+        "id": 52,
+        "symptom_name": "Trillen of beven van de handen",
+        "description": "Beven of trillen van de handen kan veroorzaakt worden door stress, angst, cafeïne, medicatie of neurologische aandoeningen zoals de ziekte van Parkinson.",
+        "self_care_advice": "Vermijd cafeïne, rust voldoende en probeer ontspanningstechnieken om stress te verminderen."
+      },
+      {
+        "id": 53,
+        "symptom_name": "Overmatige slaperigheid overdag (hypersomnie)",
+        "description": "Overmatige slaperigheid overdag kan veroorzaakt worden door slaaptekort, slaapapneu, depressie of neurologische aandoeningen.",
+        "self_care_advice": "Zorg voor een regelmatig slaapschema, vermijd cafeïne of alcohol voor het slapen en zorg voor een rustige slaapomgeving."
+      },
+      {
+        "id": 54,
+        "symptom_name": "Overmatige haargroei (hirsutisme)",
+        "description": "Overmatige haargroei bij vrouwen kan veroorzaakt worden door hormonale disbalans, zoals het polycysteus-ovariumsyndroom (PCOS), of door erfelijke factoren.",
+        "self_care_advice": "Overweeg ontharingsmethoden zoals scheren, waxen of laserbehandelingen, en bespreek hormonale behandelingen met uw arts."
+      },
+      {
+        "id": 55,
+        "symptom_name": "Overmatig zweten (hyperhidrose)",
+        "description": "Overmatig zweten kan zonder duidelijke reden voorkomen of veroorzaakt worden door stress, hormonale veranderingen of medische aandoeningen.",
+        "self_care_advice": "Draag luchtige kleding, gebruik een sterke antitranspirant en vermijd pittig eten of alcohol."
+      },
+      {
+        "id": 56,
+        "symptom_name": "Overmatige dorst",
+        "description": "Overmatige dorst kan veroorzaakt worden door uitdroging, hoge bloedsuikerspiegel (diabetes) of bepaalde medicijnen.",
+        "self_care_advice": "Drink voldoende water en beperk suikerhoudende dranken. Laat uw bloedsuiker controleren bij aanhoudende dorst."
+      },
+      {
+        "id": 57,
+        "symptom_name": "Vliegjes of lichtflitsen in het oog",
+        "description": "Vliegjes (floaters) en lichtflitsen kunnen normaal zijn, maar kunnen ook wijzen op een probleem met het netvlies, vooral als het plotseling optreedt.",
+        "self_care_advice": "Laat uw ogen onderzoeken bij nieuwe of verergerende klachten, vooral als u plotseling veel meer floaters ziet."
+      },
+      {
+        "id": 58,
+        "symptom_name": "Problemen met oogleden",
+        "description": "Ooglidproblemen zoals zwelling, jeuk, roodheid of trillingen kunnen veroorzaakt worden door allergieën, infecties of vermoeidheid.",
+        "self_care_advice": "Houd het gebied schoon, gebruik warme kompressen en vermijd het wrijven in de ogen."
+      },
+      {
+        "id": 59,
+        "symptom_name": "Flauwvallen (syncope)",
+        "description": "Flauwvallen betekent dat u plotseling het bewustzijn verliest doordat de bloedtoevoer naar de hersenen tijdelijk onvoldoende is.",
+        "self_care_advice": "Ga direct zitten of liggen zodra u zich licht in het hoofd voelt. Leg uw benen omhoog om de bloedtoevoer naar de hersenen te verbeteren. Vermijd langdurig stilstaan in warme omgevingen."
+      },
+      {
+        "id": 60,
+        "symptom_name": "Misselijkheid (gevoel van ziek zijn)",
+        "description": "Misselijkheid is het gevoel dat u moet braken of zich onwel voelt in de maagstreek. Het kan worden veroorzaakt door infecties, medicatie, zwangerschap of spijsverteringsproblemen.",
+        "self_care_advice": "Rust goed uit, eet kleine porties, vermijd vet of sterk gekruid eten en drink regelmatig kleine hoeveelheden water."
+      },
+      {
+        "id": 61,
+        "symptom_name": "Koorts bij volwassenen",
+        "description": "Koorts bij volwassenen is een lichaamstemperatuur boven 38 °C, meestal door een infectie veroorzaakt.",
+        "self_care_advice": "Drink voldoende, rust goed uit, draag luchtige kleding en neem paracetamol als u zich niet lekker voelt."
+      },
+      {
+        "id": 62,
+        "symptom_name": "Koorts bij kinderen",
+        "description": "Een hoge lichaamstemperatuur (38 °C of hoger) bij kinderen is meestal onschuldig en gaat vanzelf over binnen enkele dagen.",
+        "self_care_advice": "Geef het kind voldoende te drinken, trek lichte kleding aan en houd de temperatuur in de gaten. Geef paracetamol alleen als het kind zich ziek voelt."
+      },
+      {
+        "id": 63,
+        "symptom_name": "Pijn in hand of vingers",
+        "description": "Pijn in hand of vingers kan ontstaan door overbelasting, blessures, artritis of zenuwproblemen.",
+        "self_care_advice": "Rust de hand, vermijd overbelasting, gebruik ijs bij zwelling en voer lichte rekoefeningen uit als de pijn vermindert."
+      },
+      {
+        "id": 64,
+        "symptom_name": "Voetpijn",
+        "description": "Voetpijn kan komen door overbelasting, blessures of aandoeningen zoals ontsteking of platvoeten.",
+        "self_care_advice": "Rust de voet, draag stevige schoenen, gebruik ijs bij zwelling en vermijd langdurig staan."
+      },
+      {
+        "id": 65,
+        "symptom_name": "Aanval of stuiptrekking",
+        "description": "Een aanval is een plotselinge verstoring in de hersenactiviteit die leidt tot bewustzijnsverlies of spierschokken.",
+        "self_care_advice": "Blijf rustig, leg de persoon in een veilige houding en bel 112 als de aanval langer dan 5 minuten duurt."
+      },
+      {
+        "id": 66,
+        "symptom_name": "Hielpijn",
+        "description": "Pijn in de hiel kan worden veroorzaakt door overbelasting, peesontsteking (fasciitis plantaris) of een verkeerde loophouding.",
+        "self_care_advice": "Rust de voet, draag goed ondersteunende schoenen, gebruik eventueel een hielkussen en rek regelmatig de kuitspieren."
+      },
+      {
+        "id": 67,
+        "symptom_name": "Teenpijn",
+        "description": "Pijn in de tenen kan worden veroorzaakt door ingegroeide teennagels, eelt, artritis of infecties.",
+        "self_care_advice": "Draag comfortabele schoenen, houd de voeten schoon en droog, en week de teen in warm water bij irritatie."
+      },
+      {
+        "id": 68,
+        "symptom_name": "Pijn boven op de voet",
+        "description": "Pijn aan de bovenkant van de voet kan ontstaan door overbelasting, kneuzing of zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag geen strakke schoenen, gebruik ijs bij zwelling en ondersteun de voet bij het lopen."
+      },
+      {
+        "id": 69,
+        "symptom_name": "Pijn onder de voet",
+        "description": "Pijn aan de onderkant van de voet kan worden veroorzaakt door overbelasting, een peesplaatontsteking of een verkeerde houding.",
+        "self_care_advice": "Draag stevige schoenen, vermijd langdurig staan, rek de voetzool en gebruik eventueel een zooltje voor ondersteuning."
+      },
+      {
+        "id": 70,
+        "symptom_name": "Pijn in de bal van de voet",
+        "description": "Pijn in de bal van de voet (metatarsalgie) wordt vaak veroorzaakt door overbelasting, slecht schoeisel of een zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag schoenen met demping, vermijd hoge hakken en gebruik eventueel een inlegzool."
+      },
+      {
+        "id": 71,
+        "symptom_name": "Haaruitval",
+        "description": "Haaruitval kan tijdelijk zijn door stress, hormonale veranderingen of erfelijkheid.",
+        "self_care_advice": "Gebruik milde haarverzorging, vermijd strakke kapsels en eet gevarieerd voor voldoende voedingsstoffen."
+      },
+      {
+        "id": 72,
+        "symptom_name": "Hallucinaties of stemmen horen",
+        "description": "Hallucinaties zijn waarnemingen die er niet echt zijn, zoals stemmen horen of dingen zien die anderen niet waarnemen.",
+        "self_care_advice": "Praat met iemand die u vertrouwt, zorg voor voldoende slaap en vermijd alcohol of drugs."
+      },
+      {
+        "id": 73,
+        "symptom_name": "Handpijn",
+        "description": "Pijn in de hand kan veroorzaakt worden door overbelasting, artrose, peesontsteking of een blessure.",
+        "self_care_advice": "Rust de hand, gebruik ijs bij zwelling en vermijd herhaald gebruik van de pijnlijke beweging."
+      },
+      {
+        "id": 74,
+        "symptom_name": "Hoofdpijn",
+        "description": "Hoofdpijn kan vele oorzaken hebben, zoals spanning, migraine, vermoeidheid of uitdroging.",
+        "self_care_advice": "Rust goed uit, drink voldoende water, en vermijd fel licht of lawaai. Gebruik paracetamol indien nodig."
+      },
+      {
+        "id": 75,
+        "symptom_name": "Hevige menstruatie (menorragie)",
+        "description": "Hevige menstruatie betekent dat u meer bloed verliest dan normaal of langer dan 7 dagen ongesteld bent.",
+        "self_care_advice": "Houd uw menstruatiepatroon bij, gebruik ijzerrijke voeding en bespreek langdurige klachten met een arts."
+      },
+      {
+        "id": 76,
+        "symptom_name": "Hik (hikken)",
+        "description": "Hikken ontstaat door onwillekeurige samentrekkingen van het middenrif en gaat meestal vanzelf over.",
+        "self_care_advice": "Drink rustig water, houd even de adem in of slik een theelepel suiker. Vermijd alcohol en grote maaltijden."
+      },
+      {
+        "id": 77,
+        "symptom_name": "Heuppijn",
+        "description": "Pijn in de heup kan ontstaan door overbelasting, slijtage, ontsteking of een blessure.",
+        "self_care_advice": "Rust goed uit, gebruik ijs of warmte, en rek voorzichtig de heupspieren om stijfheid te verminderen."
+      },
+      {
+        "id": 78,
+        "symptom_name": "Heuppijn bij kinderen (irritable hip)",
+        "description": "Bij kinderen kan plotselinge heuppijn wijzen op een tijdelijke ontsteking, vaak na een infectie.",
+        "self_care_advice": "Laat het kind rusten, geef eventueel paracetamol en vermijd activiteiten die pijn doen."
+      },
+      {
+        "id": 79,
+        "symptom_name": "Netelroos (galbulten)",
+        "description": "Netelroos veroorzaakt plotselinge jeukende bulten op de huid die binnen uren tot dagen verdwijnen.",
+        "self_care_advice": "Vermijd krabben, gebruik koelzalf of antihistaminica en draag losse kleding."
+      },
+      {
+        "id": 80,
+        "symptom_name": "Wormen bij mensen",
+        "description": "Wormen zijn parasieten in de darmen die jeuk, buikpijn of gewichtsverlies kunnen veroorzaken.",
+        "self_care_advice": "Was handen goed, knip nagels kort, verschoon beddengoed regelmatig en gebruik ontwormingsmiddel indien nodig."
+      },
+      {
+        "id": 81,
+        "symptom_name": "Urineverlies (urine-incontinentie)",
+        "description": "Onbedoeld urineverlies komt vaak voor en kan verschillende vormen aannemen, zoals lekkage bij hoesten, niezen of plots dringende aandrang.",
+        "self_care_advice": "Ga regelmatig naar het toilet, vermijd overmatig drinken vlak voor het slapen, doe bekkenbodem-oefeningen en draag eventueel absorberend incontinentiemateriaal."
+      },
+      {
+        "id": 82,
+        "symptom_name": "Maag- of slokdarmirritatie (indigestie)",
+        "description": "Een gevoel van pijn of ongemak in de bovenbuik of branderig gevoel achter het borstbeen, vaak na het eten of drinken.",
+        "self_care_advice": "Eet kleinere maaltijden, vermijd vet en gekruid voedsel, blijf rechtop zitten na het eten en vermijd cafeïne of alcohol."
+      },
+      {
+        "id": 83,
+        "symptom_name": "Slaapprobleem (insomnia)",
+        "description": "Moeite met in slaap vallen, doorslapen of te vroeg wakker worden, ondanks voldoende gelegenheid om te slapen.",
+        "self_care_advice": "Stel een vast slaapschema in, vermijd schermen vlak voor het slapen, zorg voor een rustige slaapomgeving en beperk cafeïne of alcohol ’s avonds."
+      },
+      {
+        "id": 84,
+        "symptom_name": "Onregelmatige menstruatie",
+        "description": "De cyclus komt minder dan 21 dagen of meer dan 35 dagen vaak voor en kan door veel factoren beïnvloed worden.",
+        "self_care_advice": "Houd uw menstruatiepatroon bij in een kalender of app, let op stress, gewicht en veranderde levensstijl, en bespreek afwijkingen met uw arts."
+      },
+      {
+        "id": 85,
+        "symptom_name": "Jeukende huid",
+        "description": "Jeukende huid kan vele oorzaken hebben, zoals droge huid, allergieën, huidaandoeningen of interne ziekten.",
+        "self_care_advice": "Gebruik milde, ongeparfumeerde verzorgingsproducten, vermijd heet water bij het douchen, hydrateer de huid goed en draag losse kleding."
+      },
+      {
+        "id": 86,
+        "symptom_name": "Gewrichtspijn",
+        "description": "Pijn in één of meerdere gewrichten kan door veel oorzaken ontstaan, zoals overbelasting, ontsteking of slijtage.",
+        "self_care_advice": "Rust het gewricht, vermijd herhaalde belasting, gebruik ijs bij zwelling, en probeer lichte oefening als de pijn iets afneemt."
+      },
+      {
+        "id": 87,
+        "symptom_name": "Kniepijn",
+        "description": "Pijn in de knie kan komen door blessures, overbelasting, artrose of ontsteking in of rond de knie.",
+        "self_care_advice": "Draag een knie­ondersteuning, vermijd traplopen of zwaar tillen, gebruik ijs bij zwelling en probeer lichte kracht- en flexibiliteitsoefeningen."
+      },
+      {
+        "id": 88,
+        "symptom_name": "Beenkram­pen",
+        "description": "Beenkram­pen zijn plotselinge, pijnlijke samentrekkingen van de spieren in het been, vaak ’s nachts of na inspanning.",
+        "self_care_advice": "Rek de kuitspieren voor het slapen, blijf goed gehydrateerd, en vermijd langdurig staan of zitten in dezelfde houding."
+      },
+      {
+        "id": 89,
+        "symptom_name": "Man­ken bij kinderen (irritable hip)",
+        "description": "Een kind dat plots mankt kan een tijdelijke heupontsteking of andere heup­aandoening hebben.",
+        "self_care_advice": "Laat het kind rusten, vermijd zware belasting van het been, en overleg met een arts als de mankheid langer dan een paar dagen duurt."
+      },
+      {
+        "id": 90,
+        "symptom_name": "Neerslachtigheid / depressieve stemming",
+        "description": "Langdurig somber of neerslachtig voelen kan wijzen op een depressie of andere mentale gezondheids­klacht.",
+        "self_care_advice": "Probeer een vast dagritme aan te houden, blijf bewegen, praat met iemand die u vertrouwt en stel kleine haalbare doelen."
+      },
+      {
+        "id": 91,
+        "symptom_name": "Verlies van lib­ido",
+        "description": "Een aanzienlijke afname van seksueel verlangen kan door stress, hormonale veranderingen of relatie­problemen worden veroorzaakt.",
+        "self_care_advice": "Praat open met uw partner of arts, let op stress­factoren, voldoende slaap en een gezonde levensstijl."
+      },
+      {
+        "id": 92,
+        "symptom_name": "Knobbels of bulten onder de huid (lumps)",
+        "description": "Het opmerken van een nieuwe knobbel of bult kan onschuldig zijn, maar ook een teken van een ernstiger aandoening.",
+        "self_care_advice": "Houd de bult in de gaten, let op groei of verandering en plan een controle bij uw arts."
+      },
+      {
+        "id": 93,
+        "symptom_name": "Menstruatiepijn",
+        "description": "Pijn tijdens de menstruatie komt veel voor, maar kan ook wijzen op een onderliggende aandoening.",
+        "self_care_advice": "Gebruik een warme kruik, probeer rust tijdens de menstruatie­dagen en overweeg een mild pijnstiller als nodig."
+      },
+      {
+        "id": 94,
+        "symptom_name": "Gemiste of late menstruatie",
+        "description": "Een gemiste of sterk vertraagde menstruatie kan door zwangerschap, hormonale afwijkingen of andere oorzaken ontstaan.",
+        "self_care_advice": "Gebruik een ovulatie- of zwangerschapstest, houd uw cyclus bij en raadpleeg uw arts bij onregelmatigheden."
+      },
+      {
+        "id": 95,
+        "symptom_name": "Metaalachtige smaak in de mond",
+        "description": "Een metaalkleurige of metalen smaak in de mond kan door tandvleesproblemen, bepaalde medicijnen of infecties veroorzaakt worden.",
+        "self_care_advice": "Houd uw mond goed schoon, drink voldoende, vermijd metalen bestek en bespreek medicatie­bijwerkingen met uw arts."
+      },
+      {
+        "id": 96,
+        "symptom_name": "Nagelproblemen",
+        "description": "Nagelproblemen zijn meestal niet ernstig. Veel voorkomende klachten zijn broze, loszittende nagels of nagels die van kleur of vorm veranderen.",
+        "self_care_advice": "Houd uw nagels schoon en gedroogd, vermijd agressieve chemicaliën, draag goed passend schoeisel voor teennagels, en knip nagels recht af."
+      },
+      {
+        "id": 97,
+        "symptom_name": "Nekpijn en stijve nek",
+        "description": "Pijn of stijfheid in de nek kan ontstaan door verkeerde houding, spierspanning, blessure of slijtage.",
+        "self_care_advice": "Zorg voor een goede houding, wissel regelmatig houding, gebruik warme of koude kompressen en probeer lichte rekoefeningen."
+      },
+      {
+        "id": 98,
+        "symptom_name": "Nachtzweten",
+        "description": "Nachtzweten betekent dat u zóveel zweet tijdens de slaap dat kleding of beddengoed nat wordt, zonder dat de kamer te warm is of er veel dekens zijn.",
+        "self_care_advice": "Draag luchtige kleding, houd de slaapkamer koel, vermijd alcohol en pittig eten voor het slapen gaan, en probeer stressfactoren te verminderen."
+      },
+      {
+        "id": 99,
+        "symptom_name": "Tepelafscheiding",
+        "description": "Afwijkende afscheiding uit de tepelstaander kan verschillende oorzaken hebben, soms onschuldig maar soms reden voor nader onderzoek.",
+        "self_care_advice": "Let op kleur, consistentie en of er bloed in zit; draag indien nodig een goed ondersteunende bh en bespreek nieuwe of veranderende afscheiding met uw arts."
+      },
+      {
+        "id": 100,
+        "symptom_name": "Eisprongpijn",
+        "description": "Pijn of krampgevoel rond de eisprong (meestal midden in de cyclus) komt bij veel vrouwen voor en is meestal onschuldig.",
+        "self_care_advice": "Houd lichte warmte tegen de plek, rust even uit, gebruik indien nodig een milde pijnstiller en houd uw cyclus bij."
+      },
+      {
+        "id": 101,
+        "symptom_name": "Testikelpijn",
+        "description": "Pijn in een of beide testikels kan verschillende oorzaken hebben, zoals ontsteking, torsie of letsel.",
+        "self_care_advice": "Draag ondersteunend ondergoed, vermijd zware inspanning, houd de testikel hoog als er zwelling is en raadpleeg uw arts bij aanhoudende pijn."
+      },
+      {
+        "id": 102,
+        "symptom_name": "Pijn aan de achterkant van de hand",
+        "description": "Pijn aan de achterkant van de hand kan worden veroorzaakt door overbelasting, zenuwbeknelling, of letsel.",
+        "self_care_advice": "Rust de hand, vermijd herhaalde bewegingen, draag indien nodig een spalk en doe lichte stretching."
+      },
+      {
+        "id": 103,
+        "symptom_name": "Pijn in de palm van de hand",
+        "description": "Pijn of branderig gevoel in de palm kan wijzen op peesontsteking, carpaal tunnelsyndroom of overbelasting.",
+        "self_care_advice": "Bewegen op geleide van pijn"
+      },
+      {
+        "id": 104,
+        "symptom_name": "Verlamming",
+        "description": "Plotselinge of toenemende verlamming of krachtsverlies in een lichaamsdeel kan een teken zijn van een ernstige aandoening zoals een beroerte.",
+        "self_care_advice": "Zoek direct medische hulp bij plotseling krachtsverlies of verlamming; leg het aangedane deel omhoog en vermijd inspanning."
+      },
+      {
+        "id": 105,
+        "symptom_name": "Bekkenpijn",
+        "description": "Pijn in de onderbuik of het bekkengebied kan door veel oorzaken komen zoals blaas-, baarmoeder- of darmproblemen.",
+        "self_care_advice": "Rust, gebruik een warme kruik indien goed verdraagbaar, let op uw toiletritme en raadpleeg uw arts bij aanhoudende pijn."
+      },
+      {
+        "id": 106,
+        "symptom_name": "Knobbels of plekjes op de penis",
+        "description": "Knobbels of plekjes op de penis kunnen door infecties, huidproblemen of zeldzamere aandoeningen ontstaan.",
+        "self_care_advice": "Houd de plek schoon en droog, vermijd irriterende stoffen, draag katoenondergoed en bespreek nieuwe of veranderende plekjes met uw arts."
+      },
+      {
+        "id": 107,
+        "symptom_name": "Tintelingen (pins & needles)",
+        "description": "Een tintelend of prikkelend gevoel (’pins & needles’) kan ontstaan door druk op zenuwen, verminderde bloedtoevoer of neurologische aandoeningen.",
+        "self_care_advice": "Verander regelmatig houding, rek zacht de arm of been, vermijd langdurige druk op hetzelfde gebied en probeer voldoende beweging."
+      },
+      {
+        "id": 108,
+        "symptom_name": "Priapisme (pijnlijke erectie)",
+        "description": "Een langdurige, vaak pijnlijke erectie die niet verdwijnt kan een noodgeval zijn en moet snel behandeld worden.",
+        "self_care_advice": "Ga direct naar een arts als de erectie langer dan 4 uur aanhoudt; vermijd alcohol of drugs die dit kunnen veroorzaken."
+      },
+      {
+        "id": 109,
+        "symptom_name": "Huiduitslag bij baby’s en kinderen",
+        "description": "Huiduitslag komt veel voor bij baby’s en kinderen. Meestal is het onschuldig, maar soms is er snel medische aandacht nodig.",
+        "self_care_advice": "Houd de huid schoon en droog, verander regelmatig de luier bij baby’s, vermijd prikkelende stoffen en let op of de uitslag verbetert binnen een paar dagen."
+      },
+      {
+        "id": 110,
+        "symptom_name": "Rode oog",
+        "description": "Een rood oog kan veroorzaakt zijn door een infectie, allergie, irritatie of een ernstiger oogprobleem.",
+        "self_care_advice": "Was uw handen regelmatig, vermijd wrijven in het oog, gebruik indien nodig een warm kompres en raadpleeg uw arts als het niet verbetert."
+      },
+      {
+        "id": 111,
+        "symptom_name": "Kortademigheid",
+        "description": "Kortademigheid betekent dat u sneller of zwaarder ademt dan normaal, of het gevoel heeft niet genoeg lucht te krijgen.",
+        "self_care_advice": "Rust, vermijd inspanning, zit rechtop en probeer ademhaling in te kalmeren. Bij chronische long- of hartaandoeningen overleg met uw arts."
+      },
+      {
+        "id": 112,
+        "symptom_name": "Schouderpijn",
+        "description": "Pijn in de schouder kan worden veroorzaakt door overbelasting, slijtage, ontsteking of een blessure.",
+        "self_care_advice": "Vermijd zware belasting, gebruik een koude of warme drukplek, oefen lichte beweging en draag geen zware tas meer aan die kant."
+      },
+      {
+        "id": 113,
+        "symptom_name": "Stinkende voeten",
+        "description": "Stinkende voeten ontstaan vaak door transpiratie, slechte ventilatie van schoenen of schimmelinfectie.",
+        "self_care_advice": "Draag ademende schoenen, verander dagelijks sokken, gebruik antischimmelpoeder en houd de voeten droog."
+      },
+      {
+        "id": 114,
+        "symptom_name": "Sterk ruikende urine",
+        "description": "Sterk ruikende urine kan verschillende oorzaken hebben zoals uitdroging, infectie of bepaalde voedingsmiddelen of medicijnen.",
+        "self_care_advice": "Drink voldoende, let op goede hygiëne bij toiletbezoek, en overleg met uw arts als de geur langer dan 24-48 uur aanhoudt."
+      },
+      {
+        "id": 115,
+        "symptom_name": "Snurken",
+        "description": "Snurken is geluid maken tijdens de slaap door luchtweerstand. Vaak onschuldig, maar kan wijzen op slaapapneu of andere slaapstoornis.",
+        "self_care_advice": "Slaap op de zij, vermijd alcohol en zwaar eten voor het slapengaan, let op overgewicht en houdt het slaapritme regelmatig."
+      },
+      {
+        "id": 116,
+        "symptom_name": "Incontinentie bij kinderen (poepen in broek)",
+        "description": "Ongewild poepen in de broek bij kinderen kan door constipatie, emotionele factoren of medische oorzaken komen.",
+        "self_care_advice": "Houd een toiletroutine aan, beloon droog zijn, kijk naar vezelrijke voeding en zorg voor voldoende vochtinname."
+      },
+      {
+        "id": 117,
+        "symptom_name": "Zere of witte tong",
+        "description": "Een tong die wit of pijnlijk is kan wijzen op een schimmelinfectie (spruw), irritatie of andere mondhuid‐problemen.",
+        "self_care_advice": "Spoel de mond met lauw water, eet zacht voedsel, vermijd pittig eten en houd goede mondhygiëne."
+      },
+      {
+        "id": 118,
+        "symptom_name": "Keelpijn",
+        "description": "Keelpijn is een veelvoorkomend symptoom, vaak door virale infectie, soms door een bacterie.",
+        "self_care_advice": "Drink voldoende, gebruik warme dranken, gorgel met zout water en rust voldoende."
+      },
+      {
+        "id": 119,
+        "symptom_name": "Buikpijn",
+        "description": "Buikpijn kan vele oorzaken hebben, zoals voedselintolerantie, infectie, obstipatie of andere medische aandoeningen.",
+        "self_care_advice": "Hak uw voeding in kleinere porties, vermijd vet en sterk gekruid voedsel, rust, en drink voldoende vocht."
+      },
+      {
+        "id": 120,
+        "symptom_name": "Striae (rekstrepen)",
+        "description": "Striae zijn lijntjes in de huid ontstaan door snelle groei, zwangerschap of sterke gewichtsschommelingen. Meestal onschuldig.",
+        "self_care_advice": "Gebruik hydraterende crème, draag zachte kleding, beperk snelle gewichtstoename en gebruik zonbescherming op de huidstrepen."
+      },
+      {
+        "id": 121,
+        "symptom_name": "Gezwollen armen en handen (oedeem)",
+        "description": "Oedeem is vochtophoping in weefsels, vaak zichtbaar als gezwollen armen of handen. Kan meerdere oorzaken hebben.",
+        "self_care_advice": "Houd uw armen omhoog, vermijd langdurig stilstaan, draag losse kleding en controleer zoutinname."
+      },
+      {
+        "id": 122,
+        "symptom_name": "Gezwollen lymfeklieren",
+        "description": "Opgezette lymfeklieren in de hals, oksel of lies kunnen een teken zijn van infectie, ontsteking of soms ernstiger aandoening.",
+        "self_care_advice": "Zorg voor rust, warme compressen, voldoende vochtinname en let op genezing binnen een paar weken."
+      },
+      {
+        "id": 123,
+        "symptom_name": "Knobbels of zwellingen in de testikel",
+        "description": "Een zwelling of knobbel in de testikel kan onschuldig zijn, maar ook op ernstige klachten wijzen zoals testikeltorsie of kanker.",
+        "self_care_advice": "Onderzoek uzelf een- à twee keer per maand, draag ondersteunend ondergoed, vermijd zwaar tillen en raadpleeg uw arts bij verandering."
+      },
+      {
+        "id": 124,
+        "symptom_name": "Duim- of pijn in de duim",
+        "description": "Pijn in de duim kan komen door artrose, overbelasting, peesontsteking of blessures.",
+        "self_care_advice": "Draag een duimspalk indien nodig, vermijd zware belasting, doe lichte rekoefeningen en wissel warm/koude kompressen."
+      },
+      {
+        "id": 125,
+        "symptom_name": "Tinnitus (oorsuizen)",
+        "description": "Tinnitus is het horen van geluiden zoals zoemen of fluiten zonder externe bron. Het komt veel voor en is meestal onschuldig.",
+        "self_care_advice": "Vermijd harde geluiden, gebruik geluidsmaskering (‘white noise’), beperk cafeïne en beheer stress. Raadpleeg uw arts bij blijvende of verergerende klachten."
+      },
+      {
+        "id": 126,
+        "symptom_name": "Moeheid en lusteloosheid",
+        "description": "Aanhoudende moeheid of vermoeidheid zonder duidelijke oorzaak kan wijzen op onderliggende gezondheidsproblemen.",
+        "self_care_advice": "Zorg voor regelmatig slaapritme, beweeg dagelijks licht, eet gezond en beperk stress. Raadpleeg arts bij aanhoudende klachten."
+      },
+      {
+        "id": 127,
+        "symptom_name": "Vaginale droogte",
+        "description": "Vaginale droogte komt vaak voor, vooral tijdens de menopauze en kan jeuk, pijn of ongemak veroorzaken.",
+        "self_care_advice": "Gebruik glijmiddelen op waterbasis tijdens seks, draag katoenen ondergoed en vermijd irriterende producten."
+      },
+      {
+        "id": 128,
+        "symptom_name": "Gezichtsverlies",
+        "description": "Plotseling of geleidelijk verlies van gezichtsvermogen in één of beide ogen kan verschillende oorzaken hebben.",
+        "self_care_advice": "Bescherm uw ogen tegen fel licht, rust goed uit en raadpleeg een oogarts bij verandering in zicht."
+      },
+      {
+        "id": 129,
+        "symptom_name": "Braken van bloed",
+        "description": "Braken van bloed kan duiden op een bloeding in de maag of slokdarm en vereist vaak medische hulp.",
+        "self_care_advice": "Vermijd voedsel en dranken die irritatie veroorzaken en noteer de hoeveelheid en kleur van het braaksel."
+      },
+      {
+        "id": 130,
+        "symptom_name": "Tranende ogen",
+        "description": "Overmatig tranen kan worden veroorzaakt door verstopte traanbuizen, infecties of irritatie.",
+        "self_care_advice": "Houd de ogen schoon, gebruik oogdruppels bij irritatie en vermijd wrijven."
+      },
+      {
+        "id": 131,
+        "symptom_name": "Polspijn",
+        "description": "Polspijn kan ontstaan door overbelasting, artrose, zenuwbeknelling of een cyste.",
+        "self_care_advice": "Rust de pols, draag ondersteunende braces indien nodig en vermijd herhaalde belasting."
+      },
+      {
+        "id": 132,
+        "symptom_name": "Hielpijn",
+        "description": "Pijn in de hiel kan worden veroorzaakt door overbelasting, peesontsteking (fasciitis plantaris) of een verkeerde loophouding.",
+        "self_care_advice": "Rust de voet, draag goed ondersteunende schoenen, gebruik eventueel een hielkussen en rek regelmatig de kuitspieren."
+      },
+      {
+        "id": 133,
+        "symptom_name": "Teenpijn",
+        "description": "Pijn in de tenen kan worden veroorzaakt door ingegroeide teennagels, eelt, artritis of infecties.",
+        "self_care_advice": "Draag comfortabele schoenen, houd de voeten schoon en droog, en week de teen in warm water bij irritatie."
+      },
+      {
+        "id": 134,
+        "symptom_name": "Pijn boven op de voet",
+        "description": "Pijn aan de bovenkant van de voet kan ontstaan door overbelasting, kneuzing of zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag geen strakke schoenen, gebruik ijs bij zwelling en ondersteun de voet bij het lopen."
+      },
+      {
+        "id": 135,
+        "symptom_name": "Pijn onder de voet",
+        "description": "Pijn aan de onderkant van de voet kan worden veroorzaakt door overbelasting, een peesplaatontsteking of een verkeerde houding.",
+        "self_care_advice": "Draag stevige schoenen, vermijd langdurig staan, rek de voetzool en gebruik eventueel een zooltje voor ondersteuning."
+      },
+      {
+        "id": 136,
+        "symptom_name": "Pijn in de bal van de voet",
+        "description": "Pijn in de bal van de voet (metatarsalgie) wordt vaak veroorzaakt door overbelasting, slecht schoeisel of een zenuwbeknelling.",
+        "self_care_advice": "Rust de voet, draag schoenen met demping, vermijd hoge hakken en gebruik eventueel een inlegzool."
+      },
+      {
+        "id": 137,
+        "symptom_name": "Haaruitval",
+        "description": "Haaruitval kan tijdelijk zijn door stress, hormonale veranderingen of erfelijkheid.",
+        "self_care_advice": "Gebruik milde haarverzorging, vermijd strakke kapsels en eet gevarieerd voor voldoende voedingsstoffen."
+      },
+      {
+        "id": 138,
+        "symptom_name": "Hallucinaties of stemmen horen",
+        "description": "Hallucinaties zijn waarnemingen die er niet echt zijn, zoals stemmen horen of dingen zien die anderen niet waarnemen.",
+        "self_care_advice": "Praat met iemand die u vertrouwt, zorg voor voldoende slaap en vermijd alcohol of drugs."
+      }
+    ],
+    "patientInformationData": [
+      {
+        "id": 1,
+        "first_name": "Jan",
+        "last_name": "Jansen",
+        "birth_date": "1985-03-14",
+        "email": "patient1@example.com"
+      },
+      {
+        "id": 2,
+        "first_name": "Maria",
+        "last_name": "de Vries",
+        "birth_date": "1992-07-22",
+        "email": "patient2@example.com"
+      }
+    ],
+    "patientHistory": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "patientId": 1
+      },
+      {
+        "id": 2,
+        "symptomId": 2,
+        "patientId": 2
+      },
+      {
+        "id": 3,
+        "symptomId": 10,
+        "patientId": 1
+      },
+      {
+        "id": 4,
+        "symptomId": 11,
+        "patientId": 2
+      },
+      {
+        "id": 5,
+        "symptomId": 12,
+        "patientId": 1
+      },
+      {
+        "id": 6,
+        "symptomId": 13,
+        "patientId": 2
+      },
+      {
+        "id": 7,
+        "symptomId": 14,
+        "patientId": 1
+      }
+    ],
+    "questionGP": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "question_text": "Is de pijn in de anus ernstig?"
+      },
+      {
+        "id": 2,
+        "symptomId": 1,
+        "question_text": "Verbeteren de klachten niet na een paar dagen?"
+      },
+      {
+        "id": 3,
+        "symptomId": 1,
+        "question_text": "Zit er bloed in de ontlasting of uit de anus gedurende meer dan 3 weken?"
+      },
+      {
+        "id": 4,
+        "symptomId": 2,
+        "question_text": "Is de pijn constant aanwezig?"
+      },
+      {
+        "id": 5,
+        "symptomId": 2,
+        "question_text": "Beperkt de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 6,
+        "symptomId": 2,
+        "question_text": "Is er zwelling of roodheid rond het gewricht?"
+      },
+      {
+        "id": 7,
+        "symptomId": 3,
+        "question_text": "Is de pijn constant aanwezig?"
+      },
+      {
+        "id": 8,
+        "symptomId": 3,
+        "question_text": "Beperkt de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 9,
+        "symptomId": 3,
+        "question_text": "Is er zwelling of roodheid rond het gewricht?"
+      },
+      {
+        "id": 10,
+        "symptomId": 10,
+        "question_text": "Is het verlies van reuk plotseling of geleidelijk ontstaan?"
+      },
+      {
+        "id": 11,
+        "symptomId": 10,
+        "question_text": "Heeft u naast veranderingen in reuk ook veranderingen in smaak?"
+      },
+      {
+        "id": 12,
+        "symptomId": 10,
+        "question_text": "Heeft u recent een infectie van de luchtwegen gehad?"
+      },
+      {
+        "id": 13,
+        "symptomId": 11,
+        "question_text": "Is de jeuk ernstig of aanhoudend?"
+      },
+      {
+        "id": 14,
+        "symptomId": 11,
+        "question_text": "Heeft u bloed of slijm in de ontlasting?"
+      },
+      {
+        "id": 15,
+        "symptomId": 11,
+        "question_text": "Is er sprake van huiduitslag of zweren rond de anus?"
+      },
+      {
+        "id": 16,
+        "symptomId": 12,
+        "question_text": "Heeft u regelmatig last van angstgevoelens zonder duidelijke aanleiding?"
+      },
+      {
+        "id": 17,
+        "symptomId": 12,
+        "question_text": "Ervaart u lichamelijke symptomen zoals een versnelde hartslag, zweten of duizeligheid tijdens momenten van angst?"
+      },
+      {
+        "id": 18,
+        "symptomId": 12,
+        "question_text": "Heeft u situaties of plaatsen die u vermijdt uit angst om een paniekaanval te krijgen?"
+      },
+      {
+        "id": 19,
+        "symptomId": 12,
+        "question_text": "Heeft u moeite met het dagelijks functioneren door uw angstgevoelens?"
+      },
+      {
+        "id": 20,
+        "symptomId": 13,
+        "question_text": "Is de rugpijn na enkele weken thuisbehandeling niet verbeterd?"
+      },
+      {
+        "id": 21,
+        "symptomId": 13,
+        "question_text": "Belemmeren de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 22,
+        "symptomId": 13,
+        "question_text": "Is de pijn ernstig of verergert deze in de loop van de tijd?"
+      },
+      {
+        "id": 23,
+        "symptomId": 13,
+        "question_text": "Maakt u zich zorgen over de pijn of heeft u moeite om ermee om te gaan?"
+      },
+      {
+        "id": 24,
+        "symptomId": 14,
+        "question_text": "Heb je last van bloeding of zwelling van het tandvlees?"
+      },
+      {
+        "id": 25,
+        "symptomId": 14,
+        "question_text": "Heb je een droge mond of een slechte smaak in je mond?"
+      },
+      {
+        "id": 26,
+        "symptomId": 14,
+        "question_text": "Gebruik je medicijnen die de speekselproductie kunnen verminderen?"
+      },
+      {
+        "id": 27,
+        "symptomId": 14,
+        "question_text": "Heb je onlangs je dieet veranderd of vasten geprobeerd?"
+      },
+      {
+        "id": 28,
+        "symptomId": 15,
+        "question_text": "Is uw kind overdag droog, maar heeft het 's nachts moeite om droog te blijven?"
+      },
+      {
+        "id": 29,
+        "symptomId": 15,
+        "question_text": "Is er sprake van obstipatie of andere darmproblemen?"
+      },
+      {
+        "id": 30,
+        "symptomId": 15,
+        "question_text": "Heeft uw kind onlangs stressvolle gebeurtenissen meegemaakt, zoals een verhuizing of scheiding?"
+      },
+      {
+        "id": 31,
+        "symptomId": 15,
+        "question_text": "Is er een familiegeschiedenis van bedplassen?"
+      },
+      {
+        "id": 32,
+        "symptomId": 16,
+        "question_text": "Heeft je kind bloed in de ontlasting?"
+      },
+      {
+        "id": 33,
+        "symptomId": 16,
+        "question_text": "Is je kind erg moe of moeilijk wakker te krijgen?"
+      },
+      {
+        "id": 34,
+        "symptomId": 16,
+        "question_text": "Heeft je kind koorts die langer dan 5 dagen aanhoudt?"
+      },
+      {
+        "id": 35,
+        "symptomId": 16,
+        "question_text": "Heeft je kind moeite met drinken of drinken ze veel minder dan normaal?"
+      },
+      {
+        "id": 36,
+        "symptomId": 17,
+        "question_text": "Wanneer begon de bloeding na uw laatste menstruatie?"
+      },
+      {
+        "id": 37,
+        "symptomId": 17,
+        "question_text": "Heeft u andere symptomen zoals pijn, gewichtsverlies of vermoeidheid?"
+      },
+      {
+        "id": 38,
+        "symptomId": 17,
+        "question_text": "Gebruikt u hormoonvervangende therapie?"
+      },
+      {
+        "id": 39,
+        "symptomId": 17,
+        "question_text": "Heeft u een familiegeschiedenis van baarmoeder-, eierstok- of baarmoederhalskanker?"
+      },
+      {
+        "id": 40,
+        "symptomId": 18,
+        "question_text": "Wanneer begon de bloeding?"
+      },
+      {
+        "id": 41,
+        "symptomId": 18,
+        "question_text": "Is de bloeding licht of hevig?"
+      },
+      {
+        "id": 42,
+        "symptomId": 18,
+        "question_text": "Heeft u pijn of ongemak?"
+      },
+      {
+        "id": 43,
+        "symptomId": 18,
+        "question_text": "Gebruikt u hormonale anticonceptie?"
+      },
+      {
+        "id": 44,
+        "symptomId": 18,
+        "question_text": "Heeft u recentelijk een uitstrijkje gehad?"
+      },
+      {
+        "id": 45,
+        "symptomId": 19,
+        "question_text": "Wanneer begon de bloeding?"
+      },
+      {
+        "id": 46,
+        "symptomId": 19,
+        "question_text": "Is de bloeding licht of hevig?"
+      },
+      {
+        "id": 47,
+        "symptomId": 19,
+        "question_text": "Heeft u pijn of ongemak?"
+      },
+      {
+        "id": 48,
+        "symptomId": 19,
+        "question_text": "Heeft u veranderingen in uw ontlastingspatroon opgemerkt?"
+      },
+      {
+        "id": 49,
+        "symptomId": 19,
+        "question_text": "Gebruikt u medicijnen die de bloedstolling beïnvloeden?"
+      },
+      {
+        "id": 50,
+        "symptomId": 20,
+        "question_text": "Heeft u buikpijn of ongemak samen met de winderigheid?"
+      },
+      {
+        "id": 51,
+        "symptomId": 20,
+        "question_text": "Heeft u veranderingen in uw ontlastingspatroon opgemerkt?"
+      },
+      {
+        "id": 52,
+        "symptomId": 20,
+        "question_text": "Gebruikt u medicijnen die de spijsvertering beïnvloeden?"
+      },
+      {
+        "id": 53,
+        "symptomId": 20,
+        "question_text": "Heeft u onlangs uw dieet veranderd?"
+      },
+      {
+        "id": 54,
+        "symptomId": 21,
+        "question_text": "Wanneer begon je bloed op te hoesten?"
+      },
+      {
+        "id": 55,
+        "symptomId": 21,
+        "question_text": "Heb je andere symptomen zoals koorts, vermoeidheid of gewichtsverlies?"
+      },
+      {
+        "id": 56,
+        "symptomId": 21,
+        "question_text": "Ben je recentelijk in contact geweest met iemand die tuberculose heeft?"
+      },
+      {
+        "id": 57,
+        "symptomId": 21,
+        "question_text": "Heb je een voorgeschiedenis van longziekten of ben je een roker?"
+      },
+      {
+        "id": 58,
+        "symptomId": 21,
+        "question_text": "Gebruik je medicijnen die de bloedstolling beïnvloeden?"
+      },
+      {
+        "id": 59,
+        "symptomId": 22,
+        "question_text": "Wanneer merkte je voor het eerst bloed in je sperma?"
+      },
+      {
+        "id": 60,
+        "symptomId": 22,
+        "question_text": "Heb je andere symptomen zoals pijn bij het plassen of ejaculeren?"
+      },
+      {
+        "id": 61,
+        "symptomId": 22,
+        "question_text": "Heb je recent een medische ingreep ondergaan?"
+      },
+      {
+        "id": 62,
+        "symptomId": 22,
+        "question_text": "Gebruik je medicijnen die de bloedstolling beïnvloeden?"
+      },
+      {
+        "id": 63,
+        "symptomId": 22,
+        "question_text": "Heb je een familiegeschiedenis van prostaatkanker?"
+      },
+      {
+        "id": 64,
+        "symptomId": 23,
+        "question_text": "Wanneer heb je voor het eerst bloed in je urine opgemerkt?"
+      },
+      {
+        "id": 65,
+        "symptomId": 23,
+        "question_text": "Heb je pijn of branderig gevoel bij het plassen?"
+      },
+      {
+        "id": 66,
+        "symptomId": 23,
+        "question_text": "Heb je koorts of andere tekenen van infectie?"
+      },
+      {
+        "id": 67,
+        "symptomId": 23,
+        "question_text": "Heb je recentelijk medicijnen gebruikt die de urine kunnen kleuren?"
+      },
+      {
+        "id": 68,
+        "symptomId": 23,
+        "question_text": "Heb je een familiegeschiedenis van nier- of blaaskanker?"
+      },
+      {
+        "id": 69,
+        "symptomId": 24,
+        "question_text": "Wanneer merkte je voor het eerst de blauwe of grijze verkleuring op?"
+      },
+      {
+        "id": 70,
+        "symptomId": 24,
+        "question_text": "Heb je ademhalingsmoeilijkheden of pijn op de borst?"
+      },
+      {
+        "id": 71,
+        "symptomId": 24,
+        "question_text": "Heb je recentelijk medicijnen gebruikt die de bloedcirculatie beïnvloeden?"
+      },
+      {
+        "id": 72,
+        "symptomId": 24,
+        "question_text": "Heb je een geschiedenis van hart- of longziekten?"
+      },
+      {
+        "id": 73,
+        "symptomId": 25,
+        "question_text": "Wanneer begon je te blozen?"
+      },
+      {
+        "id": 74,
+        "symptomId": 25,
+        "question_text": "Komt het blozen vaak voor?"
+      },
+      {
+        "id": 75,
+        "symptomId": 25,
+        "question_text": "Merk je andere symptomen op, zoals hartkloppingen of overmatig zweten?"
+      },
+      {
+        "id": 76,
+        "symptomId": 25,
+        "question_text": "Gebruik je medicijnen die blozen kunnen veroorzaken?"
+      },
+      {
+        "id": 77,
+        "symptomId": 25,
+        "question_text": "Heb je een medische aandoening zoals rosacea of hyperthyreoïdie?"
+      },
+      {
+        "id": 78,
+        "symptomId": 26,
+        "question_text": "Wanneer merkte je voor het eerst een verandering in je lichaamsgeur?"
+      },
+      {
+        "id": 79,
+        "symptomId": 26,
+        "question_text": "Heb je recent je dieet of medicatie veranderd?"
+      },
+      {
+        "id": 80,
+        "symptomId": 26,
+        "question_text": "Ervaar je overmatig zweten of andere symptomen?"
+      },
+      {
+        "id": 81,
+        "symptomId": 26,
+        "question_text": "Heb je een medische aandoening zoals diabetes of leverziekte?"
+      },
+      {
+        "id": 82,
+        "symptomId": 26,
+        "question_text": "Is de geur anders dan normaal of plotseling begonnen?"
+      },
+      {
+        "id": 83,
+        "symptomId": 27,
+        "question_text": "Wanneer merkte u voor het eerst onvrijwillig urine- of ontlastingsverlies?"
+      },
+      {
+        "id": 84,
+        "symptomId": 27,
+        "question_text": "Heeft u andere symptomen zoals pijn bij het plassen of ontlasten?"
+      },
+      {
+        "id": 85,
+        "symptomId": 27,
+        "question_text": "Heeft u recentelijk medische ingrepen ondergaan die invloed kunnen hebben op de blaas of darmen?"
+      },
+      {
+        "id": 86,
+        "symptomId": 27,
+        "question_text": "Gebruikt u medicijnen die de blaas- of darmfunctie kunnen beïnvloeden?"
+      },
+      {
+        "id": 87,
+        "symptomId": 27,
+        "question_text": "Heeft u een familiegeschiedenis van neurologische aandoeningen of bekkenbodemproblemen?"
+      },
+      {
+        "id": 88,
+        "symptomId": 28,
+        "question_text": "Wanneer merkte je de knobbel  voor het eerst?"
+      },
+      {
+        "id": 89,
+        "symptomId": 28,
+        "question_text": "Is de knobbel  pijnlijk of gevoelig?"
+      },
+      {
+        "id": 90,
+        "symptomId": 28,
+        "question_text": "Zijn er andere veranderingen in je borst, zoals huidverkleuring of afscheiding?"
+      },
+      {
+        "id": 91,
+        "symptomId": 29,
+        "question_text": "Wanneer begon de pijn?"
+      },
+      {
+        "id": 92,
+        "symptomId": 29,
+        "question_text": "Is de pijn constant of komt en gaat het?"
+      },
+      {
+        "id": 93,
+        "symptomId": 29,
+        "question_text": "Heb je andere symptomen zoals zwelling of roodheid?"
+      },
+      {
+        "id": 94,
+        "symptomId": 30,
+        "question_text": "Heb je 's ochtends kaakpijn of hoofdpijn?"
+      },
+      {
+        "id": 95,
+        "symptomId": 30,
+        "question_text": "Word je 's nachts vaak wakker door kaakspanning?"
+      },
+      {
+        "id": 96,
+        "symptomId": 30,
+        "question_text": "Heb je iemand die zegt dat je 's nachts tandenknarst?"
+      },
+      {
+        "id": 97,
+        "symptomId": 31,
+        "question_text": "Wanneer merkte je de verandering in je ogen?"
+      },
+      {
+        "id": 98,
+        "symptomId": 31,
+        "question_text": "Heb je andere symptomen zoals dubbelzien of pijn bij het bewegen van je ogen?"
+      },
+      {
+        "id": 99,
+        "symptomId": 31,
+        "question_text": "Heb je een familiegeschiedenis van schildklieraandoeningen?"
+      },
+      {
+        "id": 100,
+        "symptomId": 32,
+        "question_text": "Hoe lang heeft u al last van neusverkoudheid?"
+      },
+      {
+        "id": 101,
+        "symptomId": 32,
+        "question_text": "Heeft u andere symptomen zoals koorts of verstopte sinussen?"
+      },
+      {
+        "id": 102,
+        "symptomId": 32,
+        "question_text": "Rookt u of bent u blootgesteld aan rook?"
+      },
+      {
+        "id": 103,
+        "symptomId": 33,
+        "question_text": "Is de pijn acuut begonnen?"
+      },
+      {
+        "id": 104,
+        "symptomId": 33,
+        "question_text": "Is de pijn constant of komt en gaat het?"
+      },
+      {
+        "id": 105,
+        "symptomId": 33,
+        "question_text": "Heeft u andere symptomen zoals kortademigheid of misselijkheid?"
+      },
+      {
+        "id": 106,
+        "symptomId": 34,
+        "question_text": "Heeft u recent een val gehad?"
+      },
+      {
+        "id": 107,
+        "symptomId": 34,
+        "question_text": "Heeft u moeite met zitten of opstaan?"
+      },
+      {
+        "id": 108,
+        "symptomId": 34,
+        "question_text": "Is de pijn erger tijdens het zitten of buigen?"
+      },
+      {
+        "id": 109,
+        "symptomId": 35,
+        "question_text": "Wanneer begon de verwardheid?"
+      },
+      {
+        "id": 110,
+        "symptomId": 35,
+        "question_text": "Heeft de persoon recent medicijnen ingenomen?"
+      },
+      {
+        "id": 111,
+        "symptomId": 35,
+        "question_text": "Zijn er andere symptomen zoals hallucinaties of agitatie?"
+      },
+      {
+        "id": 112,
+        "symptomId": 36,
+        "question_text": "Hoe vaak heeft u ontlasting?"
+      },
+      {
+        "id": 113,
+        "symptomId": 36,
+        "question_text": "Heeft u pijn of ongemak tijdens de stoelgang?"
+      },
+      {
+        "id": 114,
+        "symptomId": 36,
+        "question_text": "Heeft u bloed in uw ontlasting?"
+      },
+      {
+        "id": 115,
+        "symptomId": 37,
+        "question_text": "Hoest u al langer dan 3 weken?"
+      },
+      {
+        "id": 116,
+        "symptomId": 37,
+        "question_text": "Is de hoest ernstig of verstoort het uw slaap?"
+      },
+      {
+        "id": 117,
+        "symptomId": 37,
+        "question_text": "Heeft u onderliggende aandoeningen zoals astma of COPD?"
+      },
+      {
+        "id": 118,
+        "symptomId": 38,
+        "question_text": "Is het bloed helder of donker?"
+      },
+      {
+        "id": 119,
+        "symptomId": 38,
+        "question_text": "Hoe vaak hoest u bloed op?"
+      },
+      {
+        "id": 120,
+        "symptomId": 38,
+        "question_text": "Heeft u recent longproblemen gehad?"
+      },
+      {
+        "id": 121,
+        "symptomId": 39,
+        "question_text": "Wanneer begon het gehoorverlies?"
+      },
+      {
+        "id": 122,
+        "symptomId": 39,
+        "question_text": "Is het in één oor of beide oren?"
+      },
+      {
+        "id": 123,
+        "symptomId": 39,
+        "question_text": "Heeft u oorpijn of andere klachten?"
+      },
+      {
+        "id": 124,
+        "symptomId": 40,
+        "question_text": "Hoeveel vocht drinkt u per dag?"
+      },
+      {
+        "id": 125,
+        "symptomId": 40,
+        "question_text": "Heeft u diarree of braken?"
+      },
+      {
+        "id": 126,
+        "symptomId": 40,
+        "question_text": "Gebruikt u medicijnen die vochtverlies veroorzaken?"
+      },
+      {
+        "id": 127,
+        "symptomId": 41,
+        "question_text": "Hoe lang heeft u al tandpijn?"
+      },
+      {
+        "id": 128,
+        "symptomId": 41,
+        "question_text": "Is de pijn constant of komt en gaat het?"
+      },
+      {
+        "id": 129,
+        "symptomId": 41,
+        "question_text": "Heeft u zwelling of roodheid rondom de tand?"
+      },
+      {
+        "id": 130,
+        "symptomId": 42,
+        "question_text": "Wanneer treedt de duizeligheid op?"
+      },
+      {
+        "id": 131,
+        "symptomId": 42,
+        "question_text": "Is het een draaierig gevoel of licht in het hoofd?"
+      },
+      {
+        "id": 132,
+        "symptomId": 42,
+        "question_text": "Heeft u andere klachten zoals misselijkheid of oorsuizen?"
+      },
+      {
+        "id": 133,
+        "symptomId": 43,
+        "question_text": "Wanneer begon het dubbelzien?"
+      },
+      {
+        "id": 134,
+        "symptomId": 43,
+        "question_text": "Treedt het in één oog of beide ogen op?"
+      },
+      {
+        "id": 135,
+        "symptomId": 43,
+        "question_text": "Is er sprake van hoofdpijn of oogpijn?"
+      },
+      {
+        "id": 136,
+        "symptomId": 44,
+        "question_text": "Hoe lang heeft u al droge ogen?"
+      },
+      {
+        "id": 137,
+        "symptomId": 44,
+        "question_text": "Is er roodheid of zwelling aanwezig?"
+      },
+      {
+        "id": 138,
+        "symptomId": 44,
+        "question_text": "Gebruikt u contactlenzen?"
+      },
+      {
+        "id": 139,
+        "symptomId": 45,
+        "question_text": "Hoe lang heeft u last van droge lippen?"
+      },
+      {
+        "id": 140,
+        "symptomId": 45,
+        "question_text": "Is er scheurvorming of bloeden?"
+      },
+      {
+        "id": 141,
+        "symptomId": 45,
+        "question_text": "Heeft u andere huidproblemen in het gezicht?"
+      },
+      {
+        "id": 142,
+        "symptomId": 46,
+        "question_text": "Hoe lang heeft u last van een droge mond?"
+      },
+      {
+        "id": 143,
+        "symptomId": 46,
+        "question_text": "Heeft u moeite met slikken of praten?"
+      },
+      {
+        "id": 144,
+        "symptomId": 46,
+        "question_text": "Gebruikt u medicijnen die een droge mond kunnen veroorzaken?"
+      },
+      {
+        "id": 145,
+        "symptomId": 47,
+        "question_text": "Heeft u moeite met vast voedsel of ook vloeistoffen?"
+      },
+      {
+        "id": 146,
+        "symptomId": 47,
+        "question_text": "Wanneer begon het slikprobleem?"
+      },
+      {
+        "id": 147,
+        "symptomId": 47,
+        "question_text": "Heeft u pijn bij het slikken?"
+      },
+      {
+        "id": 148,
+        "symptomId": 48,
+        "question_text": "Heeft u koorts of gehoorverlies?"
+      },
+      {
+        "id": 149,
+        "symptomId": 48,
+        "question_text": "Komt de pijn plotseling op of geleidelijk?"
+      },
+      {
+        "id": 150,
+        "symptomId": 48,
+        "question_text": "Heeft u recent gezwommen of gevlogen?"
+      },
+      {
+        "id": 151,
+        "symptomId": 49,
+        "question_text": "Wanneer treden de hartkloppingen op?"
+      },
+      {
+        "id": 152,
+        "symptomId": 49,
+        "question_text": "Heeft u duizeligheid of pijn op de borst?"
+      },
+      {
+        "id": 153,
+        "symptomId": 49,
+        "question_text": "Gebruikt u medicijnen of supplementen?"
+      },
+      {
+        "id": 154,
+        "symptomId": 50,
+        "question_text": "Heeft u moeite met ejaculeren of komt u te snel?"
+      },
+      {
+        "id": 155,
+        "symptomId": 50,
+        "question_text": "Gebruikt u medicijnen of drugs?"
+      },
+      {
+        "id": 156,
+        "symptomId": 50,
+        "question_text": "Heeft u stress of relatieproblemen?"
+      },
+      {
+        "id": 157,
+        "symptomId": 51,
+        "question_text": "Heeft u problemen met het krijgen of behouden van een erectie?"
+      },
+      {
+        "id": 158,
+        "symptomId": 51,
+        "question_text": "Heeft u andere seksuele of emotionele klachten?"
+      },
+      {
+        "id": 159,
+        "symptomId": 51,
+        "question_text": "Gebruikt u medicijnen of heeft u gezondheidsproblemen zoals diabetes?"
+      },
+      {
+        "id": 160,
+        "symptomId": 52,
+        "question_text": "Wanneer is het beven begonnen?"
+      },
+      {
+        "id": 161,
+        "symptomId": 52,
+        "question_text": "Komt het alleen voor bij bepaalde bewegingen?"
+      },
+      {
+        "id": 162,
+        "symptomId": 52,
+        "question_text": "Gebruikt u medicijnen of alcohol?"
+      },
+      {
+        "id": 163,
+        "symptomId": 53,
+        "question_text": "Hoeveel uur slaapt u gemiddeld per nacht?"
+      },
+      {
+        "id": 164,
+        "symptomId": 53,
+        "question_text": "Voelt u zich nog steeds moe na voldoende slaap?"
+      },
+      {
+        "id": 165,
+        "symptomId": 53,
+        "question_text": "Snurkt u of stopt u soms met ademhalen tijdens de slaap?"
+      },
+      {
+        "id": 166,
+        "symptomId": 54,
+        "question_text": "Wanneer begon de overmatige haargroei?"
+      },
+      {
+        "id": 167,
+        "symptomId": 54,
+        "question_text": "Heeft u veranderingen in uw menstruatiecyclus?"
+      },
+      {
+        "id": 168,
+        "symptomId": 54,
+        "question_text": "Heeft u gewichtstoename of acne?"
+      },
+      {
+        "id": 169,
+        "symptomId": 55,
+        "question_text": "Wanneer begon het overmatige zweten?"
+      },
+      {
+        "id": 170,
+        "symptomId": 55,
+        "question_text": "Komt het voor op specifieke plekken zoals handen of oksels?"
+      },
+      {
+        "id": 171,
+        "symptomId": 55,
+        "question_text": "Heeft u andere symptomen zoals koorts of gewichtsverlies?"
+      },
+      {
+        "id": 172,
+        "symptomId": 56,
+        "question_text": "Hoeveel drinkt u per dag?"
+      },
+      {
+        "id": 173,
+        "symptomId": 56,
+        "question_text": "Heeft u vaak dorst en moet u veel plassen?"
+      },
+      {
+        "id": 174,
+        "symptomId": 56,
+        "question_text": "Heeft u recent gewichtsverlies of vermoeidheid?"
+      },
+      {
+        "id": 175,
+        "symptomId": 57,
+        "question_text": "Ziet u plotseling meer floaters dan normaal?"
+      },
+      {
+        "id": 176,
+        "symptomId": 57,
+        "question_text": "Heeft u lichtflitsen of wazig zicht?"
+      },
+      {
+        "id": 177,
+        "symptomId": 57,
+        "question_text": "Heeft u pijn of drukgevoel in het oog?"
+      },
+      {
+        "id": 178,
+        "symptomId": 58,
+        "question_text": "Zijn beide ogen of slechts één aangedaan?"
+      },
+      {
+        "id": 179,
+        "symptomId": 58,
+        "question_text": "Heeft u pijn, afscheiding of korstvorming?"
+      },
+      {
+        "id": 180,
+        "symptomId": 58,
+        "question_text": "Heeft u allergieën of recent nieuwe cosmetica gebruikt?"
+      },
+      {
+        "id": 181,
+        "symptomId": 59,
+        "question_text": "Bent u vaker dan één keer flauwgevallen?"
+      },
+      {
+        "id": 182,
+        "symptomId": 59,
+        "question_text": "Had u vlak voor het flauwvallen hartkloppingen of pijn op de borst?"
+      },
+      {
+        "id": 183,
+        "symptomId": 59,
+        "question_text": "Bent u niet volledig hersteld na het flauwvallen?"
+      },
+      {
+        "id": 184,
+        "symptomId": 60,
+        "question_text": "Heeft u al langer dan 1 week last van misselijkheid?"
+      },
+      {
+        "id": 185,
+        "symptomId": 60,
+        "question_text": "Bent u ook daadwerkelijk aan het braken?"
+      },
+      {
+        "id": 186,
+        "symptomId": 60,
+        "question_text": "Neemt u medicijnen die misselijkheid kunnen veroorzaken?"
+      },
+      {
+        "id": 187,
+        "symptomId": 61,
+        "question_text": "Heeft u al langer dan 3 dagen koorts?"
+      },
+      {
+        "id": 188,
+        "symptomId": 61,
+        "question_text": "Komt de koorts steeds terug?"
+      },
+      {
+        "id": 189,
+        "symptomId": 61,
+        "question_text": "Heeft u recent gereisd naar het buitenland?"
+      },
+      {
+        "id": 190,
+        "symptomId": 62,
+        "question_text": "Heeft uw kind al langer dan 3 dagen koorts?"
+      },
+      {
+        "id": 191,
+        "symptomId": 62,
+        "question_text": "Drinkt en plast uw kind minder dan normaal?"
+      },
+      {
+        "id": 192,
+        "symptomId": 62,
+        "question_text": "Heeft uw kind ook huiduitslag of hoest?"
+      },
+      {
+        "id": 193,
+        "symptomId": 63,
+        "question_text": "Heeft u al langer dan 2 weken pijn in uw hand of vingers?"
+      },
+      {
+        "id": 194,
+        "symptomId": 63,
+        "question_text": "Heeft u zwelling of stijfheid in uw hand of vingers?"
+      },
+      {
+        "id": 195,
+        "symptomId": 63,
+        "question_text": "Is de pijn ontstaan zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 196,
+        "symptomId": 64,
+        "question_text": "Heeft u langer dan 2 weken last van voetpijn?"
+      },
+      {
+        "id": 197,
+        "symptomId": 64,
+        "question_text": "Wordt de pijn erger bij lopen of staan?"
+      },
+      {
+        "id": 198,
+        "symptomId": 64,
+        "question_text": "Heeft u zwelling of roodheid aan de voet?"
+      },
+      {
+        "id": 199,
+        "symptomId": 65,
+        "question_text": "Heeft u al eerder een aanval gehad?"
+      },
+      {
+        "id": 200,
+        "symptomId": 65,
+        "question_text": "Heeft u een bekende neurologische aandoening?"
+      },
+      {
+        "id": 201,
+        "symptomId": 65,
+        "question_text": "Heeft u zich geblesseerd tijdens de aanval?"
+      },
+      {
+        "id": 202,
+        "symptomId": 66,
+        "question_text": "Heeft u al langer dan 2 weken hielpijn?"
+      },
+      {
+        "id": 203,
+        "symptomId": 66,
+        "question_text": "Heeft u pijn bij de eerste stappen in de ochtend?"
+      },
+      {
+        "id": 204,
+        "symptomId": 66,
+        "question_text": "Is de pijn erger geworden ondanks rust?"
+      },
+      {
+        "id": 205,
+        "symptomId": 67,
+        "question_text": "Heeft u al langer dan 1 week pijn aan een teen?"
+      },
+      {
+        "id": 206,
+        "symptomId": 67,
+        "question_text": "Is er sprake van zwelling of roodheid?"
+      },
+      {
+        "id": 207,
+        "symptomId": 67,
+        "question_text": "Heeft u moeite met lopen door de teenpijn?"
+      },
+      {
+        "id": 208,
+        "symptomId": 68,
+        "question_text": "Heeft u al langer dan 2 weken pijn boven op de voet?"
+      },
+      {
+        "id": 209,
+        "symptomId": 68,
+        "question_text": "Is er zwelling of stijfheid aanwezig?"
+      },
+      {
+        "id": 210,
+        "symptomId": 68,
+        "question_text": "Heeft u pijn zonder duidelijke oorzaak gekregen?"
+      },
+      {
+        "id": 211,
+        "symptomId": 69,
+        "question_text": "Heeft u al langer dan 2 weken pijn onder de voet?"
+      },
+      {
+        "id": 212,
+        "symptomId": 69,
+        "question_text": "Voelt u vooral pijn bij het opstaan?"
+      },
+      {
+        "id": 213,
+        "symptomId": 69,
+        "question_text": "Is de pijn toegenomen ondanks rust?"
+      },
+      {
+        "id": 214,
+        "symptomId": 70,
+        "question_text": "Heeft u al langer dan 2 weken pijn in de bal van de voet?"
+      },
+      {
+        "id": 215,
+        "symptomId": 70,
+        "question_text": "Wordt de pijn erger bij lopen of rennen?"
+      },
+      {
+        "id": 216,
+        "symptomId": 70,
+        "question_text": "Voelt u tintelingen of een branderig gevoel?"
+      },
+      {
+        "id": 217,
+        "symptomId": 71,
+        "question_text": "Verliest u meer haar dan normaal?"
+      },
+      {
+        "id": 218,
+        "symptomId": 71,
+        "question_text": "Ziet u kale plekken op uw hoofd?"
+      },
+      {
+        "id": 219,
+        "symptomId": 71,
+        "question_text": "Bent u recent ziek geweest of afgevallen?"
+      },
+      {
+        "id": 220,
+        "symptomId": 72,
+        "question_text": "Hoort of ziet u dingen die anderen niet waarnemen?"
+      },
+      {
+        "id": 221,
+        "symptomId": 72,
+        "question_text": "Heeft u deze klachten vaker gehad?"
+      },
+      {
+        "id": 222,
+        "symptomId": 72,
+        "question_text": "Gebruikt u medicijnen of middelen die dit kunnen veroorzaken?"
+      },
+      {
+        "id": 223,
+        "symptomId": 73,
+        "question_text": "Heeft u al langer dan 2 weken pijn in uw hand?"
+      },
+      {
+        "id": 224,
+        "symptomId": 73,
+        "question_text": "Is er sprake van zwelling of stijfheid?"
+      },
+      {
+        "id": 225,
+        "symptomId": 73,
+        "question_text": "Heeft u moeite met het bewegen van de hand?"
+      },
+      {
+        "id": 226,
+        "symptomId": 74,
+        "question_text": "Heeft u al langer dan een week hoofdpijn?"
+      },
+      {
+        "id": 227,
+        "symptomId": 74,
+        "question_text": "Wordt de hoofdpijn erger of verandert het patroon?"
+      },
+      {
+        "id": 228,
+        "symptomId": 74,
+        "question_text": "Heeft u hoofdpijn na een hoofdletsel?"
+      },
+      {
+        "id": 229,
+        "symptomId": 75,
+        "question_text": "Heeft u meer dan 7 dagen last van bloedverlies?"
+      },
+      {
+        "id": 230,
+        "symptomId": 75,
+        "question_text": "Verliest u grote stolsels tijdens de menstruatie?"
+      },
+      {
+        "id": 231,
+        "symptomId": 75,
+        "question_text": "Voelt u zich vaak moe of duizelig tijdens de menstruatie?"
+      },
+      {
+        "id": 232,
+        "symptom_id": 76,
+        "question": "Heeft u al langer dan 48 uur last van hikken?"
+      },
+      {
+        "id": 233,
+        "symptom_id": 76,
+        "question": "Komt de hik regelmatig terug?"
+      },
+      {
+        "id": 234,
+        "symptom_id": 76,
+        "question": "Neemt u medicijnen die hikken kunnen veroorzaken?"
+      },
+      {
+        "id": 235,
+        "symptom_id": 77,
+        "question": "Heeft u al langer dan 2 weken pijn in de heup?"
+      },
+      {
+        "id": 236,
+        "symptom_id": 77,
+        "question": "Wordt de pijn erger bij bewegen of liggen?"
+      },
+      {
+        "id": 237,
+        "symptom_id": 77,
+        "question": "Heeft u stijfheid in de ochtend?"
+      },
+      {
+        "id": 238,
+        "symptom_id": 78,
+        "question": "Is het kind mank gaan lopen?"
+      },
+      {
+        "id": 239,
+        "symptom_id": 78,
+        "question": "Heeft het kind pijn bij bewegen van het been?"
+      },
+      {
+        "id": 240,
+        "symptom_id": 78,
+        "question": "Heeft het kind recent een verkoudheid of infectie gehad?"
+      },
+      {
+        "id": 241,
+        "symptom_id": 79,
+        "question": "Komen de bulten vaker terug?"
+      },
+      {
+        "id": 242,
+        "symptom_id": 79,
+        "question": "Weet u waardoor de uitslag ontstaat?"
+      },
+      {
+        "id": 243,
+        "symptom_id": 79,
+        "question": "Heeft u last van jeuk die uw slaap verstoort?"
+      },
+      {
+        "id": 244,
+        "symptom_id": 80,
+        "question": "Heeft u jeuk rond de anus, vooral ’s nachts?"
+      },
+      {
+        "id": 245,
+        "symptom_id": 80,
+        "question": "Ziet u witte draadjes in de ontlasting?"
+      },
+      {
+        "id": 246,
+        "symptom_id": 80,
+        "question": "Heeft u ook buikpijn of gewichtsverlies?"
+      },
+      {
+        "id": 247,
+        "symptom_id": 81,
+        "question": "Lekt u urine bij hoesten of niezen?"
+      },
+      {
+        "id": 248,
+        "symptom_id": 81,
+        "question": "Heeft u regelmatig een plotselinge, sterke aandrang om te plassen?"
+      },
+      {
+        "id": 249,
+        "symptom_id": 81,
+        "question": "Is het urineverlies begonnen zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 250,
+        "symptom_id": 82,
+        "question": "Ervaart u een brandend gevoel in de borst na het eten?"
+      },
+      {
+        "id": 251,
+        "symptom_id": 82,
+        "question": "Voelt u zich snel vol of opgeblazen na het eten?"
+      },
+      {
+        "id": 252,
+        "symptom_id": 82,
+        "question": "Heeft u opgegeven voedsel of zure vloeistof in de mond geproefd?"
+      },
+      {
+        "id": 253,
+        "symptom_id": 83,
+        "question": "Heeft u vaker dan 3 nachten per week moeite met slapen?"
+      },
+      {
+        "id": 254,
+        "symptom_id": 83,
+        "question": "Wordt u overdag vermoeid of prikkelbaar door het slechte slapen?"
+      },
+      {
+        "id": 255,
+        "symptom_id": 83,
+        "question": "Heeft u veranderingen in uw slaapgewoonten of stressfactoren?"
+      },
+      {
+        "id": 256,
+        "symptom_id": 84,
+        "question": "Heeft u een cyclus korter dan 21 dagen of langer dan 35 dagen?"
+      },
+      {
+        "id": 257,
+        "symptom_id": 84,
+        "question": "Verandert de lengte of het patroon van uw menstruatie regelmatig?"
+      },
+      {
+        "id": 258,
+        "symptom_id": 84,
+        "question": "Gebruikt u hormonale anticonceptie of bent u in overgang?"
+      },
+      {
+        "id": 259,
+        "symptom_id": 85,
+        "question": "Heeft u jeuk die langer dan een week duurt?"
+      },
+      {
+        "id": 260,
+        "symptom_id": 85,
+        "question": "Is er roodheid, uitslag of zwelling bij de jeukende plek?"
+      },
+      {
+        "id": 261,
+        "symptom_id": 85,
+        "question": "Bent u recent blootgesteld aan nieuwe zeep, voedsel of planten?"
+      },
+      {
+        "id": 262,
+        "symptom_id": 86,
+        "question": "Heeft u gewrichtspijn die langer dan 2 weken aanhoudt?"
+      },
+      {
+        "id": 263,
+        "symptom_id": 86,
+        "question": "Is het gewricht ’s ochtends stijf of moeilijk te bewegen?"
+      },
+      {
+        "id": 264,
+        "symptom_id": 86,
+        "question": "Is er sprake van zwelling of warmte rond het gewricht?"
+      },
+      {
+        "id": 265,
+        "symptom_id": 87,
+        "question": "Heeft u kniepijn die u beperkt in lopen of traplopen?"
+      },
+      {
+        "id": 266,
+        "symptom_id": 87,
+        "question": "Merkt u zwelling of instabiliteit in de knie?"
+      },
+      {
+        "id": 267,
+        "symptom_id": 87,
+        "question": "Is de pijn ontstaan zonder duidelijke aanleiding?"
+      },
+      {
+        "id": 268,
+        "symptom_id": 88,
+        "question": "Ervaart u vaak beenkrampen, vooral ’s nachts?"
+      },
+      {
+        "id": 269,
+        "symptom_id": 88,
+        "question": "Zijn uw krampen ernstig genoeg om u wakker te houden?"
+      },
+      {
+        "id": 270,
+        "symptom_id": 88,
+        "question": "Heeft u recent uw lichamelijke inspanning sterk verhoogd?"
+      },
+      {
+        "id": 271,
+        "symptom_id": 89,
+        "question": "Mankt uw kind zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 272,
+        "symptom_id": 89,
+        "question": "Heeft het kind pijn bij het bewegen of het opstaan van het been?"
+      },
+      {
+        "id": 273,
+        "symptom_id": 89,
+        "question": "Heeft uw kind recent een infectie gehad?"
+      },
+      {
+        "id": 274,
+        "symptom_id": 90,
+        "question": "Heeft u zich vaker dan twee weken achtereen neerslachtig gevoeld?"
+      },
+      {
+        "id": 275,
+        "symptom_id": 90,
+        "question": "Heeft u minder interesse of plezier in dingen dan voorheen?"
+      },
+      {
+        "id": 276,
+        "symptom_id": 90,
+        "question": "Slaapt u slechter of eet u minder door uw stemming?"
+      },
+      {
+        "id": 277,
+        "symptom_id": 91,
+        "question": "Ervaart u minder seksueel verlangen dan normaal?"
+      },
+      {
+        "id": 278,
+        "symptom_id": 91,
+        "question": "Heeft u veranderingen in medicatie of hormonen gehad?"
+      },
+      {
+        "id": 279,
+        "symptom_id": 91,
+        "question": "Is er sprake van relatie- of leefstijlveranderingen aan de basis?"
+      },
+      {
+        "id": 280,
+        "symptom_id": 92,
+        "question": "Heeft u een nieuwe knobbel of bult opgemerkt?"
+      },
+      {
+        "id": 281,
+        "symptom_id": 92,
+        "question": "Is de bult harder geworden of gegroeid?"
+      },
+      {
+        "id": 282,
+        "symptom_id": 92,
+        "question": "Is de bult pijnlijk of verandert van kleur?"
+      },
+      {
+        "id": 283,
+        "symptom_id": 93,
+        "question": "Heeft u pijn tijdens elke menstruatie?"
+      },
+      {
+        "id": 284,
+        "symptom_id": 93,
+        "question": "Beperkt de pijn uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 285,
+        "symptom_id": 93,
+        "question": "Is de menstruatie langer dan 7 dagen of met grote stolsels?"
+      },
+      {
+        "id": 286,
+        "symptom_id": 94,
+        "question": "Is uw menstruatie minstens 1 week te laat of gemist?"
+      },
+      {
+        "id": 287,
+        "symptom_id": 94,
+        "question": "Heeft u andere zwangerschapssymptomen zoals misselijkheid of gevoelige borsten?"
+      },
+      {
+        "id": 288,
+        "symptom_id": 94,
+        "question": "Heeft u onlangs uw hormonen of anticonceptie veranderd?"
+      },
+      {
+        "id": 289,
+        "symptom_id": 95,
+        "question": "Ervaart u geregeld een metaalachtige smaak in uw mond?"
+      },
+      {
+        "id": 290,
+        "symptom_id": 95,
+        "question": "Begon de smaakverandering na het starten van een nieuw medicijn?"
+      },
+      {
+        "id": 291,
+        "symptom_id": 95,
+        "question": "Heeft u andere klachten zoals tandvleesontsteking of neus-/bijholteproblemen?"
+      },
+      {
+        "id": 292,
+        "symptom_id": 96,
+        "question": "Is uw nagel (of meerdere nagels) van kleur veranderd of losgeraakt zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 293,
+        "symptom_id": 96,
+        "question": "Is er sprake van pijn, roodheid of zwelling rond de nagelrand?"
+      },
+      {
+        "id": 294,
+        "symptom_id": 96,
+        "question": "Heeft u naast de nagelproblemen ook andere klachten zoals vermoeidheid of bleek zien?"
+      },
+      {
+        "id": 295,
+        "symptom_id": 97,
+        "question": "Heeft u nekpijn die langer dan 2 weken aanhoudt?"
+      },
+      {
+        "id": 296,
+        "symptom_id": 97,
+        "question": "Voelt de nek stijf bij het bewegen of ’s ochtends opstaan?"
+      },
+      {
+        "id": 297,
+        "symptom_id": 97,
+        "question": "Heeft u nekpijn zonder duidelijke aanleiding zoals een val of trauma?"
+      },
+      {
+        "id": 298,
+        "symptom_id": 98,
+        "question": "Heeft u regelmatig nachtzweten dat doorweekt beddengoed oplevert?"
+      },
+      {
+        "id": 299,
+        "symptom_id": 98,
+        "question": "Is het zweten begonnen zonder duidelijke reden of verandering in omgeving?"
+      },
+      {
+        "id": 300,
+        "symptom_id": 98,
+        "question": "Zijn er bijkomende klachten zoals vermoeidheid of gewichtsverlies?"
+      },
+      {
+        "id": 301,
+        "symptom_id": 99,
+        "question": "Heeft u afscheiding uit de tepel die nieuw is of veranderde kleur heeft?"
+      },
+      {
+        "id": 302,
+        "symptom_id": 99,
+        "question": "Is de afscheiding afkomstig uit één borst of beide en zonder relatie tot zwangerschap of borstvoeding?"
+      },
+      {
+        "id": 303,
+        "symptom_id": 99,
+        "question": "Heeft u knobbeltje of huidveranderingen rond de tepel of borst?"
+      },
+      {
+        "id": 304,
+        "symptom_id": 100,
+        "question": "Voelt u pijn of kramp in de onderbuik ongeveer op de midden van uw cyclus?"
+      },
+      {
+        "id": 305,
+        "symptom_id": 100,
+        "question": "Is de pijn mild en tijdelijk of is het iedere cyclus aanwezig?"
+      },
+      {
+        "id": 306,
+        "symptom_id": 100,
+        "question": "Heeft u veranderingen in uw cyclus of medicatie sinds het optreden van de pijn?"
+      },
+      {
+        "id": 307,
+        "symptom_id": 101,
+        "question": "Heeft u testikelpijn die langer dan 1-2 dagen aanhoudt?"
+      },
+      {
+        "id": 308,
+        "symptom_id": 101,
+        "question": "Is er sprake van zwelling of roodheid van de testikel of balzak?"
+      },
+      {
+        "id": 309,
+        "symptom_id": 101,
+        "question": "Heeft u eerder een testikelontsteking of –trauma gehad?"
+      },
+      {
+        "id": 310,
+        "symptom_id": 102,
+        "question": "Heeft u pijn aan de achterkant van uw hand die langere tijd aanhoudt?"
+      },
+      {
+        "id": 311,
+        "symptom_id": 102,
+        "question": "Voelt u tintelingen of krachtsverlies in de vingers of hand?"
+      },
+      {
+        "id": 312,
+        "symptom_id": 102,
+        "question": "Is er sprake van zwelling of een zichtbare afwijking?"
+      },
+      {
+        "id": 313,
+        "symptom_id": 103,
+        "question": "Heeft u aanhoudende pijn of branderig gevoel in de palm van uw hand?"
+      },
+      {
+        "id": 314,
+        "symptom_id": 103,
+        "question": "Wordt de pijn erger bij het vastpakken of knijpen?"
+      },
+      {
+        "id": 315,
+        "symptom_id": 103,
+        "question": "Heeft u ’s nachts last van de pijn of tintelingen?"
+      },
+      {
+        "id": 316,
+        "symptom_id": 104,
+        "question": "Heeft u recente verlamming of krachtsverlies in arm, been of gezicht?"
+      },
+      {
+        "id": 317,
+        "symptom_id": 104,
+        "question": "Is het verlies van kracht erger geworden sinds het begin?"
+      },
+      {
+        "id": 318,
+        "symptom_id": 104,
+        "question": "Heeft u andere symptomen zoals dubbelzien of spraakproblemen?"
+      },
+      {
+        "id": 316,
+        "symptom_id": 104,
+        "question": "Heeft u recente verlamming of krachtsverlies in arm, been of gezicht?"
+      },
+      {
+        "id": 317,
+        "symptom_id": 104,
+        "question": "Is het verlies van kracht erger geworden sinds het begin?"
+      },
+      {
+        "id": 318,
+        "symptom_id": 104,
+        "question": "Heeft u andere symptomen zoals dubbelzien of spraakproblemen?"
+      },
+      {
+        "id": 319,
+        "symptom_id": 105,
+        "question": "Heeft u bekkenpijn die langer dan 1 week aanhoudt?"
+      },
+      {
+        "id": 320,
+        "symptom_id": 105,
+        "question": "Is de pijn constant of alleen bij bewegen of plassen?"
+      },
+      {
+        "id": 321,
+        "symptom_id": 105,
+        "question": "Heeft u daarnaast verandering in uw urine- of stoelgangpatroon?"
+      },
+      {
+        "id": 322,
+        "symptom_id": 106,
+        "question": "Heeft u nieuwe knobbels of plekjes op de penis die niet vanzelf verdwijnen?"
+      },
+      {
+        "id": 323,
+        "symptom_id": 106,
+        "question": "Zijn de plekjes pijnlijk, met afscheiding of verandering van kleur?"
+      },
+      {
+        "id": 324,
+        "symptom_id": 106,
+        "question": "Heeft u recent onveilige seks gehad of niet beschermd?"
+      },
+      {
+        "id": 325,
+        "symptom_id": 107,
+        "question": "Heeft u langdurige of terugkerende tintelingen in arm, been of gezicht?"
+      },
+      {
+        "id": 326,
+        "symptom_id": 107,
+        "question": "Heeft u naast de tintelingen ook gevoelsverlies of krachtsverlies?"
+      },
+      {
+        "id": 327,
+        "symptom_id": 107,
+        "question": "Heeft u diabetes of een andere chronische ziekte die zenuwen kan aantasten?"
+      },
+      {
+        "id": 328,
+        "symptom_id": 108,
+        "question": "Heeft u een erectie die langer dan 4 uur aanhoudt?"
+      },
+      {
+        "id": 329,
+        "symptom_id": 108,
+        "question": "Ervaart u pijn of ongemak tijdens de erectie?"
+      },
+      {
+        "id": 330,
+        "symptom_id": 108,
+        "question": "Heeft u recent alcohol of drugs gebruikt die bekend staan erecties te verlengen?"
+      },
+      {
+        "id": 331,
+        "symptom_id": 109,
+        "question": "Heeft uw kind een huiduitslag die langer dan een week aanhoudt?"
+      },
+      {
+        "id": 332,
+        "symptom_id": 109,
+        "question": "Is de uitslag verspreid over het lichaam of juist gelokaliseerd?"
+      },
+      {
+        "id": 333,
+        "symptom_id": 109,
+        "question": "Heeft uw kind ook een hoge temperatuur of is het duidelijk ziek?"
+      },
+      {
+        "id": 334,
+        "symptom_id": 110,
+        "question": "Is het oog rood gebleven na 24 uur?"
+      },
+      {
+        "id": 335,
+        "symptom_id": 110,
+        "question": "Is er afscheiding of plakkerigheid van het oog?"
+      },
+      {
+        "id": 336,
+        "symptom_id": 110,
+        "question": "Heeft u zichtverlies of veel lichtprikkels?"
+      },
+      {
+        "id": 337,
+        "symptom_id": 111,
+        "question": "Bent u kortademig bij lichte inspanning of in rust?"
+      },
+      {
+        "id": 338,
+        "symptom_id": 111,
+        "question": "Is de kortademigheid plots ontstaan of geleidelijk toegenomen?"
+      },
+      {
+        "id": 339,
+        "symptom_id": 111,
+        "question": "Heeft u andere symptomen zoals hoesten, pijn op de borst of koorts?"
+      },
+      {
+        "id": 340,
+        "symptom_id": 112,
+        "question": "Heeft u schouderpijn die langer dan 2 weken aanhoudt?"
+      },
+      {
+        "id": 341,
+        "symptom_id": 112,
+        "question": "Is de pijn erger bij bepaalde bewegingen of ’s nachts?"
+      },
+      {
+        "id": 342,
+        "symptom_id": 112,
+        "question": "Heeft u stompe of stekende pijn zonder duidelijke aanleiding?"
+      },
+      {
+        "id": 343,
+        "symptom_id": 113,
+        "question": "Heeft u regelmatig voeten die sterk ruiken ondanks goede hygiëne?"
+      },
+      {
+        "id": 344,
+        "symptom_id": 113,
+        "question": "Heeft u schilfering, jeuk of roodheid tussen de tenen?"
+      },
+      {
+        "id": 345,
+        "symptom_id": 113,
+        "question": "Draagt u vaak dezelfde gesloten schoenen meerdere dagen achter elkaar?"
+      },
+      {
+        "id": 346,
+        "symptom_id": 114,
+        "question": "Ruikt uw urine sterk en ongewoon zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 347,
+        "symptom_id": 114,
+        "question": "Heeft u een branderig gevoel bij het plassen of vaker dringende aandrang?"
+      },
+      {
+        "id": 348,
+        "symptom_id": 114,
+        "question": "Is de urine troebel of zichtbaar anders van kleur?"
+      },
+      {
+        "id": 349,
+        "symptom_id": 115,
+        "question": "Snurkt u regelmatig meer dan 3 nachten per week?"
+      },
+      {
+        "id": 350,
+        "symptom_id": 115,
+        "question": "Heeft uw partner gezien dat u stopt met ademhalen tijdens het slapen?"
+      },
+      {
+        "id": 351,
+        "symptom_id": 115,
+        "question": "Voelt u zich overdag vermoeid zonder andere duidelijke oorzaak?"
+      },
+      {
+        "id": 352,
+        "symptom_id": 116,
+        "question": "Gebruikt uw kind regelmatig het toilet of heeft het terugkerend ongelukjes met poepen in de broek?"
+      },
+      {
+        "id": 353,
+        "symptom_id": 116,
+        "question": "Is er sprake van constipatie of harde ontlasting bij uw kind?"
+      },
+      {
+        "id": 354,
+        "symptom_id": 116,
+        "question": "Is het kind emotioneel gestrest of net verhuisd/ingewend?"
+      },
+      {
+        "id": 355,
+        "symptom_id": 117,
+        "question": "Heeft uw tong een witte coating of leuke plekken die pijnlijk zijn?"
+      },
+      {
+        "id": 356,
+        "symptom_id": 117,
+        "question": "Heeft u moeite met eten of slikken door de tongklachten?"
+      },
+      {
+        "id": 357,
+        "symptom_id": 117,
+        "question": "Heeft u recent antibiotica gebruikt of heeft u diabetes?"
+      },
+      {
+        "id": 358,
+        "symptom_id": 118,
+        "question": "Heeft u keelpijn die langer dan 3-4 dagen aanhoudt?"
+      },
+      {
+        "id": 359,
+        "symptom_id": 118,
+        "question": "Zijn uw amandelen sterk opgezwollen of zijn er witte vlekken?"
+      },
+      {
+        "id": 360,
+        "symptom_id": 118,
+        "question": "Heeft u naast keelpijn ook koorts of knobbeltjes in de hals?"
+      },
+      {
+        "id": 361,
+        "symptom_id": 119,
+        "question": "Heeft u buikpijn die langer dan een week aanhoudt?"
+      },
+      {
+        "id": 362,
+        "symptom_id": 119,
+        "question": "Is de pijn diffuus of juist goed gelokaliseerd?"
+      },
+      {
+        "id": 363,
+        "symptom_id": 119,
+        "question": "Heeft u veranderingen in ontlasting, eetlust of gewicht sinds de pijn begon?"
+      },
+      {
+        "id": 364,
+        "symptom_id": 120,
+        "question": "Heeft u nieuwe huidlijntjes of –strepen op borst, buik, dij of billen?"
+      },
+      {
+        "id": 365,
+        "symptom_id": 120,
+        "question": "Zijn de strepen rood of paars van kleur of juist wit/vervaagd?"
+      },
+      {
+        "id": 366,
+        "symptom_id": 120,
+        "question": "Is er sprake van snelle gewichtstoename of zwangerschap sinds de strepen verschenen?"
+      },
+      {
+        "id": 367,
+        "symptom_id": 121,
+        "question": "Heeft u aanhoudende zwelling van armen of handen zonder duidelijke oorzaak?"
+      },
+      {
+        "id": 368,
+        "symptom_id": 121,
+        "question": "Is de zwelling symmetrisch of juist éénzijdig?"
+      },
+      {
+        "id": 369,
+        "symptom_id": 121,
+        "question": "Heeft u bijkomende klachten zoals kortademigheid, hart- of nierproblemen?"
+      },
+      {
+        "id": 370,
+        "symptom_id": 122,
+        "question": "Heeft u vergrote lymfeklieren die langer dan 3 weken aanhouden?"
+      },
+      {
+        "id": 371,
+        "symptom_id": 122,
+        "question": "Is er pijn of roodheid bij de zwelling?"
+      },
+      {
+        "id": 372,
+        "symptom_id": 122,
+        "question": "Heeft u recent een infectie of wond in de buurt van de lymfeklieren?"
+      },
+      {
+        "id": 373,
+        "symptom_id": 123,
+        "question": "Heeft u een nieuwe knobbel of zwelling in de testikel of balzak?"
+      },
+      {
+        "id": 374,
+        "symptom_id": 123,
+        "question": "Is de zwelling groter geworden of pijnlijk geworden?"
+      },
+      {
+        "id": 375,
+        "symptom_id": 123,
+        "question": "Heeft u een eerdere testikeloperatie of trauma gehad?"
+      },
+      {
+        "id": 376,
+        "symptom_id": 124,
+        "question": "Heeft u duimpijn die langer dan 2 weken aanwezig is?"
+      },
+      {
+        "id": 377,
+        "symptom_id": 124,
+        "question": "Is de pijn erger bij grijpen of knijpen?"
+      },
+      {
+        "id": 378,
+        "symptom_id": 124,
+        "question": "Heeft u stijfheid of zwelling in de basis van de duim?"
+      },
+      {
+        "id": 379,
+        "symptom_id": 125,
+        "question": "Hoor je frequente geluiden in je oor zonder externe bron?"
+      },
+      {
+        "id": 380,
+        "symptom_id": 125,
+        "question": "Wordt de tinnitus verergerd door lawaai of stress?"
+      },
+      {
+        "id": 381,
+        "symptom_id": 125,
+        "question": "Heb je gehoorverlies of duizeligheid erbij?"
+      },
+      {
+        "id": 382,
+        "symptom_id": 126,
+        "question": "Voelt u zich al langere tijd vermoeid ondanks voldoende rust?"
+      },
+      {
+        "id": 383,
+        "symptom_id": 126,
+        "question": "Heeft u moeite met dagelijkse taken door uw vermoeidheid?"
+      },
+      {
+        "id": 384,
+        "symptom_id": 126,
+        "question": "Heeft u veranderingen in slaap, voeding of gewicht gehad?"
+      },
+      {
+        "id": 385,
+        "symptom_id": 127,
+        "question": "Heeft u pijn of ongemak bij seks?"
+      },
+      {
+        "id": 386,
+        "symptom_id": 127,
+        "question": "Heeft u jeuk of irritatie in de vagina?"
+      },
+      {
+        "id": 387,
+        "symptom_id": 127,
+        "question": "Heeft u ongebruikelijke afscheiding of bloeding?"
+      },
+      {
+        "id": 388,
+        "symptom_id": 128,
+        "question": "Is uw gezichtsvermogen plotseling of geleidelijk veranderd?"
+      },
+      {
+        "id": 389,
+        "symptom_id": 128,
+        "question": "Heeft u moeite met lezen of gezichten herkennen?"
+      },
+      {
+        "id": 390,
+        "symptom_id": 128,
+        "question": "Zijn beide ogen of slechts één oog aangetast?"
+      },
+      {
+        "id": 391,
+        "symptom_id": 129,
+        "question": "Heeft u braken van helder rood of donker bloed?"
+      },
+      {
+        "id": 392,
+        "symptom_id": 129,
+        "question": "Heeft u maagklachten of brandend maagzuur?"
+      },
+      {
+        "id": 393,
+        "symptom_id": 129,
+        "question": "Gebruikt u medicijnen die maagbloedingen kunnen veroorzaken?"
+      },
+      {
+        "id": 394,
+        "symptom_id": 130,
+        "question": "Heeft u voortdurend tranende ogen?"
+      },
+      {
+        "id": 395,
+        "symptom_id": 130,
+        "question": "Is er roodheid of irritatie aanwezig?"
+      },
+      {
+        "id": 396,
+        "symptom_id": 130,
+        "question": "Zijn uw ogen gevoelig voor fel licht?"
+      },
+      {
+        "id": 397,
+        "symptom_id": 131,
+        "question": "Heeft u pijn bij beweging van de pols?"
+      },
+      {
+        "id": 398,
+        "symptom_id": 131,
+        "question": "Is er zwelling of roodheid aanwezig?"
+      },
+      {
+        "id": 399,
+        "symptom_id": 131,
+        "question": "Heeft u moeite met dagelijkse activiteiten door de pijn?"
+      },
+      {
+        "id": 400,
+        "symptom_id": 132,
+        "question": "Heeft u al langer dan 2 weken hielpijn?"
+      },
+      {
+        "id": 401,
+        "symptom_id": 132,
+        "question": "Heeft u pijn bij de eerste stappen in de ochtend?"
+      },
+      {
+        "id": 402,
+        "symptom_id": 132,
+        "question": "Is de pijn erger geworden ondanks rust?"
+      },
+      {
+        "id": 403,
+        "symptom_id": 133,
+        "question": "Heeft u al langer dan 1 week pijn aan een teen?"
+      },
+      {
+        "id": 404,
+        "symptom_id": 133,
+        "question": "Is er sprake van zwelling of roodheid?"
+      },
+      {
+        "id": 405,
+        "symptom_id": 133,
+        "question": "Heeft u moeite met lopen door de teenpijn?"
+      },
+      {
+        "id": 406,
+        "symptom_id": 134,
+        "question": "Heeft u al langer dan 2 weken pijn boven op de voet?"
+      },
+      {
+        "id": 407,
+        "symptom_id": 134,
+        "question": "Is er zwelling of stijfheid aanwezig?"
+      },
+      {
+        "id": 408,
+        "symptom_id": 134,
+        "question": "Heeft u pijn zonder duidelijke oorzaak gekregen?"
+      },
+      {
+        "id": 409,
+        "symptom_id": 135,
+        "question": "Heeft u al langer dan 2 weken pijn onder de voet?"
+      },
+      {
+        "id": 410,
+        "symptom_id": 135,
+        "question": "Voelt u vooral pijn bij het opstaan?"
+      },
+      {
+        "id": 411,
+        "symptom_id": 135,
+        "question": "Is de pijn toegenomen ondanks rust?"
+      },
+      {
+        "id": 412,
+        "symptom_id": 136,
+        "question": "Heeft u al langer dan 2 weken pijn in de bal van de voet?"
+      },
+      {
+        "id": 413,
+        "symptom_id": 136,
+        "question": "Wordt de pijn erger bij lopen of rennen?"
+      },
+      {
+        "id": 414,
+        "symptom_id": 136,
+        "question": "Voelt u tintelingen of een branderig gevoel?"
+      },
+      {
+        "id": 415,
+        "symptom_id": 137,
+        "question": "Verliest u meer haar dan normaal?"
+      },
+      {
+        "id": 416,
+        "symptom_id": 137,
+        "question": "Ziet u kale plekken op uw hoofd?"
+      },
+      {
+        "id": 417,
+        "symptom_id": 137,
+        "question": "Bent u recent ziek geweest of afgevallen?"
+      },
+      {
+        "id": 418,
+        "symptom_id": 138,
+        "question": "Hoort of ziet u dingen die anderen niet waarnemen?"
+      },
+      {
+        "id": 419,
+        "symptom_id": 138,
+        "question": "Heeft u deze klachten vaker gehad?"
+      },
+      {
+        "id": 420,
+        "symptom_id": 138,
+        "question": "Gebruikt u medicijnen of middelen die dit kunnen veroorzaken?"
+      }
+
+    ],
+    "questionUrgent": [
+      {
+        "id": 1,
+        "symptomId": 1,
+        "question_text": "Heeft u hevige anale pijn met hoge temperatuur of koude rillingen?"
+      },
+      {
+        "id": 2,
+        "symptomId": 1,
+        "question_text": "Is uw ontlasting zwart of donkerrood?"
+      },
+      {
+        "id": 3,
+        "symptomId": 2,
+        "question_text": "Heeft u plotselinge hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 4,
+        "symptomId": 2,
+        "question_text": "Is er een zichtbare misvorming van de arm of elleboog?"
+      },
+      {
+        "id": 5,
+        "symptomId": 2,
+        "question_text": "Heeft u gevoelloosheid of tintelingen in hand of vingers?"
+      },
+      {
+        "id": 6,
+        "symptomId": 3,
+        "question_text": "Heeft u plotselinge hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 7,
+        "symptomId": 3,
+        "question_text": "Is er een zichtbare misvorming van de arm of elleboog?"
+      },
+      {
+        "id": 8,
+        "symptomId": 3,
+        "question_text": "Heeft u gevoelloosheid of tintelingen in hand of vingers?"
+      },
+      {
+        "id": 9,
+        "symptomId": 10,
+        "question_text": "Heeft u ook moeite met ademhalen of een plotseling verlies van smaak?"
+      },
+      {
+        "id": 10,
+        "symptomId": 10,
+        "question_text": "Is er sprake van een ernstig hoofdletsel dat gepaard gaat met reukverlies?"
+      },
+      {
+        "id": 11,
+        "symptomId": 11,
+        "question_text": "Heeft u hevige pijn, koorts of tekenen van infectie?"
+      },
+      {
+        "id": 12,
+        "symptomId": 11,
+        "question_text": "Is er een onverwachte massa of zwelling in het anale gebied?"
+      },
+      {
+        "id": 13,
+        "symptomId": 12,
+        "question_text": "Ervaart u hevige angst die gepaard gaat met gedachten aan zelfbeschadiging of zelfmoord?"
+      },
+      {
+        "id": 14,
+        "symptomId": 12,
+        "question_text": "Heeft u recentelijk een traumatische gebeurtenis meegemaakt die uw angstgevoelens heeft verergerd?"
+      },
+      {
+        "id": 15,
+        "symptomId": 13,
+        "question_text": "Heeft u rugpijn met hoge koorts?"
+      },
+      {
+        "id": 16,
+        "symptomId": 13,
+        "question_text": "Heeft u onbedoeld gewicht verloren?"
+      },
+      {
+        "id": 17,
+        "symptomId": 13,
+        "question_text": "Is er een knobbel of zwelling in uw rug of is de vorm van uw rug veranderd?"
+      },
+      {
+        "id": 18,
+        "symptomId": 13,
+        "question_text": "Verergert de pijn na rust of is deze 's nachts erger?"
+      },
+      {
+        "id": 19,
+        "symptomId": 13,
+        "question_text": "Komt de pijn uit het bovenste gedeelte van uw rug (tussen de schouders), in plaats van de onderrug?"
+      },
+      {
+        "id": 20,
+        "symptomId": 14,
+        "question_text": "Heb je pijn in de mond of kaak?"
+      },
+      {
+        "id": 21,
+        "symptomId": 14,
+        "question_text": "Heb je koorts of andere tekenen van infectie?"
+      },
+      {
+        "id": 22,
+        "symptomId": 14,
+        "question_text": "Heb je moeite met slikken of ademhalen?"
+      },
+      {
+        "id": 23,
+        "symptomId": 15,
+        "question_text": "Is het bedplassen plotseling begonnen na een periode van droog zijn?"
+      },
+      {
+        "id": 24,
+        "symptomId": 15,
+        "question_text": "Ervaart uw kind pijn of branderigheid bij het plassen?"
+      },
+      {
+        "id": 25,
+        "symptomId": 15,
+        "question_text": "Heeft uw kind andere symptomen zoals overmatige dorst of vermoeidheid?"
+      },
+      {
+        "id": 26,
+        "symptomId": 16,
+        "question_text": "Heeft je kind een koorts boven de 39°C?"
+      },
+      {
+        "id": 27,
+        "symptomId": 16,
+        "question_text": "Is je kind bleek, blauw of voelt het koud aan?"
+      },
+      {
+        "id": 28,
+        "symptomId": 16,
+        "question_text": "Heeft je kind moeite met ademhalen of een snelle ademhaling?"
+      },
+      {
+        "id": 29,
+        "symptomId": 16,
+        "question_text": "Heeft je kind een uitslag die niet verdwijnt bij druk (glas-test)?"
+      },
+      {
+        "id": 30,
+        "symptomId": 16,
+        "question_text": "Is je kind jonger dan 3 maanden met een temperatuur boven de 38°C?"
+      },
+      {
+        "id": 31,
+        "symptomId": 17,
+        "question_text": "Is de bloeding plotseling begonnen na een periode van geen menstruatie?"
+      },
+      {
+        "id": 32,
+        "symptomId": 17,
+        "question_text": "Ervaart u hevige pijn of ongemak?"
+      },
+      {
+        "id": 33,
+        "symptomId": 17,
+        "question_text": "Heeft u koorts of andere tekenen van infectie?"
+      },
+      {
+        "id": 34,
+        "symptomId": 17,
+        "question_text": "Heeft u onbedoeld gewicht verloren?"
+      },
+      {
+        "id": 35,
+        "symptomId": 18,
+        "question_text": "Heeft u hevige bloeding of pijn?"
+      },
+      {
+        "id": 36,
+        "symptomId": 18,
+        "question_text": "Heeft u andere symptomen zoals koorts of misselijkheid?"
+      },
+      {
+        "id": 37,
+        "symptomId": 18,
+        "question_text": "Is de bloeding plotseling begonnen?"
+      },
+      {
+        "id": 38,
+        "symptomId": 19,
+        "question_text": "Heeft u hevige of aanhoudende bloeding?"
+      },
+      {
+        "id": 39,
+        "symptomId": 19,
+        "question_text": "Is uw ontlasting zwart of teerachtig?"
+      },
+      {
+        "id": 40,
+        "symptomId": 19,
+        "question_text": "Ervaart u duizeligheid of flauwvallen?"
+      },
+      {
+        "id": 41,
+        "symptomId": 19,
+        "question_text": "Heeft u onbedoeld gewicht verloren?"
+      },
+      {
+        "id": 42,
+        "symptomId": 20,
+        "question_text": "Heeft u bloed in uw ontlasting?"
+      },
+      {
+        "id": 43,
+        "symptomId": 20,
+        "question_text": "Ervaart u plotselinge, hevige buikpijn?"
+      },
+      {
+        "id": 44,
+        "symptomId": 20,
+        "question_text": "Heeft u onbedoeld gewicht verloren?"
+      },
+      {
+        "id": 45,
+        "symptomId": 20,
+        "question_text": "Heeft u koorts of andere tekenen van infectie?"
+      },
+      {
+        "id": 46,
+        "symptomId": 21,
+        "question_text": "Heb je moeite met ademhalen?"
+      },
+      {
+        "id": 47,
+        "symptomId": 21,
+        "question_text": "Heb je pijn op de borst of een snelle hartslag?"
+      },
+      {
+        "id": 48,
+        "symptomId": 21,
+        "question_text": "Heb je duizeligheid of flauwvallen ervaren?"
+      },
+      {
+        "id": 49,
+        "symptomId": 21,
+        "question_text": "Heb je bloed opgehoest in grotere hoeveelheden dan normaal?"
+      },
+      {
+        "id": 50,
+        "symptomId": 33,
+        "question_text": "Heeft u pijn die uitstraalt naar uw arm, kaak of rug?"
+      },
+      {
+        "id": 51,
+        "symptomId": 33,
+        "question_text": "Heeft u plotselinge duizeligheid of flauwvallen?"
+      },
+      {
+        "id": 52,
+        "symptomId": 33,
+        "question_text": "Heeft u een gevoel van druk op de borst?"
+      },
+      {
+        "id": 53,
+        "symptomId": 34,
+        "question_text": "Heeft u koorts in combinatie met de pijn?"
+      },
+      {
+        "id": 54,
+        "symptomId": 34,
+        "question_text": "Heeft u pijn die uitstraalt naar andere delen van het lichaam?"
+      },
+      {
+        "id": 55,
+        "symptomId": 34,
+        "question_text": "Heeft u veranderingen in uw stoelgang?"
+      },
+      {
+        "id": 56,
+        "symptomId": 35,
+        "question_text": "Is de verwardheid plotseling begonnen?"
+      },
+      {
+        "id": 57,
+        "symptomId": 35,
+        "question_text": "Zijn er tekenen van infectie of intoxicatie?"
+      },
+      {
+        "id": 58,
+        "symptomId": 35,
+        "question_text": "Heeft de persoon recent een beroerte gehad?"
+      },
+      {
+        "id": 59,
+        "symptomId": 36,
+        "question_text": "Heeft u plotselinge, hevige buikpijn?"
+      },
+      {
+        "id": 60,
+        "symptomId": 36,
+        "question_text": "Heeft u onbedoeld gewicht verloren?"
+      },
+      {
+        "id": 61,
+        "symptomId": 36,
+        "question_text": "Heeft u veranderingen in uw stoelgangpatroon?"
+      },
+      {
+        "id": 62,
+        "symptomId": 37,
+        "question_text": "Hoest u bloed op?"
+      },
+      {
+        "id": 63,
+        "symptomId": 37,
+        "question_text": "Heeft u ernstige kortademigheid of pijn op de borst?"
+      },
+      {
+        "id": 64,
+        "symptomId": 38,
+        "question_text": "Heeft u hevige bloedingen bij het hoesten?"
+      },
+      {
+        "id": 65,
+        "symptomId": 38,
+        "question_text": "Heeft u pijn op de borst of ademhalingsproblemen?"
+      },
+      {
+        "id": 66,
+        "symptomId": 38,
+        "question_text": "Bent u plotseling erg ziek geworden?"
+      },
+      {
+        "id": 67,
+        "symptomId": 39,
+        "question_text": "Heeft u plotseling verlies van gehoor in één oor?"
+      },
+      {
+        "id": 68,
+        "symptomId": 39,
+        "question_text": "Heeft u duizeligheid of evenwichtsproblemen?"
+      },
+      {
+        "id": 69,
+        "symptomId": 39,
+        "question_text": "Heeft u koorts of bloed uit het oor?"
+      },
+      {
+        "id": 70,
+        "symptomId": 40,
+        "question_text": "Bent u extreem suf of verward?"
+      },
+      {
+        "id": 71,
+        "symptomId": 40,
+        "question_text": "Heeft u zeer weinig of geen urineproductie?"
+      },
+      {
+        "id": 72,
+        "symptomId": 40,
+        "question_text": "Heeft u een snelle hartslag of lage bloeddruk?"
+      },
+      {
+        "id": 73,
+        "symptomId": 41,
+        "question_text": "Heeft u hevige pijn met koorts?"
+      },
+      {
+        "id": 74,
+        "symptomId": 41,
+        "question_text": "Is er een abces of pus aanwezig?"
+      },
+      {
+        "id": 75,
+        "symptomId": 41,
+        "question_text": "Heeft u moeite met slikken of ademhalen door de pijn?"
+      },
+      {
+        "id": 76,
+        "symptomId": 42,
+        "question_text": "Heeft u plotselinge hevige duizeligheid?"
+      },
+      {
+        "id": 77,
+        "symptomId": 42,
+        "question_text": "Heeft u dubbelzien of spraakproblemen?"
+      },
+      {
+        "id": 78,
+        "symptomId": 42,
+        "question_text": "Heeft u zwakte of verlamming aan een kant van het lichaam?"
+      },
+      {
+        "id": 79,
+        "symptomId": 43,
+        "question_text": "Is het dubbelzien plotseling ontstaan?"
+      },
+      {
+        "id": 80,
+        "symptomId": 43,
+        "question_text": "Heeft u moeite met spreken, lopen of evenwicht?"
+      },
+      {
+        "id": 81,
+        "symptomId": 43,
+        "question_text": "Is er sprake van gezichtsverlies?"
+      },
+      {
+        "id": 82,
+        "symptomId": 44,
+        "question_text": "Heeft u plotseling verlies van gezichtsvermogen?"
+      },
+      {
+        "id": 83,
+        "symptomId": 44,
+        "question_text": "Heeft u hevige pijn in het oog?"
+      },
+      {
+        "id": 84,
+        "symptomId": 44,
+        "question_text": "Heeft u pus of afscheiding uit het oog?"
+      },
+      {
+        "id": 85,
+        "symptomId": 45,
+        "question_text": "Heeft u hevige pijn of zwelling?"
+      },
+      {
+        "id": 86,
+        "symptomId": 45,
+        "question_text": "Is er een infectie zichtbaar?"
+      },
+      {
+        "id": 87,
+        "symptomId": 45,
+        "question_text": "Heeft u koorts of algemene malaise?"
+      },
+      {
+        "id": 88,
+        "symptomId": 46,
+        "question_text": "Heeft u pijnlijke zweren of bloedingen in de mond?"
+      },
+      {
+        "id": 89,
+        "symptomId": 46,
+        "question_text": "Heeft u hoge koorts of vermoeidheid?"
+      },
+      {
+        "id": 90,
+        "symptomId": 46,
+        "question_text": "Heeft u problemen met ademhalen?"
+      },
+      {
+        "id": 91,
+        "symptomId": 47,
+        "question_text": "Kunt u helemaal niet slikken of verslikt u zich vaak?"
+      },
+      {
+        "id": 92,
+        "symptomId": 47,
+        "question_text": "Heeft u pijn op de borst tijdens het slikken?"
+      },
+      {
+        "id": 93,
+        "symptomId": 47,
+        "question_text": "Heeft u gewichtsverlies of uitdroging?"
+      },
+      {
+        "id": 94,
+        "symptomId": 48,
+        "question_text": "Heeft u hevige pijn met koorts of zwelling rond het oor?"
+      },
+      {
+        "id": 95,
+        "symptomId": 48,
+        "question_text": "Komt er pus of bloed uit het oor?"
+      },
+      {
+        "id": 96,
+        "symptomId": 48,
+        "question_text": "Heeft u plotseling gehoorverlies?"
+      },
+      {
+        "id": 97,
+        "symptomId": 49,
+        "question_text": "Heeft u hartkloppingen met pijn op de borst of flauwvallen?"
+      },
+      {
+        "id": 98,
+        "symptomId": 49,
+        "question_text": "Heeft u ademhalingsproblemen of zwakte?"
+      },
+      {
+        "id": 99,
+        "symptomId": 49,
+        "question_text": "Heeft u een snelle hartslag die niet stopt?"
+      },
+      {
+        "id": 100,
+        "symptomId": 50,
+        "question_text": "Heeft u pijn of bloed bij ejaculatie?"
+      },
+      {
+        "id": 101,
+        "symptomId": 50,
+        "question_text": "Kunt u helemaal niet ejaculeren?"
+      },
+      {
+        "id": 102,
+        "symptomId": 50,
+        "question_text": "Heeft u problemen met plassen of erectie?"
+      },
+      {
+        "id": 103,
+        "symptomId": 51,
+        "question_text": "Heeft u pijn of kromming van de penis bij een erectie?"
+      },
+      {
+        "id": 104,
+        "symptomId": 51,
+        "question_text": "Heeft u plotselinge erectieproblemen zonder duidelijke reden?"
+      },
+      {
+        "id": 105,
+        "symptomId": 51,
+        "question_text": "Heeft u symptomen van een onderliggende ziekte zoals hartklachten?"
+      },
+      {
+        "id": 106,
+        "symptomId": 52,
+        "question_text": "Heeft u plotseling beven met spierzwakte of spraakproblemen?"
+      },
+      {
+        "id": 107,
+        "symptomId": 52,
+        "question_text": "Heeft u andere neurologische klachten zoals stijfheid of trage bewegingen?"
+      },
+      {
+        "id": 108,
+        "symptomId": 52,
+        "question_text": "Beïnvloedt het beven uw dagelijkse activiteiten?"
+      },
+      {
+        "id": 109,
+        "symptomId": 53,
+        "question_text": "Valt u plotseling in slaap overdag?"
+      },
+      {
+        "id": 110,
+        "symptomId": 53,
+        "question_text": "Heeft u verwardheid of bewustzijnsverlies?"
+      },
+      {
+        "id": 111,
+        "symptomId": 53,
+        "question_text": "Heeft u ernstige vermoeidheid die plotseling begon?"
+      },
+      {
+        "id": 112,
+        "symptomId": 54,
+        "question_text": "Heeft u plotselinge haargroei samen met andere hormonale symptomen?"
+      },
+      {
+        "id": 113,
+        "symptomId": 54,
+        "question_text": "Heeft u pijnlijke of snel groeiende gezwellen?"
+      },
+      {
+        "id": 114,
+        "symptomId": 54,
+        "question_text": "Heeft u een diepe stemverandering of spiergroei?"
+      },
+      {
+        "id": 115,
+        "symptomId": 55,
+        "question_text": "Begon het zweten plotseling zonder reden?"
+      },
+      {
+        "id": 116,
+        "symptomId": 55,
+        "question_text": "Gaat het gepaard met pijn op de borst of hartkloppingen?"
+      },
+      {
+        "id": 117,
+        "symptomId": 55,
+        "question_text": "Heeft u nachtzweten met gewichtsverlies?"
+      },
+      {
+        "id": 118,
+        "symptomId": 56,
+        "question_text": "Heeft u extreme dorst met misselijkheid of ademhalingsproblemen?"
+      },
+      {
+        "id": 119,
+        "symptomId": 56,
+        "question_text": "Heeft u tekenen van uitdroging zoals droge mond of duizeligheid?"
+      },
+      {
+        "id": 120,
+        "symptomId": 56,
+        "question_text": "Heeft u plotselinge verwardheid of zwakte?"
+      },
+      {
+        "id": 121,
+        "symptomId": 57,
+        "question_text": "Ziet u een donkere schaduw of sluier in uw gezichtsveld?"
+      },
+      {
+        "id": 122,
+        "symptomId": 57,
+        "question_text": "Heeft u plotseling verlies van gezichtsvermogen?"
+      },
+      {
+        "id": 123,
+        "symptomId": 57,
+        "question_text": "Heeft u ernstige pijn in of rond het oog?"
+      },
+      {
+        "id": 124,
+        "symptomId": 58,
+        "question_text": "Is het ooglid ernstig gezwollen of rood?"
+      },
+      {
+        "id": 125,
+        "symptomId": 58,
+        "question_text": "Heeft u koorts of pus uit het oog?"
+      },
+      {
+        "id": 126,
+        "symptomId": 58,
+        "question_text": "Heeft u problemen met het openen van het oog?"
+      },
+      {
+        "id": 127,
+        "symptomId": 59,
+        "question_text": "Bent u niet snel bij bewustzijn gekomen na het flauwvallen?"
+      },
+      {
+        "id": 128,
+        "symptomId": 59,
+        "question_text": "Had u pijn op de borst of kortademigheid tijdens het flauwvallen?"
+      },
+      {
+        "id": 129,
+        "symptomId": 59,
+        "question_text": "Heeft u hoofdletsel opgelopen tijdens het flauwvallen?"
+      },
+      {
+        "id": 130,
+        "symptomId": 60,
+        "question_text": "Heeft u bloed in het braaksel gezien?"
+      },
+      {
+        "id": 131,
+        "symptomId": 60,
+        "question_text": "Heeft u ernstige buikpijn naast de misselijkheid?"
+      },
+      {
+        "id": 132,
+        "symptomId": 60,
+        "question_text": "Voelt u zich erg zwak of uitgedroogd door het braken?"
+      },
+      {
+        "id": 133,
+        "symptomId": 61,
+        "question_text": "Heeft u een temperatuur boven 39 °C die niet daalt?"
+      },
+      {
+        "id": 134,
+        "symptomId": 61,
+        "question_text": "Heeft u een stijve nek of huiduitslag gekregen?"
+      },
+      {
+        "id": 135,
+        "symptomId": 61,
+        "question_text": "Bent u erg verward of buiten bewustzijn geraakt?"
+      },
+      {
+        "id": 136,
+        "symptomId": 62,
+        "question_text": "Is uw kind jonger dan 3 maanden en heeft het koorts van 38 °C of hoger?"
+      },
+      {
+        "id": 137,
+        "symptomId": 62,
+        "question_text": "Is uw kind suf of reageert het niet goed?"
+      },
+      {
+        "id": 138,
+        "symptomId": 62,
+        "question_text": "Heeft uw kind een huiduitslag die niet wegdrukt bij aanraken?"
+      },
+      {
+        "id": 139,
+        "symptomId": 63,
+        "question_text": "Heeft u plotseling hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 140,
+        "symptomId": 63,
+        "question_text": "Zijn uw vingers blauw of gevoelloos geworden?"
+      },
+      {
+        "id": 141,
+        "symptomId": 63,
+        "question_text": "Is er sprake van pus of koorts bij een wond aan de hand?"
+      },
+      {
+        "id": 142,
+        "symptomId": 64,
+        "question_text": "Heeft u de voet ernstig bezeerd of gekneusd?"
+      },
+      {
+        "id": 143,
+        "symptomId": 64,
+        "question_text": "Kunt u niet meer op de voet staan?"
+      },
+      {
+        "id": 144,
+        "symptomId": 64,
+        "question_text": "Is de voet rood, warm en gezwollen met koorts?"
+      },
+      {
+        "id": 145,
+        "symptomId": 65,
+        "question_text": "Heeft de aanval langer dan 5 minuten geduurd?"
+      },
+      {
+        "id": 146,
+        "symptomId": 65,
+        "question_text": "Had de persoon moeite met ademhalen tijdens de aanval?"
+      },
+      {
+        "id": 147,
+        "symptomId": 65,
+        "question_text": "Is de persoon niet volledig hersteld na de aanval?"
+      },
+      {
+        "id": 148,
+        "symptomId": 66,
+        "question_text": "Kunt u niet op de hiel staan of lopen?"
+      },
+      {
+        "id": 149,
+        "symptomId": 66,
+        "question_text": "Is de hiel rood, gezwollen of warm?"
+      },
+      {
+        "id": 150,
+        "symptomId": 66,
+        "question_text": "Heeft u koorts bij de hielpijn?"
+      },
+      {
+        "id": 151,
+        "symptomId": 67,
+        "question_text": "Is de teen ernstig gezwollen of etterend?"
+      },
+      {
+        "id": 152,
+        "symptomId": 67,
+        "question_text": "Is er sprake van hevige pijn of koorts?"
+      },
+      {
+        "id": 153,
+        "symptomId": 67,
+        "question_text": "Is de teen blauw of zwart verkleurd?"
+      },
+      {
+        "id": 154,
+        "symptomId": 68,
+        "question_text": "Heeft u een ongeluk gehad met de voet?"
+      },
+      {
+        "id": 155,
+        "symptomId": 68,
+        "question_text": "Kunt u niet op de voet staan of lopen?"
+      },
+      {
+        "id": 156,
+        "symptomId": 68,
+        "question_text": "Is de voet rood en warm met koorts?"
+      },
+      {
+        "id": 157,
+        "symptomId": 69,
+        "question_text": "Kunt u helemaal niet meer op de voet staan?"
+      },
+      {
+        "id": 158,
+        "symptomId": 69,
+        "question_text": "Is er sprake van hevige zwelling of roodheid?"
+      },
+      {
+        "id": 159,
+        "symptomId": 69,
+        "question_text": "Heeft u koorts of koude rillingen bij de pijn?"
+      },
+      {
+        "id": 160,
+        "symptomId": 70,
+        "question_text": "Kunt u niet meer normaal lopen?"
+      },
+      {
+        "id": 161,
+        "symptomId": 70,
+        "question_text": "Is er sprake van zwelling of koorts?"
+      },
+      {
+        "id": 162,
+        "symptomId": 70,
+        "question_text": "Is de pijn plotseling en hevig begonnen?"
+      },
+      {
+        "id": 163,
+        "symptomId": 71,
+        "question_text": "Verliest u plotseling grote hoeveelheden haar?"
+      },
+      {
+        "id": 164,
+        "symptomId": 71,
+        "question_text": "Heeft u ook huiduitslag of pijn op de hoofdhuid?"
+      },
+      {
+        "id": 165,
+        "symptomId": 71,
+        "question_text": "Gebeurde de haaruitval na een nieuw medicijn?"
+      },
+      {
+        "id": 166,
+        "symptomId": 72,
+        "question_text": "Voelt u zich angstig of onveilig door de hallucinaties?"
+      },
+      {
+        "id": 167,
+        "symptomId": 72,
+        "question_text": "Denkt u eraan uzelf of iemand anders pijn te doen?"
+      },
+      {
+        "id": 168,
+        "symptomId": 72,
+        "question_text": "Heeft u plotseling nieuwe hallucinaties gekregen?"
+      },
+      {
+        "id": 169,
+        "symptomId": 73,
+        "question_text": "Is de hand rood, gezwollen en warm?"
+      },
+      {
+        "id": 170,
+        "symptomId": 73,
+        "question_text": "Kunt u uw hand of vingers niet bewegen?"
+      },
+      {
+        "id": 171,
+        "symptomId": 73,
+        "question_text": "Heeft u hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 172,
+        "symptomId": 74,
+        "question_text": "Heeft u plotseling hevige hoofdpijn gekregen?"
+      },
+      {
+        "id": 173,
+        "symptomId": 74,
+        "question_text": "Heeft u een stijve nek of zichtproblemen?"
+      },
+      {
+        "id": 174,
+        "symptomId": 74,
+        "question_text": "Voelt u zich verward of misselijk bij de hoofdpijn?"
+      },
+      {
+        "id": 175,
+        "symptomId": 75,
+        "question_text": "Heeft u plotseling extreem bloedverlies?"
+      },
+      {
+        "id": 176,
+        "symptomId": 75,
+        "question_text": "Heeft u hevige buikpijn tijdens de menstruatie?"
+      },
+      {
+        "id": 177,
+        "symptomId": 75,
+        "question_text": "Voelt u zich erg zwak of duizelig door het bloedverlies?"
+      },
+      {
+        "id": 178,
+        "symptom_id": 76,
+        "question": "Heeft u moeite met ademhalen door de hikken?"
+      },
+      {
+        "id": 179,
+        "symptom_id": 76,
+        "question": "Heeft u pijn op de borst tijdens de hikken?"
+      },
+      {
+        "id": 180,
+        "symptom_id": 76,
+        "question": "Heeft u de hik gekregen na een operatie of verwonding?"
+      },
+      {
+        "id": 181,
+        "symptom_id": 77,
+        "question": "Heeft u hevige pijn na een val of ongeluk?"
+      },
+      {
+        "id": 182,
+        "symptom_id": 77,
+        "question": "Kunt u niet meer op het been staan?"
+      },
+      {
+        "id": 183,
+        "symptom_id": 77,
+        "question": "Is de heup rood, warm of gezwollen?"
+      },
+      {
+        "id": 184,
+        "symptom_id": 78,
+        "question": "Heeft het kind koorts bij de heuppijn?"
+      },
+      {
+        "id": 185,
+        "symptom_id": 78,
+        "question": "Kan het kind niet meer lopen?"
+      },
+      {
+        "id": 186,
+        "symptom_id": 78,
+        "question": "Is de heup rood of gezwollen?"
+      },
+      {
+        "id": 187,
+        "symptom_id": 79,
+        "question": "Heeft u zwelling van lippen of keel?"
+      },
+      {
+        "id": 188,
+        "symptom_id": 79,
+        "question": "Heeft u moeite met ademhalen?"
+      },
+      {
+        "id": 189,
+        "symptom_id": 79,
+        "question": "Is de uitslag plotseling ernstig toegenomen?"
+      },
+      {
+        "id": 190,
+        "symptom_id": 80,
+        "question": "Heeft u bloed bij de ontlasting?"
+      },
+      {
+        "id": 191,
+        "symptom_id": 80,
+        "question": "Heeft u ernstige buikpijn of koorts?"
+      },
+      {
+        "id": 192,
+        "symptom_id": 80,
+        "question": "Zijn er ook klachten bij andere gezinsleden?"
+      },
+      {
+        "id": 193,
+        "symptom_id": 81,
+        "question": "Kunt u helemaal niet meer ophouden met plassen of verliest u veel urine ineens?"
+      },
+      {
+        "id": 194,
+        "symptom_id": 81,
+        "question": "Heeft u pijn of branderig gevoel bij het plassen?"
+      },
+      {
+        "id": 195,
+        "symptom_id": 81,
+        "question": "Heeft u koorts of bloed in de urine?"
+      },
+      {
+        "id": 196,
+        "symptom_id": 82,
+        "question": "Heeft u zwart of teerachtige ontlasting?"
+      },
+      {
+        "id": 197,
+        "symptom_id": 82,
+        "question": "Heeft u hevige pijn in de buik die niet weggaat?"
+      },
+      {
+        "id": 198,
+        "symptom_id": 82,
+        "question": "Heeft u moeite met slikken of gewichtsverlies?"
+      },
+      {
+        "id": 199,
+        "symptom_id": 83,
+        "question": "Lijdt u aan ernstige vermoeidheid met valpartijen of geheugenproblemen?"
+      },
+      {
+        "id": 200,
+        "symptom_id": 83,
+        "question": "Heeft u hallucinaties of verwardheid door het gebrek aan slaap?"
+      },
+      {
+        "id": 201,
+        "symptom_id": 83,
+        "question": "Gebruikt u medicijnen die uw slaap ernstig verstoren?"
+      },
+      {
+        "id": 202,
+        "symptom_id": 84,
+        "question": "Heeft u hevig bloedverlies of stolsels buiten de menstruatie?"
+      },
+      {
+        "id": 203,
+        "symptom_id": 84,
+        "question": "Heeft u pijn in de onderbuik met koorts tijdens de menstruatie?"
+      },
+      {
+        "id": 204,
+        "symptom_id": 84,
+        "question": "Bent u onverwacht zwanger of vermoedt u dat?"
+      },
+      {
+        "id": 205,
+        "symptom_id": 85,
+        "question": "Heeft u jeuk met koorts of gezwollen lymfeklieren?"
+      },
+      {
+        "id": 206,
+        "symptom_id": 85,
+        "question": "Heeft u ademhalingsproblemen of zwelling van lippen/keel bij de jeuk?"
+      },
+      {
+        "id": 207,
+        "symptom_id": 85,
+        "question": "Heeft u tekenen van lever- of nierproblemen (gele huid, weinig urine)?"
+      },
+      {
+        "id": 208,
+        "symptom_id": 86,
+        "question": "Is de gewrichtspijn plotseling begonnen na een verwonding?"
+      },
+      {
+        "id": 209,
+        "symptom_id": 86,
+        "question": "Is het gewricht rood, gezwollen en zeer warm?"
+      },
+      {
+        "id": 210,
+        "symptom_id": 86,
+        "question": "Heeft u koorts bij de gewrichtspijn?"
+      },
+      {
+        "id": 211,
+        "symptom_id": 87,
+        "question": "Kunt u de knie nauwelijks belasten of ligt u met zware pijn op de grond?"
+      },
+      {
+        "id": 212,
+        "symptom_id": 87,
+        "question": "Is de knie duidelijk misvormd of scheef gaan staan?"
+      },
+      {
+        "id": 213,
+        "symptom_id": 87,
+        "question": "Heeft u plotseling knie­zwelling met koorts?"
+      },
+      {
+        "id": 214,
+        "symptom_id": 88,
+        "question": "Heeft u een been­kramp die niet weggaat of zeer hevig is?"
+      },
+      {
+        "id": 215,
+        "symptom_id": 88,
+        "question": "Is er sprake van zwelling, roodheid of warmte in het been?"
+      },
+      {
+        "id": 216,
+        "symptom_id": 88,
+        "question": "Heeft u pijn in het been met kortademigheid of borstpijn?"
+      },
+      {
+        "id": 217,
+        "symptom_id": 89,
+        "question": "Kan uw kind helemaal niet meer lopen?"
+      },
+      {
+        "id": 218,
+        "symptom_id": 89,
+        "question": "Heeft uw kind koorts of is de heup zichtbaar gezwollen?"
+      },
+      {
+        "id": 219,
+        "symptom_id": 89,
+        "question": "Heeft uw kind ernstige pijn die het huilen of slapen belemmert?"
+      },
+      {
+        "id": 220,
+        "symptom_id": 90,
+        "question": "Draagt u gedachten over uzelf pijn doen of zelfmoord?"
+      },
+      {
+        "id": 221,
+        "symptom_id": 90,
+        "question": "Heeft u ernstige veranderingen in uw stemming of gedrag in korte tijd?"
+      },
+      {
+        "id": 222,
+        "symptom_id": 90,
+        "question": "Voelt u zich zeer angstig of onveilig door uw gedachten?"
+      },
+      {
+        "id": 223,
+        "symptom_id": 91,
+        "question": "Heeft u verlies van libido ineens en in combinatie met andere symptomen?"
+      },
+      {
+        "id": 224,
+        "symptom_id": 91,
+        "question": "Heeft u pijn of bloedverlies bij of na de seks?"
+      },
+      {
+        "id": 225,
+        "symptom_id": 91,
+        "question": "Heeft u onverwachte hormonale klachten zoals borstvorming of stemverandering?"
+      },
+      {
+        "id": 226,
+        "symptom_id": 92,
+        "question": "Heeft u bloed of vocht uit de bult?"
+      },
+      {
+        "id": 227,
+        "symptom_id": 92,
+        "question": "Is de bult zeer hard, snel gegroeid of pijnlijk?"
+      },
+      {
+        "id": 228,
+        "symptom_id": 92,
+        "question": "Zijn er meerdere bulten in korte tijd ontstaan?"
+      },
+      {
+        "id": 229,
+        "symptom_id": 93,
+        "question": "Heeft u zeer hevige pijn buiten uw menstruatie?"
+      },
+      {
+        "id": 230,
+        "symptom_id": 93,
+        "question": "Is er veel bloedverlies of stolsels buiten de normale cyclus?"
+      },
+      {
+        "id": 231,
+        "symptom_id": 93,
+        "question": "Bent u jong en plotselinge hevige pijn krijgen met koorts?"
+      },
+      {
+        "id": 232,
+        "symptom_id": 94,
+        "question": "Is er sprake van hevig bloedverlies na een gemiste menstruatie?"
+      },
+      {
+        "id": 233,
+        "symptom_id": 94,
+        "question": "Voelt u zich zeer zwak of duizelig?"
+      },
+      {
+        "id": 234,
+        "symptom_id": 94,
+        "question": "Heeft u pijn in de onderbuik of koorts bij het uitblijven van uw menstruatie?"
+      },
+      {
+        "id": 235,
+        "symptom_id": 95,
+        "question": "Heeft u de metaalachtige smaak gecombineerd met bloed in de mond of tandvleesbloeding?"
+      },
+      {
+        "id": 236,
+        "symptom_id": 95,
+        "question": "Heeft u plots verlies van smaak of geur?"
+      },
+      {
+        "id": 237,
+        "symptom_id": 95,
+        "question": "Is er sprake van nieuwe medicatie‐ of chemo-/radiotherapie?"
+      },
+      {
+        "id": 238,
+        "symptom_id": 96,
+        "question": "Is er een nagel die plotseling volledig is losgeraakt of is er sprake van ettering?"
+      },
+      {
+        "id": 239,
+        "symptom_id": 96,
+        "question": "Heeft u een gekleurde vlek onder de nagel (zwart/bruin) die snel groeit?"
+      },
+      {
+        "id": 240,
+        "symptom_id": 96,
+        "question": "Heeft u een chronische ziekte zoals diabetes en ernstige nagel- of voetaandoeningen?"
+      },
+      {
+        "id": 241,
+        "symptom_id": 97,
+        "question": "Heeft u nekpijn gecombineerd met uitval van armen of benen?"
+      },
+      {
+        "id": 242,
+        "symptom_id": 97,
+        "question": "Heeft u plotseling hevige nekpijn na een ongeluk of val?"
+      },
+      {
+        "id": 243,
+        "symptom_id": 97,
+        "question": "Heeft u dubbelzien, koorts of bewustzijnsverlies bij de nekpijn?"
+      },
+      {
+        "id": 244,
+        "symptom_id": 98,
+        "question": "Heeft u nachtzweten in combinatie met koorts of gezwollen lymfeklieren?"
+      },
+      {
+        "id": 245,
+        "symptom_id": 98,
+        "question": "Heeft u nachtzweten plus onverklaard gewichtsverlies of hevige vermoeidheid?"
+      },
+      {
+        "id": 246,
+        "symptom_id": 98,
+        "question": "Heeft u een ernstige ziekte zoals kanker of hiv en nieuwe nachtzweten gekregen?"
+      },
+      {
+        "id": 247,
+        "symptom_id": 99,
+        "question": "Is de afscheiding bloederig of bruin/rood gekleurd?"
+      },
+      {
+        "id": 248,
+        "symptom_id": 99,
+        "question": "Heeft u tevens een knobbeltje in de borst of huidintrekking rond de tepel?"
+      },
+      {
+        "id": 249,
+        "symptom_id": 99,
+        "question": "Heeft u onverklaard gewichtsverlies of pijnlijke borst met de afscheiding?"
+      },
+      {
+        "id": 250,
+        "symptom_id": 100,
+        "question": "Heeft u hevige pijn met misselijkheid of koorts tijdens de eisprong?"
+      },
+      {
+        "id": 251,
+        "symptom_id": 100,
+        "question": "Heeft u pijn aan één kant die snel verergert of gepaard gaat met bloedverlies?"
+      },
+      {
+        "id": 252,
+        "symptom_id": 100,
+        "question": "Bent u zwanger of vermoedt u dat de pijn mogelijk door een buitenbaarmoederlijke zwangerschap komt?"
+      },
+      {
+        "id": 253,
+        "symptom_id": 101,
+        "question": "Heeft u plotselinge hevige pijn in de testikel of balzak?"
+      },
+      {
+        "id": 254,
+        "symptom_id": 101,
+        "question": "Is de testikel flink gezwollen of blauw verkleurd?"
+      },
+      {
+        "id": 255,
+        "symptom_id": 101,
+        "question": "Heeft u koorts of kinkers (nausea) bij de testikelpijn?"
+      },
+      {
+        "id": 256,
+        "symptom_id": 102,
+        "question": "Heeft u pijn die plots is begonnen na een val of ongeluk?"
+      },
+      {
+        "id": 257,
+        "symptom_id": 102,
+        "question": "Heeft u verlamming of gevoelloosheid in de hand of vingers?"
+      },
+      {
+        "id": 258,
+        "symptom_id": 102,
+        "question": "Is de hand rood, warm of gezwollen met koorts?"
+      },
+      {
+        "id": 259,
+        "symptom_id": 103,
+        "question": "Heeft u plotseling verlies van kracht of grip in de hand?"
+      },
+      {
+        "id": 260,
+        "symptom_id": 103,
+        "question": "Heeft u een zwelling of misvorming van de hand of pols?"
+      },
+      {
+        "id": 261,
+        "symptom_id": 103,
+        "question": "Heeft u koorts of roodheid bij de pijn?"
+      },
+      {
+        "id": 262,
+        "symptom_id": 104,
+        "question": "Heeft u plotseling krachtsverlies in een arm, been of gezicht?"
+      },
+      {
+        "id": 263,
+        "symptom_id": 104,
+        "question": "Heeft u moeite met spreken of begrijpen, of scheve mond?"
+      },
+      {
+        "id": 264,
+        "symptom_id": 104,
+        "question": "Denkt u dat u een beroerte of ernstige neurologische aandoening heeft?"
+      },
+      {
+        "id": 265,
+        "symptom_id": 105,
+        "question": "Heeft u hevige bekkenpijn met koorts of misselijkheid?"
+      },
+      {
+        "id": 266,
+        "symptom_id": 105,
+        "question": "Is de pijn zo sterk dat u niet kunt lopen of zitten?"
+      },
+      {
+        "id": 267,
+        "symptom_id": 105,
+        "question": "Heeft u zwangerschap of vermoedt u een ectopische zwangerschap?"
+      },
+      {
+        "id": 268,
+        "symptom_id": 106,
+        "question": "Heeft u knobbels of plekjes die bloeden of zeer snel groeien?"
+      },
+      {
+        "id": 269,
+        "symptom_id": 106,
+        "question": "Heeft u pijn of zwelling van de penis of balzak?"
+      },
+      {
+        "id": 270,
+        "symptom_id": 106,
+        "question": "Heeft u koorts of algemeen ziek voelend te maken met deze plekjes?"
+      },
+      {
+        "id": 271,
+        "symptom_id": 107,
+        "question": "Heeft u plotselinge tintelingen met krachtsverlies of moeilijk spreken?"
+      },
+      {
+        "id": 272,
+        "symptom_id": 107,
+        "question": "Heeft u een gevoel alsof u verlamd raakt in een deel van uw lichaam?"
+      },
+      {
+        "id": 273,
+        "symptom_id": 107,
+        "question": "Denkt u dat u mogelijk een beroerte of ernstige neurologische aandoening heeft?"
+      },
+      {
+        "id": 274,
+        "symptom_id": 108,
+        "question": "Is de erectie zeer pijnlijk en onverminderd na 4 uur?"
+      },
+      {
+        "id": 275,
+        "symptom_id": 108,
+        "question": "Heeft u achteruitgang in het zicht of functioneren van de penis door de erectie?"
+      },
+      {
+        "id": 276,
+        "symptom_id": 108,
+        "question": "Heeft u een aandoening zoals sikkelcelziekte of medicatie hiervoor gekregen?"
+      },
+      {
+        "id": 277,
+        "symptom_id": 109,
+        "question": "Heeft uw kind een uitslag die niet vervaagt als je er een glas op drukt?"
+      },
+      {
+        "id": 278,
+        "symptom_id": 109,
+        "question": "Is uw kind moeilijk te wekken, erg suf of ademt het heel snel?"
+      },
+      {
+        "id": 279,
+        "symptom_id": 109,
+        "question": "Is de huid of lippen blauwachtig, grauw of zeer bleek?"
+      },
+      {
+        "id": 280,
+        "symptom_id": 110,
+        "question": "Heeft u plotseling verlies van zicht of een donker vlekje in het oog?"
+      },
+      {
+        "id": 281,
+        "symptom_id": 110,
+        "question": "Is het oog zeer pijnlijk of is het gezichtszenuw aangetast?"
+      },
+      {
+        "id": 282,
+        "symptom_id": 110,
+        "question": "Heeft u hevige roodheid, zwelling rond het oog of koorts?"
+      },
+      {
+        "id": 283,
+        "symptom_id": 111,
+        "question": "Heeft u ernstige kortademigheid met moeite om te praten of te ademen?"
+      },
+      {
+        "id": 284,
+        "symptom_id": 111,
+        "question": "Zijn uw lippen of vingertoppen blauw of paars kleuren?"
+      },
+      {
+        "id": 285,
+        "symptom_id": 111,
+        "question": "Heeft u pijn op de borst met de kortademigheid?"
+      },
+      {
+        "id": 286,
+        "symptom_id": 112,
+        "question": "Heeft u pijn die plots is ontstaan na een val of ongeluk?"
+      },
+      {
+        "id": 287,
+        "symptom_id": 112,
+        "question": "Is er een zichtbare misvorming of plotseling krachtverlies?"
+      },
+      {
+        "id": 288,
+        "symptom_id": 112,
+        "question": "Heeft u pijn in de schouder met zwelling, roodheid of koorts?"
+      },
+      {
+        "id": 289,
+        "symptom_id": 113,
+        "question": "Heeft u een geur die gepaard gaat met pus of wondjes?"
+      },
+      {
+        "id": 290,
+        "symptom_id": 113,
+        "question": "Is er een hardnekkige schimmelinfectie die niet reageert op vrij verkrijgbare middelen?"
+      },
+      {
+        "id": 291,
+        "symptom_id": 113,
+        "question": "Heeft u naast de geur ook hevige pijn of zwelling?"
+      },
+      {
+        "id": 292,
+        "symptom_id": 114,
+        "question": "Heeft u sterke urinegeur met koorts of pijn in de zij of onderrug?"
+      },
+      {
+        "id": 293,
+        "symptom_id": 114,
+        "question": "Ziet u bloed in de urine?"
+      },
+      {
+        "id": 294,
+        "symptom_id": 114,
+        "question": "Heeft u een nierziekte of wordt u behandeld voor een urinair probleem?"
+      },
+      {
+        "id": 295,
+        "symptom_id": 115,
+        "question": "Heeft u snurken met meer dan 10 seconden ophouden met ademhalen?"
+      },
+      {
+        "id": 296,
+        "symptom_id": 115,
+        "question": "Wordt u ’s nachts wakker met verstikkingsgevoel of paniek?"
+      },
+      {
+        "id": 297,
+        "symptom_id": 115,
+        "question": "Heeft u hart- of longziekten en nieuw snurken gekregen?"
+      },
+      {
+        "id": 298,
+        "symptom_id": 116,
+        "question": "Heeft uw kind poep in de broek met bijkomende buikpijn of koorts?"
+      },
+      {
+        "id": 299,
+        "symptom_id": 116,
+        "question": "Heeft uw kind neurologische problemen of aangeboren afwijkingen?"
+      },
+      {
+        "id": 300,
+        "symptom_id": 116,
+        "question": "Is de ontlasting zeer los of witachtig?"
+      },
+      {
+        "id": 301,
+        "symptom_id": 117,
+        "question": "Heeft u witte plekken samen met diarree of hevige vermoeidheid?"
+      },
+      {
+        "id": 302,
+        "symptom_id": 117,
+        "question": "Heeft u slikproblemen of moeite met ademhalen?"
+      },
+      {
+        "id": 303,
+        "symptom_id": 117,
+        "question": "Heeft u een verzwakt immuunsysteem of jonge leeftijd (< 1 jaar)?"
+      },
+      {
+        "id": 304,
+        "symptom_id": 118,
+        "question": "Heeft u keelpijn met moeite bij open mond, slikken of ademhalen?"
+      },
+      {
+        "id": 305,
+        "symptom_id": 118,
+        "question": "Heeft u zeer hoge koorts of beurs aan de hals met stijfheid?"
+      },
+      {
+        "id": 306,
+        "symptom_id": 118,
+        "question": "Tong of lippen blauw/paars kleurig bij de keelpijn?"
+      },
+      {
+        "id": 307,
+        "symptom_id": 119,
+        "question": "Heeft u scherpe, hevige buikpijn die plots begon?"
+      },
+      {
+        "id": 308,
+        "symptom_id": 119,
+        "question": "Is er bloed of zwarte ontlasting?"
+      },
+      {
+        "id": 309,
+        "symptom_id": 119,
+        "question": "Heeft u braken met uitdroging of tekenen van shock?"
+      },
+      {
+        "id": 310,
+        "symptom_id": 120,
+        "question": "Zijn de strepen gepaard aan huidverharding of pijn?"
+      },
+      {
+        "id": 311,
+        "symptom_id": 120,
+        "question": "Heeft u hormonale of bijnierproblemen die met dit ontstaan kunnen samenhangen?"
+      },
+      {
+        "id": 312,
+        "symptom_id": 120,
+        "question": "Zijn er andere huidafwijkingen of bloedwaarden afwijkend?"
+      },
+      {
+        "id": 313,
+        "symptom_id": 121,
+        "question": "Heeft u plotseling zwelling met pijn of roodheid in de arm/hand?"
+      },
+      {
+        "id": 314,
+        "symptom_id": 121,
+        "question": "Is er eenzijdige zwelling gecombineerd met kortademigheid of pijn op de borst?"
+      },
+      {
+        "id": 315,
+        "symptom_id": 121,
+        "question": "Heeft u bekende hart- of nierziekten die plots verergerd zijn?"
+      },
+      {
+        "id": 316,
+        "symptom_id": 122,
+        "question": "Is de zwelling zeer hard, vergroot snel of blijft groeien?"
+      },
+      {
+        "id": 317,
+        "symptom_id": 122,
+        "question": "Heeft u koorts zonder duidelijke oorzaak of nachtzweten?"
+      },
+      {
+        "id": 318,
+        "symptom_id": 122,
+        "question": "Is er gewichtsverlies of vermoeidheid in combinatie met de zwelling?"
+      },
+      {
+        "id": 319,
+        "symptom_id": 123,
+        "question": "Heeft u plotseling hevige pijn in de testikel of balzak?"
+      },
+      {
+        "id": 320,
+        "symptom_id": 123,
+        "question": "Is de testikel heel hard of blauw verkleurd?"
+      },
+      {
+        "id": 321,
+        "symptom_id": 123,
+        "question": "Heeft u koorts of misselijkheid bij de zwelling?"
+      },
+      {
+        "id": 322,
+        "symptom_id": 124,
+        "question": "Heeft u plots verlies van beweeglijkheid in de duim?"
+      },
+      {
+        "id": 323,
+        "symptom_id": 124,
+        "question": "Is er een zichtbare misvorming of grote zwelling?"
+      },
+      {
+        "id": 324,
+        "symptom_id": 124,
+        "question": "Heeft u scherpe pijn met koorts of roodheid?"
+      },
+      {
+        "id": 325,
+        "symptom_id": 125,
+        "question": "Is de tinnitus plots begonnen na een hoofd- of oorletsel?"
+      },
+      {
+        "id": 326,
+        "symptom_id": 125,
+        "question": "Is er plots oorverlies of scheef gezicht?"
+      },
+      {
+        "id": 327,
+        "symptom_id": 125,
+        "question": "Heeft u heftige pijn of afscheiding uit het oor?"
+      },
+      {
+        "id": 328,
+        "symptom_id": 126,
+        "question": "Heeft u plotseling veel vermoeidheid met gewichtsverlies of nachtzweten?"
+      },
+      {
+        "id": 329,
+        "symptom_id": 126,
+        "question": "Heeft u hart- of longklachten met de vermoeidheid?"
+      },
+      {
+        "id": 330,
+        "symptom_id": 126,
+        "question": "Heeft u bloedarmoede of schildklierproblemen zonder behandeling?"
+      },
+      {
+        "id": 331,
+        "symptom_id": 127,
+        "question": "Heeft u hevige pijn of bloeding?"
+      },
+      {
+        "id": 332,
+        "symptom_id": 127,
+        "question": "Heeft u koorts of andere tekenen van infectie?"
+      },
+      {
+        "id": 333,
+        "symptom_id": 127,
+        "question": "Is er sprake van een plotselinge zwelling of roodheid?"
+      },
+      {
+        "id": 334,
+        "symptom_id": 128,
+        "question": "Heeft u plotseling volledig gezichtsverlies?"
+      },
+      {
+        "id": 335,
+        "symptom_id": 128,
+        "question": "Heeft u dubbelzien of ernstige wazigheid?"
+      },
+      {
+        "id": 336,
+        "symptom_id": 128,
+        "question": "Heeft u pijn of roodheid in het oog?"
+      },
+      {
+        "id": 337,
+        "symptom_id": 129,
+        "question": "Heeft u hevige bloeding met duizeligheid of flauwvallen?"
+      },
+      {
+        "id": 338,
+        "symptom_id": 129,
+        "question": "Is het bloed zwart of teerachtig?"
+      },
+      {
+        "id": 339,
+        "symptom_id": 129,
+        "question": "Heeft u pijn op de borst of kortademigheid?"
+      },
+      {
+        "id": 340,
+        "symptom_id": 130,
+        "question": "Heeft u pijn of zwelling rond de ogen?"
+      },
+      {
+        "id": 341,
+        "symptom_id": 130,
+        "question": "Heeft u plotseling verlies van zicht samen met tranen?"
+      },
+      {
+        "id": 342,
+        "symptom_id": 130,
+        "question": "Is er pus of etter aanwezig in het oog?"
+      },
+      {
+        "id": 343,
+        "symptom_id": 131,
+        "question": "Heeft u hevige pijn na een ongeluk of val?"
+      },
+      {
+        "id": 344,
+        "symptom_id": 131,
+        "question": "Is er een zichtbare misvorming van de pols?"
+      },
+      {
+        "id": 345,
+        "symptom_id": 131,
+        "question": "Heeft u gevoelloosheid of tintelingen in hand of vingers?"
+      },
+      {
+        "id": 346,
+        "symptom_id": 132,
+        "question": "Kunt u niet op de hiel staan of lopen?"
+      },
+      {
+        "id": 347,
+        "symptom_id": 132,
+        "question": "Is de hiel rood, gezwollen of warm?"
+      },
+      {
+        "id": 348,
+        "symptom_id": 132,
+        "question": "Heeft u koorts bij de hielpijn?"
+      },
+      {
+        "id": 349,
+        "symptom_id": 133,
+        "question": "Is de teen ernstig gezwollen of etterend?"
+      },
+      {
+        "id": 350,
+        "symptom_id": 133,
+        "question": "Is er sprake van hevige pijn of koorts?"
+      },
+      {
+        "id": 351,
+        "symptom_id": 133,
+        "question": "Is de teen blauw of zwart verkleurd?"
+      },
+      {
+        "id": 352,
+        "symptom_id": 134,
+        "question": "Heeft u een ongeluk gehad met de voet?"
+      },
+      {
+        "id": 353,
+        "symptom_id": 134,
+        "question": "Kunt u niet op de voet staan of lopen?"
+      },
+      {
+        "id": 354,
+        "symptom_id": 134,
+        "question": "Is de voet rood en warm met koorts?"
+      },
+      {
+        "id": 355,
+        "symptom_id": 135,
+        "question": "Kunt u helemaal niet meer op de voet staan?"
+      },
+      {
+        "id": 356,
+        "symptom_id": 135,
+        "question": "Is er sprake van hevige zwelling of roodheid?"
+      },
+      {
+        "id": 357,
+        "symptom_id": 135,
+        "question": "Heeft u koorts of koude rillingen bij de pijn?"
+      },
+      {
+        "id": 358,
+        "symptom_id": 136,
+        "question": "Kunt u niet meer normaal lopen?"
+      },
+      {
+        "id": 359,
+        "symptom_id": 136,
+        "question": "Is er sprake van zwelling of koorts?"
+      },
+      {
+        "id": 360,
+        "symptom_id": 136,
+        "question": "Is de pijn plotseling en hevig begonnen?"
+      },
+      {
+        "id": 361,
+        "symptom_id": 137,
+        "question": "Verliest u plotseling grote hoeveelheden haar?"
+      },
+      {
+        "id": 362,
+        "symptom_id": 137,
+        "question": "Heeft u ook huiduitslag of pijn op de hoofdhuid?"
+      },
+      {
+        "id": 363,
+        "symptom_id": 137,
+        "question": "Gebeurde de haaruitval na een nieuw medicijn?"
+      },
+      {
+        "id": 364,
+        "symptom_id": 138,
+        "question": "Voelt u zich angstig of onveilig door de hallucinaties?"
+      },
+      {
+        "id": 365,
+        "symptom_id": 138,
+        "question": "Denkt u eraan uzelf of iemand anders pijn te doen?"
+      },
+      {
+        "id": 366,
+        "symptom_id": 138,
+        "question": "Heeft u plotseling nieuwe hallucinaties gekregen?"
+      }
+
+    ]
+  }
+}

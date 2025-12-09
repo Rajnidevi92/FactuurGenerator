@@ -5,8 +5,6 @@ import styles from "./Registration.module.css";
 
 export default function Registration() {
     return (
-        <>
-            <Header />
             <main className={`${styles.authWrapper} outer-content-container`}>
                 <div className="inner-content-container">
                     <div className={styles.authCard} aria-labelledby="register-title">
@@ -97,7 +95,5 @@ export default function Registration() {
                     </div>
                 </div>
             </main>
-            <Footer />
-        </>
     );
 }

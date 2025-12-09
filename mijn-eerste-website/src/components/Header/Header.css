@@ -8,13 +8,8 @@
     width: 100%;
     z-index: 999;
 
-    /* reset oude padding - we regelen padding in de nested .outer-content-container */
-    padding: 0;
-    min-height: 56px; /* pas dit getal aan indien je het nog dunner/witter wilt */
 }
 
-/* Zorg dat de outer-content-container binnen de header géén 40px vertical padding meer heeft.
-   Houd links/rechts padding (40px) voor align met de rest van de layout. */
 .header .outer-content-container {
     padding: 20px 40px; /* 6px boven/onder, 40px links/rechts */
     display: flex;
