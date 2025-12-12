@@ -1,10 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Factuur Generator - Per Jaar</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-$END$
+<div class="container">
+    <h1>Factuur Generator</h1>
+
+    <!-- YEAR SELECT -->
+    <div class="section">
+        <label>Jaar:
+            <select id="year-select"></select>
+        </label>
+    </div>
+
+    <!-- Werkgever beheer -->
+    <div class="section columns">
+        <div class="col">
+            <h2>Werkgever</h2>
+            <div class="row">
+                <select id="employer-select"></select>
+                <button id="add-employer">Nieuwe</button>
+            </div>
+
+            <div id="employer-form">
+                <label>Korte ID (code): <input id="employer-id" placeholder="Bijv. PZC"></label>
+                <label>Bedrijfsnaam: <input id="company-name" placeholder="PZC dordrecht"></label>
+                <label>Contactpersoon: <input id="company-contact" placeholder="S. Koopman"></label>
+                <label>Adres: <input id="company-address" placeholder="Adres"></label>
+                <label>KvK: <input id="company-kvk" placeholder="83830782"></label>
+                <label>Bank: <input id="company-bank" placeholder="NL..."></label>
+                <label>BTW: <input id="company-btw" placeholder="NL..."></label>
+                <label>Logo: <input type="file" id="employer-logo-input" accept="image/*"></label>
+                <div class="row">
+                    <button id="save-employer">Opslaan werkgever</button>
+                    <button id="delete-employer" class="danger">Verwijderen</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h2>Werknemer</h2>
+            <label>Naam: <input id="employee-name"></label>
+            <label>Adres: <input id="employee-address"></label>
+            <label>Email: <input id="employee-email"></label>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Mijn betaalgegevens</h2>
+
+        <label>IBAN (mijn rekeningnummer):
+            <input id="my-iban" placeholder="NL00BANK0123456789">
+        </label>
+
+        <label>T.n.v. (mijn naam):
+            <input id="my-tnv" placeholder="Jouw naam">
+        </label>
+
+        <button id="save-my-payment">Opslaan betaalgegevens</button>
+    </div>
+
+
+    <!-- Factuur info -->
+    <div class="section">
+        <h2>Factuur info</h2>
+        <div class="row">
+            <input id="invoice-number" readonly placeholder="Factuurnummer">
+            <button id="new-invoice-number">Nieuw #</button>
+            <button id="new-invoice" class="danger">Nieuwe factuur</button>
+        </div>
+        <div class="row">
+            <label>Factuurdatum: <input type="date" id="invoice-date"></label>
+            <label>Vervaldatum: <input type="date" id="invoice-due"></label>
+        </div>
+    </div>
+
+    <!-- Uren / km per dag -->
+    <div class="section">
+        <h2>Uren & km per dag</h2>
+        <table id="daily-table">
+            <thead>
+            <tr><th>Datum</th><th>Omschrijving</th><th>Eenheid</th><th>Aantal</th><th>Tarief</th><th>Totaal</th></tr>
+            </thead>
+            <tbody id="daily-body">
+            <tr>
+                <td><input type="date" class="day-date"></td>
+                <td><input class="day-desc" value="Werkzaamheden"></td>
+                <td>Uur</td>
+                <td><input type="number" class="day-hours" value="0" min="0" step="0.1"></td>
+                <td class="day-rate-hours">€ 0.00</td>
+                <td class="day-total">€ 0.00</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="3"></td><td id="sum-hours">0</td><td></td><td id="sum-hours-amount">€ 0.00</td></tr>
+            <tr><td colspan="3"></td><td id="sum-km">0</td><td></td><td id="sum-km-amount">€ 0.00</td></tr>
+            <tr><td colspan="5" class="total-label">Totaal</td><td id="grand-total" class="total-value">€ 0.00</td></tr>
+            </tfoot>
+        </table>
+
+        <div class="row-controls">
+            <button id="add-row">Dag toevoegen</button>
+            <button id="remove-row" class="danger">Laatste verwijderen</button>
+        </div>
+
+        <div class="rates">
+            <input type="number" id="hourly-rate" placeholder="Uurtarief (€)" step="0.01">
+            <input type="number" id="km-rate" placeholder="Km vergoeding (€)" step="0.01">
+        </div>
+    </div>
+
+    <!-- Declaratie beheer -->
+    <div class="section">
+        <h2>Declaraties</h2>
+        <div class="row">
+            <select id="load-declaration"><option>-- Open declaratie --</option></select>
+            <button id="load-declaration-btn">Open</button>
+            <button id="save-declaration">Opslaan</button>
+            <button id="delete-declaration" class="danger">Verwijderen</button>
+        </div>
+
+        <div class="row">
+            <input id="declaration-search" placeholder="Zoek declaratie">
+            <select id="declaration-sort">
+                <option value="number">Sorteer op nummer</option>
+                <option value="date">Sorteer op datum</option>
+            </select>
+        </div>
+
+        <div id="dashboard" class="dashboard-box">
+            <h3>Overzicht (geselecteerd jaar)</h3>
+            <p>Totaal declaraties: <strong id="dash-total-declarations">0</strong></p>
+            <p>Totaal uren: <strong id="dash-total-hours">0</strong></p>
+            <p>Totaal kilometervergoeding: <strong id="dash-total-km-amount">€ 0.00</strong></p>
+            <p>Totaal omzet: <strong id="dash-total-amount">€ 0.00</strong></p>
+        </div>
+    </div>
+
+    <!-- Grafieken -->
+    <div class="section">
+        <h3>Omzet per maand</h3>
+        <canvas id="chart-omzet" height="120"></canvas>
+    </div>
+
+    <div class="section">
+        <h3>Gewerkte uren per maand</h3>
+        <canvas id="chart-uren" height="120"></canvas>
+    </div>
+
+    <div class="section">
+        <h3>Opdrachtgever verdeling (taartdiagram)</h3>
+        <canvas id="chart-opdrachtgevers" height="120"></canvas>
+    </div>
+
+    <div class="actions">
+        <button id="generate-pdf">Genereer PDF</button>
+    </div>
+
+    <div id="invoice-preview" class="invoice-preview"></div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Required for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<!-- Scripts -->
+<script src="main.js"></script>
+<script src="helpers.js"></script>
+
 </body>
 </html>
